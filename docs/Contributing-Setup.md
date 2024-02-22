@@ -9,7 +9,7 @@ The requirements to setup, develop, and build this project are listed below.
 
 ### .NET Runtime
 
-.NET SDK 7.0 or newer
+.NET SDK 8.0 or newer
 
 - <https://dotnet.microsoft.com/en-us/download/dotnet/8.0>
 - See `global.json` file for specific SDK requirements
@@ -53,7 +53,7 @@ To run the Sample app Admin customization in development mode, add the following
 
 ```json
 "CMSAdminClientModuleSettings": {
-  "kentico-xperience-integrations-repotemplate": {
+  "kentico-xperience-integrations-zapier": {
     "Mode": "Proxy",
     "Port": 3009
   }
@@ -68,7 +68,7 @@ To run the Sample app Admin customization in development mode, add the following
    - `refactor/` - for restructuring of existing features
    - `fix/` - for bugfixes
 
-1. Run `dotnet format` against the `src/Kentico.Xperience.RepoTemplate` project
+1. Run `dotnet format` against the `src/Kentico.Xperience.Zapier` project
 
    > use `dotnet: format` VS Code task.
 

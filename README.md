@@ -1,4 +1,4 @@
-# ---Package Name---
+# Kentico.Xperience.Zapier
 
 ---Select the correct badge for the support policy and update the GitHub Action pipeline badge to point to this repository (replace `repo-template`)---
 
