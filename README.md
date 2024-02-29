@@ -26,9 +26,10 @@ Zapier integration enables seamless connectivity between a wide range of web app
 
 ## Library Version Matrix
 
+
 | Xperience Version | Library Version |
 | ----------------- | --------------- |
-| >= 28.1.0         | 1.0.0           |
+| >= 28.1.0         | PREVIEW         |
 
 ### Dependencies
 
@@ -36,6 +37,9 @@ Zapier integration enables seamless connectivity between a wide range of web app
 - [Xperience by Kentico](https://docs.xperience.io/xp/changelog)
 
 ## Package Installation
+
+> [!WARNING]  
+> The nuget is not published yet, include this respository into your project directly
 
 Add the package to your application using the .NET CLI
 
@@ -45,14 +49,7 @@ dotnet add package Kentico.Xperience.Zapier
 
 ## Quick Start
 
-
-1. Include `Kentico.Xperience.Zapier` project in the solution.
-
-   ```powershell
-   dotnet add package Kentico.Xperience.Zapier
-   ```
-
-2. Register required services into DI container.
+1. Register required services into DI container.
 
    ```csharp
    // Program.cs
@@ -71,10 +68,10 @@ dotnet add package Kentico.Xperience.Zapier
    app.UseAuthorization() //place under app.UseKentico()
    ```
 
-3. In the administration go to UI application 'Zapier'.
-4. On the API Key menu generate new API key for your Zapier application.
+2. In the administration go to UI application 'Zapier'.
+3. On the API Key menu generate new API key for your Zapier application.
     * Save the API key as it will appear only once.
-5. Open your Zapier UI and create new Zap.
+4. Open your Zapier UI and create new Zap.
     * As a trigger pick Xperience by Kentico application
     * Select Event "Catch Xperience by Kentico Webhook"
     * Then you have to connect an Account using URL of your website (without trailing slash) and your generated API Key from previous step
@@ -83,9 +80,9 @@ dotnet add package Kentico.Xperience.Zapier
         * Pick object in Xperience by Kentico which you want to set for an automation process
         * Select type Event for your object
     * Test your trigger
-6. Now you can create your own workflow eg. connect with Gmail, Microsoft Teams, ...
+5. Now you can create your own workflow eg. connect with Gmail, Microsoft Teams, ...
     * You can find more information on https://zapier.com/workflows 
-7. After you finish your automation workflow... Publication of your Zap will create an object in your Xperience by Kentico application.
+6. After you finish your automation workflow... Publication of your Zap will create an object in your Xperience by Kentico application.
     * You can find it in administration -> Zapier UI application -> List of Zapier triggers
 
 
