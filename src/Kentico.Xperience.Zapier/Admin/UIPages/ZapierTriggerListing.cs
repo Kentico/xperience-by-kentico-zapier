@@ -22,7 +22,10 @@ internal class ZapierTriggerListing : ListingPage
     public override async Task ConfigurePage()
     {
         PageConfiguration.AddEditRowAction<ZapierTriggerEditPage>();
-        PageConfiguration.HeaderActions.AddLink<ZapierTriggerCreatePage>("Create");
+
+        // Creating and editting is primarly managed directly from Zapier
+        //PageConfiguration.HeaderActions.AddLink<ZapierTriggerCreatePage>("Create"); 
+
         PageConfiguration.TableActions.AddDeleteAction(nameof(Delete), "Delete");
 
 
@@ -34,7 +37,7 @@ internal class ZapierTriggerListing : ListingPage
         .AddColumn(nameof(ZapierTriggerInfo.ZapierTriggerEventType), "Event type", searchable: true, sortable: true)
         .AddColumn(nameof(ZapierTriggerInfo.ZapierTriggerObjectType), "Object type", searchable: true, sortable: true)
         .AddColumn(nameof(ZapierTriggerInfo.ZapierTriggerZapierURL), "Url", searchable: true, sortable: true)
-        .AddComponentColumn(nameof(ZapierTriggerInfo.ZapierTriggerEnabled), "@kentico/xperience-admin-components/SimpleStatus", "Status", maxWidth: 30, searchable: true, modelRetriever: modelRetriever);
+        .AddComponentColumn(nameof(ZapierTriggerInfo.ZapierTriggerEnabled), NamedComponentCellComponentNames.SIMPLE_STATUS_COMPONENT, "Status", maxWidth: 30, searchable: true, modelRetriever: modelRetriever);
 
         await base.ConfigurePage();
     }

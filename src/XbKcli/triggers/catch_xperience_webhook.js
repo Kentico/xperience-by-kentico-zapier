@@ -110,29 +110,15 @@ const getFallbackData = async (z, bundle) => {
   const response = await z.request(options);
   const json = z.JSON.parse(response.content);
 
-  if(!json) return [sampleUser];
+
+  if(!json) return [sampleObj];
 
   return [json];
 }
 
 
-
-
-const sampleUser = {
-  'UserID': 53,
-  'UserName': 'administrator',
-  'FirstName': 'Global',
-  'LastName': 'Administrator',
-  'Email': 'administrator@localhost.local',
-  'UserEnabled': true,
-  'UserCreated': {},
-  'LastLogon': '2019-06-27T16:42:15.4840521',
-  'UserGUID': '6415b8ce-8072-4bcd-8e48-9d7178b826b7',
-  'UserLastModified': '2024-01-31T09:18:04.7681275',
-  'UserIsPendingRegistration': false,
-  'UserRegistrationLinkExpiration': {},
-  'UserAdministrationAccess': true,
-  'UserIsExternal': false
+const sampleObj = {
+  'Id': 1,
 };
 
 
@@ -173,6 +159,6 @@ module.exports = {
       // In cases where Zapier needs to show an example record to the user, but we are unable to get a live example
       // from the API, Zapier will fallback to this hard-coded sample. It should reflect the data structure of
       // returned records, and have obvious placeholder values that we can show to any user.
-      sample: sampleUser
+      sample: sampleObj
     }
 };

@@ -3,7 +3,6 @@ using CMS.Core;
 using CMS.DataEngine;
 using CMS.OnlineForms;
 using Kentico.Integration.Zapier;
-using Kentico.Xperience.Zapier.Admin;
 using Kentico.Xperience.Zapier.Admin.UIPages;
 
 namespace Kentico.Xperience.Zapier;
@@ -50,7 +49,7 @@ public class ZapierTriggerHandler
                         typeInfo.Events.Insert.After += ObjectInfoHandler;
                     }
 
-                    LogService.LogEvent(EventTypeEnum.Information, nameof(ZapierEventRegistrationService), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} create event.");
+                    LogService.LogEvent(EventTypeEnum.Information, nameof(ZapierTriggerHandler), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} create event.");
                     break;
 
                 case ZapierTriggerEvents.Update:
@@ -63,7 +62,7 @@ public class ZapierTriggerHandler
                         typeInfo.Events.Update.After += ObjectInfoHandler;
                     }
 
-                    LogService.LogEvent(EventTypeEnum.Information, nameof(ZapierEventRegistrationService), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} update event.");
+                    LogService.LogEvent(EventTypeEnum.Information, nameof(ZapierTriggerHandler), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} update event.");
                     break;
                 case ZapierTriggerEvents.Delete:
                     if (ZapierTrigger.IsForm())
@@ -74,10 +73,10 @@ public class ZapierTriggerHandler
                     {
                         typeInfo.Events.Delete.Before += ObjectInfoHandler;
                     }
-                    LogService.LogEvent(EventTypeEnum.Information, nameof(ZapierEventRegistrationService), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} delete event.");
+                    LogService.LogEvent(EventTypeEnum.Information, nameof(ZapierTriggerHandler), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} delete event.");
                     break;
                 case ZapierTriggerEvents.None:
-                    LogService.LogEvent(EventTypeEnum.Error, nameof(ZapierEventRegistrationService), "REGISTER", $"Handler '{ZapierTrigger.ZapierTriggerDisplayName}' could not be registered.");
+                    LogService.LogEvent(EventTypeEnum.Error, nameof(ZapierTriggerHandler), "REGISTER", $"Handler '{ZapierTrigger.ZapierTriggerDisplayName}' could not be registered.");
                     break;
                 default:
                     return false;
@@ -115,7 +114,7 @@ public class ZapierTriggerHandler
                         typeInfo.Events.Insert.After -= ObjectInfoHandler;
                     }
 
-                    LogService.LogEvent(EventTypeEnum.Information, nameof(ZapierEventRegistrationService), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} create event.");
+                    LogService.LogEvent(EventTypeEnum.Information, nameof(ZapierTriggerHandler), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} create event.");
                     break;
 
                 case ZapierTriggerEvents.Update:
@@ -128,7 +127,7 @@ public class ZapierTriggerHandler
                         typeInfo.Events.Update.After -= ObjectInfoHandler;
                     }
 
-                    LogService.LogEvent(EventTypeEnum.Information, nameof(ZapierEventRegistrationService), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} update event.");
+                    LogService.LogEvent(EventTypeEnum.Information, nameof(ZapierTriggerHandler), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} update event.");
                     break;
                 case ZapierTriggerEvents.Delete:
                     if (ZapierTrigger.IsForm())
@@ -139,10 +138,10 @@ public class ZapierTriggerHandler
                     {
                         typeInfo.Events.Delete.Before -= ObjectInfoHandler;
                     }
-                    LogService.LogEvent(EventTypeEnum.Information, nameof(ZapierEventRegistrationService), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} delete event.");
+                    LogService.LogEvent(EventTypeEnum.Information, nameof(ZapierTriggerHandler), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} delete event.");
                     break;
                 case ZapierTriggerEvents.None:
-                    LogService.LogEvent(EventTypeEnum.Error, nameof(ZapierEventRegistrationService), "REGISTER", $"Handler '{ZapierTrigger.ZapierTriggerDisplayName}' could not be registered.");
+                    LogService.LogEvent(EventTypeEnum.Error, nameof(ZapierTriggerHandler), "REGISTER", $"Handler '{ZapierTrigger.ZapierTriggerDisplayName}' could not be registered.");
                     break;
                 default:
                     return false;

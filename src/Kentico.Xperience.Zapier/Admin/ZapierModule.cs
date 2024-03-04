@@ -13,8 +13,6 @@ namespace Kentico.Xperience.Zapier.Admin;
 
 internal class ZapierModule : Module
 {
-
-    //private IZapierEventRegistrationService registrationService = null!;
     private IZapierModuleInstaller? installer;
 
     public ZapierModule() : base(nameof(ZapierModule)) { }
@@ -33,9 +31,6 @@ internal class ZapierModule : Module
         ZapierTriggerInfo.TYPEINFO.Events.Insert.After += (s, e) => AddNewZapWebhook(e);
         ZapierTriggerInfo.TYPEINFO.Events.Update.Before += (s, e) => UpdateIfEnabled(e);
         ZapierTriggerInfo.TYPEINFO.Events.Delete.After += (s, e) => RemoveZapWebhook(e);
-
-        //registrationService = services.GetRequiredService<IZapierEventRegistrationService>();
-        //registrationService.SetListenersAsync();
     }
 
     private void InitZapierRegistrations(object? sender, EventArgs e)
