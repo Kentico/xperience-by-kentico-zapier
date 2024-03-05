@@ -10,7 +10,6 @@ public static class ZapierServiceCollectionExtensions
 {
     public static IServiceCollection AddKenticoZapier(this IServiceCollection services)
     {
-        //services.AddSingleton<IZapierEventRegistrationService, ZapierEventRegistrationService>();
         services.AddSingleton<IZapierModuleInstaller, ZapierModuleInstaller>();
 
         services.AddAuthentication()
@@ -25,7 +24,7 @@ public static class ZapierServiceCollectionExtensions
                         var provider = context.HttpContext.RequestServices.GetRequiredService<IApiKeyInfoProvider>();
                         string token = provider.Get().FirstOrDefault()?.ApiKeyToken ?? string.Empty;
 
-                        bool isValid = ApiKeyHelper.VerifyHash(context.ApiKey, token);
+                        bool isValid = ApiKeyHelper.VerifyToken(context.ApiKey, token);
 
                         if (isValid)
                         {

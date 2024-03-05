@@ -69,4 +69,10 @@ internal class ZapierTriggerEditPage : ModelEditPage<ZapierTriggerEditModel>
         return await base.ProcessFormData(model, formItems);
     }
 
+    public override Task ConfigurePage()
+    {
+        PageConfiguration.SubmitConfiguration.Visible = false;
+
+        return base.ConfigurePage();
+    }
 }

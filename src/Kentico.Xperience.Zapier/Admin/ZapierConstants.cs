@@ -19,4 +19,9 @@ internal static class ZapierConstants
         public const string ResourceDescription = "Kentico Zapier API keys";
         public const bool ResourceIsInDevelopment = false;
     }
+
+    internal static class Permissions
+    {
+        public const string GENERATE = "Generate";
+    }
 }

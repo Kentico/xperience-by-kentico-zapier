@@ -1,6 +1,6 @@
 {
-  "name": "XbKcli",
-  "version": "1.0.0",
+  "name": "xperience-by-kentico-zapier-cli",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {

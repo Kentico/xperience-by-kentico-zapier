@@ -22,6 +22,7 @@ namespace Kentico.Xperience.Zapier.Admin.UIPages;
 [UIPermission(SystemPermissions.CREATE)]
 [UIPermission(SystemPermissions.UPDATE)]
 [UIPermission(SystemPermissions.DELETE)]
+[UIPermission(ZapierConstants.Permissions.GENERATE)]
 internal class ZapierApplicationPage : ApplicationPage
 {
     public const string IDENTIFIER = "zapier";
