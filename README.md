@@ -14,14 +14,8 @@ Zapier integration enables seamless connectivity between a wide range of web app
 
 ## Screenshots
 
-![UI Application](/images/screenshots/ui_application.png "UI Application")
-![Api Key listing](/images/screenshots/apikeylisting.png "Api Key listing")
-![Xperience by Kentico app in Zapier UI](/images/screenshots/zapierxbk.png "Xperience by Kentico app in Zapier UI")
-![Xperience by Kentico Event](/images/screenshots/zapiercatchwebhook.png "Xperience by Kentico Event")
-![Connect Zapier to Xperience](/images/screenshots/connectAccount.png "Connect Zapier to Xperience")
-![Set your configuration](/images/screenshots/triggerconfig.png "Set your configuration")
-
-
+![List of zapier triggers](/images/screenshots/listofzapiertriggers.png "List of zapier triggers")
+![Zap creation in zapier UI](/images/screenshots/zapieruitrigger.png "Zap creation in zapier UI")
 
 
 ## Library Version Matrix
