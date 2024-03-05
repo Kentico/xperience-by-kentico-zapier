@@ -64,35 +64,31 @@ internal class ZapierApiKeyListingPage : ListingPage
         return user.UserName ?? user.Email ?? string.Empty;
     }
 
-
-
     [PageCommand(Permission = SystemPermissions.DELETE)]
     public override Task<ICommandResponse<RowActionResult>> Delete(int id) => base.Delete(id);
 
-
-    [PageCommand(Permission = "Generate")]
+    [PageCommand(Permission = ZapierConstants.Permissions.GENERATE)]
     public async Task<ICommandResponse<RowActionResult>> Generate(CancellationToken _)
     {
         var rowAction = new RowActionResult(true, true);
-
-        ApiKeyInfo.Provider.BulkDelete(new WhereCondition());
-
+        var user = await userAccessor.Get();
         string apiKey = ApiKeyHelper.GenerateApiKey();
 
-        var user = await userAccessor.Get();
+        using var transaction = new CMSTransactionScope();
+
+        ApiKeyInfo.Provider.BulkDelete(new WhereCondition());
 
         var apiKeyInfo = new ApiKeyInfo()
         {
             ApiKeyCreatedBy = user.UserID,
-            ApiKeyToken = ApiKeyHelper.GetHash(apiKey),
+            ApiKeyToken = ApiKeyHelper.GetToken(apiKey),
         };
 
         apiKeyInfoProvider.Set(apiKeyInfo);
 
-        //TODO nice
-        //var command =  NavigateTo(pageUrlGenerator.GenerateUrl<ZapierTriggerListing>());
+        transaction.Commit();
 
-        return ResponseFrom(rowAction).UseCommand("LoadData").AddWarningMessage($"Save your API Key (It will not be visible again): {apiKey}");
+        return ResponseFrom(rowAction).UseCommand("LoadData").AddWarningMessage($"Save your API Key (It will not be visible again): {apiKey}"); //Nice to have - Can be redirected to a separate page to display ApiKey
     }
 
 
