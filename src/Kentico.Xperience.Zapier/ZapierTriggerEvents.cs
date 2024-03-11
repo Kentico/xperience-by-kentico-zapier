@@ -6,4 +6,5 @@ public enum ZapierTriggerEvents
     Create,
     Update,
     Delete,
+    Publish
 }

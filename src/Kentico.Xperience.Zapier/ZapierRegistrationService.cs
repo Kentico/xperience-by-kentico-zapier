@@ -15,18 +15,22 @@ public class ZapierRegistrationService : IZapierRegistrationService
 {
     private readonly IEventLogService logService;
     private readonly HttpClient client;
+    private readonly IWorkflowScopeService workflowScopeService;
+    private readonly IContentHelper contentHelper;
 
     protected ConcurrentDictionary<int, ZapierTriggerHandler> ZapierHandlers = [];
 
-    public ZapierRegistrationService(IEventLogService logService, HttpClient client)
+    public ZapierRegistrationService(IEventLogService logService, HttpClient client, IWorkflowScopeService workflowScopeService, IContentHelper contentHelper)
     {
         this.logService = logService;
         this.client = client;
+        this.workflowScopeService = workflowScopeService;
+        this.contentHelper = contentHelper;
     }
 
     public void RegisterWebhook(ZapierTriggerInfo webhook)
     {
-        var handler = new ZapierTriggerHandler(webhook, client, logService);
+        var handler = new ZapierTriggerHandler(webhook, client, logService, workflowScopeService, contentHelper);
 
         if (!ZapierHandlers.TryAdd(webhook.ZapierTriggerID, handler))
         {

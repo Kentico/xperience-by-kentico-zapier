@@ -17,6 +17,9 @@ public static class ZapierServiceCollectionExtensions
         services.AddSingleton<IZapierRegistrationService, ZapierRegistrationService>();
         services.AddSingleton<IApiKeyCachedService, ApiKeyCachedService>();
 
+        services.AddSingleton<IWorkflowScopeService, WorkflowScopeService>();
+        services.AddSingleton<IContentHelper, ContentHelper>();
+
         services.AddAuthentication()
             .AddApiKeyInAuthorizationHeader(ZapierConstants.AuthenticationScheme.XbyKZapierApiKeyScheme, options =>
             {

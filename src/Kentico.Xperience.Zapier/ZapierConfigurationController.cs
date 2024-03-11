@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Data;
-using CMS.ContentEngine;
 using CMS.DataEngine;
 using CMS.DataEngine.Internal;
 using CMS.Helpers;
@@ -13,6 +12,7 @@ using Kentico.Xperience.Zapier.Admin.UIPages;
 using Kentico.Xperience.Zapier.Resources;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ActionResult = Microsoft.AspNetCore.Mvc.ActionResult;
 
 namespace Kentico.Xperience.Zapier;
 
@@ -24,21 +24,22 @@ public class ZapierConfigurationController : ControllerBase
     private readonly IZapierTriggerInfoProvider zapierTriggerInfoProvider;
     private readonly IWebsiteChannelContext websiteChannelContext;
 
-    private readonly IContentQueryExecutor contentQueryExecutor;
-    private readonly IContentQueryResultMapper mapper;
+    private readonly IWorkflowScopeService workflowScopeService;
 
-    public static readonly List<ZapierTriggerEvents> EnabledEvents = [ZapierTriggerEvents.Create, ZapierTriggerEvents.Update, ZapierTriggerEvents.Delete];
+
+    public static readonly List<ZapierTriggerEvents> InfoEvents = [ZapierTriggerEvents.Create, ZapierTriggerEvents.Update, ZapierTriggerEvents.Delete];
+
+    public static readonly List<ZapierTriggerEvents> ContentItemEvents = [ZapierTriggerEvents.Create, ZapierTriggerEvents.Update, ZapierTriggerEvents.Delete, ZapierTriggerEvents.Publish];
+
 
     public ZapierConfigurationController(
         IZapierTriggerInfoProvider zapierTriggerInfoProvider,
         IWebsiteChannelContext websiteChannelContext,
-        IContentQueryExecutor contentQueryExecutor,
-        IContentQueryResultMapper mapper)
+        IWorkflowScopeService workflowScopeService)
     {
         this.zapierTriggerInfoProvider = zapierTriggerInfoProvider;
         this.websiteChannelContext = websiteChannelContext;
-        this.contentQueryExecutor = contentQueryExecutor;
-        this.mapper = mapper;
+        this.workflowScopeService = workflowScopeService;
     }
 
     [HttpGet]
@@ -47,19 +48,60 @@ public class ZapierConfigurationController : ControllerBase
 
     [HttpGet]
     [Route("zapier/data/events")]
-    public ActionResult<IEnumerable<EventItemDto>> Events() => EnabledEvents.Select(e => new EventItemDto((int)e, e.ToString())).ToList();
+    public ActionResult<IEnumerable<EventItemDtoOld>> Events() => InfoEvents.Select(e => new EventItemDtoOld((int)e, e.ToString())).ToList();
+
+
+    [HttpGet]
+    [Route("zapier/data/events/{objectType}")]
+    public async Task<ActionResult<IEnumerable<EventItemDto>>> EventsByType(string objectType)
+    {
+        var dataClass = DataClassInfoProvider.ProviderObject.Get(objectType);
+
+        if (dataClass.IsContentType())
+        {
+            int contentTypeID = dataClass.ClassID;
+            var events = ContentItemEvents.Select(e => new EventItemDto(e.ToString(), e.ToString())).ToList();
+
+            if (dataClass.ClassContentTypeType == ClassContentTypeType.WEBSITE)
+            {
+                var workflowSteps = workflowScopeService.GetEventItemsByContentType(contentTypeID);
+
+                events.AddRange(workflowSteps);
+                return events;
+            }
+
+            if (dataClass.ClassContentTypeType == ClassContentTypeType.REUSABLE)
+            {
+                var workflowSteps = workflowScopeService.GetEventItemsByContentType(contentTypeID);
+
+                events.AddRange(workflowSteps);
+                return events;
+            }
+
+            return events;
+        }
+
+        return InfoEvents.Select(e => new EventItemDto(e.ToString(), e.ToString())).ToList();
+    }
+
 
     [HttpGet]
     [Route("zapier/data/objects")]
     public ActionResult<List<KenticoInfoDto>> Objects()
     {
         var infoObjects = DataClassInfoProvider.ProviderObject.Get()
-            .WhereNull(nameof(DataClassInfo.ClassContentTypeType))
-            .Columns(nameof(DataClassInfo.ClassDisplayName), nameof(DataClassInfo.ClassName))
+            .Where(w =>
+                w.WhereNull(nameof(DataClassInfo.ClassContentTypeType))
+                    .Or()
+                    .WhereEquals(nameof(DataClassInfo.ClassContentTypeType), ClassContentTypeType.REUSABLE)
+                    .Or()
+                    .WhereEquals(nameof(DataClassInfo.ClassContentTypeType), ClassContentTypeType.WEBSITE))
+            .Columns(nameof(DataClassInfo.ClassDisplayName), nameof(DataClassInfo.ClassName), nameof(DataClassInfo.ClassType), nameof(DataClassInfo.ClassContentTypeType))
             .OrderBy(nameof(DataClassInfo.ClassName))
             .GetEnumerableTypedResult();
 
-        return infoObjects.Select(x => new KenticoInfoDto(x.ClassName, x.ClassDisplayName)).ToList();
+        return infoObjects.Select(x => new KenticoInfoDto(x.ClassName, $"{x.ClassDisplayName} ({x.ClassType}{(!string.IsNullOrEmpty(x.ClassContentTypeType) ? $" - {x.ClassContentTypeType}" : string.Empty)})"))
+            .ToList();
     }
 
 
@@ -69,20 +111,22 @@ public class ZapierConfigurationController : ControllerBase
     {
         var dataClass = DataClassInfoProvider.ProviderObject.Get(objectType);
 
-        //nebo switch
         if (dataClass.IsContentType())
         {
-            //todo
-            //IReusableContentItemReferenceProvider
+            var result = new Dictionary<string, object>();
 
-            //var builder = new ContentItemQueryBuilder().ForContentType(objectType,
-            //            config => config
-            //                .WithLinkedItems(1)
-            //            .TopN(1));
+            var classStructure = ClassStructureInfo.GetClassInfo(objectType);
+            var defs = classStructure.ColumnDefinitions;
 
-            //var result = await contentQueryExecutor.GetResult(builder,);
+            var forbiddenCols = new List<string> { "ContentItemDataID", "ContentItemDataCommonDataID", "ContentItemDataGUID" };
 
-            return NotFound();
+            foreach (var colDef in defs.Where(x => !forbiddenCols.Contains(x.ColumnName)))
+            {
+                result[colDef.ColumnName] = GetDefaultValue(colDef.ColumnType);
+            }
+
+            result.TryAdd("ContentTypeName", objectType);
+            return Ok(result);
         }
 
         if (dataClass.IsForm())
@@ -102,13 +146,14 @@ public class ZapierConfigurationController : ControllerBase
     [Route("zapier/trigger")]
     public ActionResult CreateTrigger(TriggerDto newTrigger)
     {
+
         var infoObject = new ZapierTriggerInfo
         {
             ZapierTriggerDisplayName = newTrigger.Name,
             ZapierTriggerCodeName = ValidationHelper.GetCodeName(newTrigger.Name),
             ZapierTriggerObjectClassType = ZapierTriggerExtensions.GetType(newTrigger.ObjectType),
             ZapierTriggerEnabled = true,
-            ZapierTriggerEventType = ((ZapierTriggerEvents)newTrigger.EventType).ToString(),
+            ZapierTriggerEventType = newTrigger.EventType,
             mZapierTriggerObjectType = newTrigger.ObjectType,
             ZapierTriggerZapierURL = newTrigger.ZapierUrl
         };
@@ -168,9 +213,10 @@ public class ZapierConfigurationController : ControllerBase
             return Activator.CreateInstance(t)!;
         }
 
+        //serialized strings
         if (t == typeof(string))
         {
-            return "text";
+            return "text or serialized content";
         }
 
         if (t.IsAssignableTo(typeof(IEnumerable)))
@@ -183,8 +229,13 @@ public class ZapierConfigurationController : ControllerBase
     }
 }
 
-public record EventItemDto(int Id, string Name);
-
+public record EventItemDto(string Id, string Name);
 public record KenticoInfoDto(string Id, string Name);
+public record TriggerDto(string Name, string ObjectType, string EventType, string ZapierUrl);
 
-public record TriggerDto(string Name, string ObjectType, int EventType, string ZapierUrl);
+
+
+
+public record EventItemDtoOld(int Id, string Name);
+public record TriggerDtoOld(string Name, string ObjectType, int EventType, string ZapierUrl);
+
