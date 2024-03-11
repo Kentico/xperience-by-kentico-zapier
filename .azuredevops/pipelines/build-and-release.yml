@@ -48,7 +48,7 @@ stages:
             value: Release
 
           - name: ProjectPath
-            value: src/PROJECT_NAME/PROJECT_NAME.csproj
+            value: src/Kentico.Xperience.Zapier/Kentico.Xperience.Zapier.csproj
 
         steps:
           - task: DotNetCoreCLI@2
