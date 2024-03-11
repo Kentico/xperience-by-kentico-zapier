@@ -4,7 +4,7 @@ function getEventTypesField(extras) {
             label: 'Event type',
             key: 'eventType',
             required: true,
-            type: 'integer',
+            type: 'string',
             dynamic: 'get_event_types.id.name',
         },
         extras || {},

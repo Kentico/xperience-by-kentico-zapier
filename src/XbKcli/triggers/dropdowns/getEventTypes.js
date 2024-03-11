@@ -2,7 +2,7 @@
 async function execute(z, bundle) {
 
     const options = {
-        url: `${bundle.authData.website}/zapier/data/events`,
+        url: `${bundle.authData.website}/zapier/data/events/${bundle.inputData.objectType}`,
         method: 'GET'
     };
 
@@ -23,7 +23,7 @@ module.exports = {
         type: 'polling',
         perform: execute,
         sample: {
-            id: 0,
+            id: "event",
             name: 'om.contact',
         },
         outputFields: [
@@ -35,7 +35,7 @@ module.exports = {
             {
                 key: 'id',
                 label: 'Event type codename',
-                type: 'integer',
+                type: 'string',
             }
         ]
     }

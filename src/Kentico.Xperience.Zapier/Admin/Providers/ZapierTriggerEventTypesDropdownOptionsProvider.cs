@@ -35,5 +35,10 @@ internal class ZapierTriggerObjectTypesDropdownOptionsProvider : IDropDownOption
 
 internal class ZapierTriggerObjectTypesWhereConditionProvider : IObjectSelectorWhereConditionProvider
 {
-    public WhereCondition Get() => new WhereCondition().WhereNull(nameof(DataClassInfo.ClassContentTypeType));
+    public WhereCondition Get() => new WhereCondition().Where(w =>
+               w.WhereNull(nameof(DataClassInfo.ClassContentTypeType))
+                   .Or()
+                   .WhereEquals(nameof(DataClassInfo.ClassContentTypeType), ClassContentTypeType.REUSABLE)
+                   .Or()
+                   .WhereEquals(nameof(DataClassInfo.ClassContentTypeType), ClassContentTypeType.WEBSITE));
 }

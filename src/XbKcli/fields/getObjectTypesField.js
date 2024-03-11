@@ -6,6 +6,7 @@ function getObjectTypesField(extras) {
             required: true,
             type: 'string',
             dynamic: 'get_object_types.id.name',
+            altersDynamicFields: true,
         },
         extras || {},
     );
