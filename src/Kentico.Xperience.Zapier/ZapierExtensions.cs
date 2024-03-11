@@ -1,13 +1,12 @@
 ﻿
 
 using CMS.DataEngine;
-using Newtonsoft.Json;
 
 namespace Kentico.Xperience.Zapier;
 
 public static class ZapierExtensions
 {
-    public static string ToZapierString(this BaseInfo baseInfo)
+    public static Dictionary<string, object>? TozapierDictionary(this BaseInfo baseInfo)
     {
         if (baseInfo != null)
         {
@@ -17,9 +16,9 @@ public static class ZapierExtensions
                 obj[col] = baseInfo.GetValue(col);
             }
 
-            return JsonConvert.SerializeObject(obj);
+            return obj;
         }
 
-        return string.Empty;
+        return null;
     }
 }

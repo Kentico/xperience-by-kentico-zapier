@@ -1,8 +1,11 @@
 ﻿using AspNetCore.Authentication.ApiKey;
-using Kentico.Integration.Zapier;
+using CMS.Localization;
 using Kentico.Xperience.Zapier.Admin;
+using Kentico.Xperience.Zapier.Resources;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
+
+[assembly: RegisterLocalizationResource(markedType: typeof(Localization), cultureCodes: "en-us")]
 
 namespace Kentico.Xperience.Zapier;
 
@@ -11,9 +14,11 @@ public static class ZapierServiceCollectionExtensions
     public static IServiceCollection AddKenticoZapier(this IServiceCollection services)
     {
         services.AddSingleton<IZapierModuleInstaller, ZapierModuleInstaller>();
+        services.AddSingleton<IZapierRegistrationService, ZapierRegistrationService>();
+        services.AddSingleton<IApiKeyCachedService, ApiKeyCachedService>();
 
         services.AddAuthentication()
-            .AddApiKeyInAuthorizationHeader(ApiKeyDefaults.AuthenticationScheme, options =>
+            .AddApiKeyInAuthorizationHeader(ZapierConstants.AuthenticationScheme.XbyKZapierApiKeyScheme, options =>
             {
                 options.Realm = "XbyKZapier";
                 options.KeyName = HeaderNames.Authorization;
@@ -21,8 +26,15 @@ public static class ZapierServiceCollectionExtensions
                 {
                     OnValidateKey = context =>
                     {
-                        var provider = context.HttpContext.RequestServices.GetRequiredService<IApiKeyInfoProvider>();
-                        string token = provider.Get().FirstOrDefault()?.ApiKeyToken ?? string.Empty;
+                        var apiKeyProvider = context.HttpContext.RequestServices.GetRequiredService<IApiKeyCachedService>();
+
+                        string? token = apiKeyProvider.GetApiKeyToken();
+
+                        if (token is null)
+                        {
+                            context.ValidationFailed();
+                            return Task.CompletedTask;
+                        }
 
                         bool isValid = ApiKeyHelper.VerifyToken(context.ApiKey, token);
 
@@ -34,7 +46,6 @@ public static class ZapierServiceCollectionExtensions
                         {
                             context.ValidationFailed();
                         }
-
                         return Task.CompletedTask;
                     }
                 };

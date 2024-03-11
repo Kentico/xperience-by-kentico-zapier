@@ -24,4 +24,9 @@ internal static class ZapierConstants
     {
         public const string GENERATE = "Generate";
     }
+
+    internal static class AuthenticationScheme
+    {
+        public const string XbyKZapierApiKeyScheme = "XbyKZapierApiKey";
+    }
 }

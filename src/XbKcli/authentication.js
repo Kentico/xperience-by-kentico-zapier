@@ -65,7 +65,7 @@ const includeApiKey = (request, z, bundle) => {
     // request.params.api_key = bundle.authData.apiKey;
 
     // If you want to include the API key in the header instead, uncomment this:
-    request.headers.Authorization = `ApiKey ${bundle.authData.apiKey}`;
+    request.headers.Authorization = `XbyKZapierApiKey ${bundle.authData.apiKey}`;
   }
 
   return request;

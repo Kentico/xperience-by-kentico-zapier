@@ -39,7 +39,7 @@ internal class ZapierApiKeyListingPage : ListingPage
     {
         PageConfiguration.Callouts = [new()
         {
-            Content = "Generate button will create a new API Key.If API Key already exists, this will override the existing one. Generating new key, can broke other connected zapier webhooks. Keep that in mind!",
+            Content = LocalizationService.GetString("apikey.callout"),
             Type = CalloutType.FriendlyWarning,
             ContentAsHtml = true
         }];
@@ -88,7 +88,7 @@ internal class ZapierApiKeyListingPage : ListingPage
 
         transaction.Commit();
 
-        return ResponseFrom(rowAction).UseCommand("LoadData").AddWarningMessage($"Save your API Key (It will not be visible again): {apiKey}"); //Nice to have - Can be redirected to a separate page to display ApiKey
+        return ResponseFrom(rowAction).UseCommand("LoadData").AddWarningMessage(string.Format(LocalizationService.GetString("apikey.savemessage"), apiKey)); //Nice to have - Can be redirected to a separate page to display ApiKey
     }
 
 

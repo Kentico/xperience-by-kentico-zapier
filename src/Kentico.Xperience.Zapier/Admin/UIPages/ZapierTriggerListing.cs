@@ -23,13 +23,8 @@ internal class ZapierTriggerListing : ListingPage
     {
         PageConfiguration.AddEditRowAction<ZapierTriggerEditPage>();
 
-        // Creating and editting is primarly managed directly from Zapier
-        //PageConfiguration.HeaderActions.AddLink<ZapierTriggerCreatePage>("Create"); 
-
         PageConfiguration.TableActions.AddDeleteAction(nameof(Delete), "Delete");
 
-
-        var modelRetriever = new Func<object, IDataContainer, object>(StatusColumnModelRetriever);
 
         PageConfiguration.ColumnConfigurations
         .AddColumn(nameof(ZapierTriggerInfo.ZapierTriggerID), "ID", defaultSortDirection: SortTypeEnum.Asc, maxWidth: 20, sortable: true)
@@ -37,7 +32,7 @@ internal class ZapierTriggerListing : ListingPage
         .AddColumn(nameof(ZapierTriggerInfo.ZapierTriggerEventType), "Event type", searchable: true, sortable: true)
         .AddColumn(nameof(ZapierTriggerInfo.ZapierTriggerObjectType), "Object type", searchable: true, sortable: true)
         .AddColumn(nameof(ZapierTriggerInfo.ZapierTriggerZapierURL), "Url", searchable: true, sortable: true)
-        .AddComponentColumn(nameof(ZapierTriggerInfo.ZapierTriggerEnabled), NamedComponentCellComponentNames.SIMPLE_STATUS_COMPONENT, "Status", maxWidth: 30, searchable: true, modelRetriever: modelRetriever);
+        .AddComponentColumn(nameof(ZapierTriggerInfo.ZapierTriggerEnabled), NamedComponentCellComponentNames.SIMPLE_STATUS_COMPONENT, "Status", maxWidth: 30, searchable: true, modelRetriever: StatusColumnModelRetriever);
 
         await base.ConfigurePage();
     }

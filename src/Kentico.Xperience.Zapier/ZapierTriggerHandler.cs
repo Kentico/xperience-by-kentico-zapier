@@ -1,6 +1,8 @@
-﻿
+﻿using System.Net;
+using System.Net.Http.Json;
 using CMS.Core;
 using CMS.DataEngine;
+using CMS.Helpers;
 using CMS.OnlineForms;
 using Kentico.Integration.Zapier;
 using Kentico.Xperience.Zapier.Admin.UIPages;
@@ -9,229 +11,144 @@ namespace Kentico.Xperience.Zapier;
 
 public class ZapierTriggerHandler
 {
-    private IEventLogService? eventLogService;
+    private readonly IEventLogService? eventLogService;
+
+    private readonly HttpClient client;
 
     public ZapierTriggerInfo ZapierTrigger { get; set; }
 
-    public IEventLogService LogService
-    {
-        get
-        {
-            eventLogService ??= Service.Resolve<IEventLogService>();
 
-            return eventLogService;
-        }
+    public ZapierTriggerHandler(ZapierTriggerInfo zapInfo, HttpClient httpClient, IEventLogService eventLogService)
+    {
+        ZapierTrigger = zapInfo;
+        client = httpClient;
+        this.eventLogService = eventLogService;
     }
 
-    public ZapierTriggerHandler(ZapierTriggerInfo zapInfo) => ZapierTrigger = zapInfo;
+    public bool Register() => RegistrationProcessor();
 
-    public bool Register()
+    public bool Unregister() => RegistrationProcessor(false);
+
+    private bool RegistrationProcessor(bool toRegister = true)
     {
         if (ZapierTrigger != null)
         {
-            var typeInfo = ObjectTypeManager.GetTypeInfo(ZapierTrigger.mZapierTriggerObjectType);
-
             if (!Enum.TryParse(ZapierTrigger.ZapierTriggerEventType, out ZapierTriggerEvents eventType))
             {
                 return false;
             }
 
-            switch (eventType)
-            {
-                case ZapierTriggerEvents.Create:
-
-                    if (ZapierTrigger.IsForm())
-                    {
-                        BizFormItemEvents.Insert.After += FormHandler;
-                    }
-                    else
-                    {
-                        typeInfo.Events.Insert.After += ObjectInfoHandler;
-                    }
-
-                    LogService.LogEvent(EventTypeEnum.Information, nameof(ZapierTriggerHandler), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} create event.");
-                    break;
-
-                case ZapierTriggerEvents.Update:
-                    if (ZapierTrigger.IsForm())
-                    {
-                        BizFormItemEvents.Update.After += FormHandler;
-                    }
-                    else
-                    {
-                        typeInfo.Events.Update.After += ObjectInfoHandler;
-                    }
-
-                    LogService.LogEvent(EventTypeEnum.Information, nameof(ZapierTriggerHandler), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} update event.");
-                    break;
-                case ZapierTriggerEvents.Delete:
-                    if (ZapierTrigger.IsForm())
-                    {
-                        BizFormItemEvents.Delete.Before += FormHandler;
-                    }
-                    else
-                    {
-                        typeInfo.Events.Delete.Before += ObjectInfoHandler;
-                    }
-                    LogService.LogEvent(EventTypeEnum.Information, nameof(ZapierTriggerHandler), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} delete event.");
-                    break;
-                case ZapierTriggerEvents.None:
-                    LogService.LogEvent(EventTypeEnum.Error, nameof(ZapierTriggerHandler), "REGISTER", $"Handler '{ZapierTrigger.ZapierTriggerDisplayName}' could not be registered.");
-                    break;
-                default:
-                    return false;
-            }
-
-            return true;
-        }
-
-        LogService.LogEvent(EventTypeEnum.Error, nameof(ZapierTriggerHandler), "REGISTER", $"Unable to register handler: not found.");
-        return false;
-    }
-
-
-    public bool Unregister()
-    {
-        if (ZapierTrigger != null)
-        {
-            var typeInfo = ObjectTypeManager.GetTypeInfo(ZapierTrigger.mZapierTriggerObjectType);
-
-            if (!Enum.TryParse(ZapierTrigger.ZapierTriggerEventType, out ZapierTriggerEvents eventType))
+            if (!Enum.TryParse(ZapierTrigger.ZapierTriggerObjectClassType, out ZapierTriggerObjectClassType classType))
             {
                 return false;
             }
 
-            switch (eventType)
+            bool result = classType switch
             {
-                case ZapierTriggerEvents.Create:
+                ZapierTriggerObjectClassType.Other => RegisterInfoObject(eventType, toRegister),
+                ZapierTriggerObjectClassType.System => RegisterInfoObject(eventType, toRegister),
+                ZapierTriggerObjectClassType.Form => RegisterForm(eventType, toRegister),
+                ZapierTriggerObjectClassType.Website => throw new NotImplementedException(),
+                ZapierTriggerObjectClassType.Reusable => throw new NotImplementedException(),
+                ZapierTriggerObjectClassType.Email => throw new NotImplementedException(),
+                _ => throw new NotImplementedException()
+            };
 
-                    if (ZapierTrigger.IsForm())
-                    {
-                        BizFormItemEvents.Insert.After -= FormHandler;
-                    }
-                    else
-                    {
-                        typeInfo.Events.Insert.After -= ObjectInfoHandler;
-                    }
-
-                    LogService.LogEvent(EventTypeEnum.Information, nameof(ZapierTriggerHandler), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} create event.");
-                    break;
-
-                case ZapierTriggerEvents.Update:
-                    if (ZapierTrigger.IsForm())
-                    {
-                        BizFormItemEvents.Update.After -= FormHandler;
-                    }
-                    else
-                    {
-                        typeInfo.Events.Update.After -= ObjectInfoHandler;
-                    }
-
-                    LogService.LogEvent(EventTypeEnum.Information, nameof(ZapierTriggerHandler), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} update event.");
-                    break;
-                case ZapierTriggerEvents.Delete:
-                    if (ZapierTrigger.IsForm())
-                    {
-                        BizFormItemEvents.Delete.Before -= FormHandler;
-                    }
-                    else
-                    {
-                        typeInfo.Events.Delete.Before -= ObjectInfoHandler;
-                    }
-                    LogService.LogEvent(EventTypeEnum.Information, nameof(ZapierTriggerHandler), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} delete event.");
-                    break;
-                case ZapierTriggerEvents.None:
-                    LogService.LogEvent(EventTypeEnum.Error, nameof(ZapierTriggerHandler), "REGISTER", $"Handler '{ZapierTrigger.ZapierTriggerDisplayName}' could not be registered.");
-                    break;
-                default:
-                    return false;
-            }
-
-            return true;
-
+            return result;
         }
 
-        LogService.LogEvent(EventTypeEnum.Error, nameof(ZapierTriggerHandler), "REGISTER", $"Handler could not be unregistered.");
+        eventLogService.LogEvent(EventTypeEnum.Error, nameof(ZapierTriggerHandler), $"{(toRegister ? "REGISTER" : "UNREGISTER")}", $"Handler (un)registration was not successful");
         return false;
     }
 
 
-    //private bool HandlerRegistrationConnector(bool register)
-    //{
-    //    if (ZapierTrigger != null)
-    //    {
-    //        var typeInfo = ObjectTypeManager.GetTypeInfo(ZapierTrigger.mZapierTriggerObjectType);
+    private bool RegisterInfoObject(ZapierTriggerEvents eventType, bool register)
+    {
+        var typeInfo = ObjectTypeManager.GetTypeInfo(ZapierTrigger.mZapierTriggerObjectType);
 
-    //        if (!Enum.TryParse(ZapierTrigger.ZapierTriggerEventType, out ZapierTriggerEvents eventType))
-    //        {
-    //            return false;
-    //        }
+        var objHandler = eventType switch
+        {
+            ZapierTriggerEvents.Create => typeInfo.Events.Insert,
+            ZapierTriggerEvents.Update => typeInfo.Events.Update,
+            ZapierTriggerEvents.Delete => typeInfo.Events.Delete,
+            _ => null
+        };
 
-    //        if (typeInfo != null)
-    //        {
-    //            switch (eventType)
-    //            {
-    //                case ZapierTriggerEvents.Create:
+        if (objHandler is null)
+        {
+            eventLogService.LogEvent(EventTypeEnum.Error, nameof(ZapierTriggerHandler), $"{(register ? "REGISTER" : "UNREGISTER")}", $"Action for info object handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} for event {eventType} was not successful.");
+            return false;
+        }
 
-    //                    if (ZapierTrigger.IsForm())
-    //                    {
-    //                        BizFormItemEvents.Insert.After += FormHandler;
-    //                    }
-    //                    else
-    //                    {
-    //                        typeInfo.Events.Insert.After += ObjectInfoHandler;
-    //                    }
+        if (eventType is ZapierTriggerEvents.Delete)
+        {
+            if (register)
+            {
+                objHandler.Before += ObjectInfoHandler;
+            }
+            else
+            {
+                objHandler.Before -= ObjectInfoHandler;
+            }
+        }
+        else
+        {
+            if (register)
+            {
+                objHandler.After += ObjectInfoHandler;
+            }
+            else
+            {
+                objHandler.After -= ObjectInfoHandler;
+            }
+        }
+        eventLogService.LogEvent(EventTypeEnum.Information, nameof(ZapierTriggerHandler), $"{(register ? "REGISTER" : "UNREGISTER")}", $"Action for info object handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} for event {eventType} was successful.");
+        return true;
+    }
 
-    //                    eventLogService.LogEvent(EventTypeEnum.Information, nameof(ZapierEventRegistrationService), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} create event.");
-    //                    break;
 
-    //                case ZapierTriggerEvents.Update:
-    //                    if (ZapierTrigger.IsForm())
-    //                    {
-    //                        BizFormItemEvents.Update.After += FormHandler;
-    //                    }
-    //                    else
-    //                    {
-    //                        typeInfo.Events.Update.After += ObjectInfoHandler;
-    //                    }
+    private bool RegisterForm(ZapierTriggerEvents eventType, bool register)
+    {
+        var objHandler = eventType switch
+        {
+            ZapierTriggerEvents.Create => BizFormItemEvents.Insert,
+            ZapierTriggerEvents.Update => BizFormItemEvents.Update,
+            ZapierTriggerEvents.Delete => BizFormItemEvents.Delete,
+            _ => null
+        };
 
-    //                    eventLogService.LogEvent(EventTypeEnum.Information, nameof(ZapierEventRegistrationService), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} update event.");
-    //                    break;
+        if (objHandler is null)
+        {
+            eventLogService.LogEvent(EventTypeEnum.Error, nameof(ZapierTriggerHandler), $"{(register ? "REGISTER" : "UNREGISTER")}", $"Action for form handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} for event {eventType} was not successful.");
+            return false;
+        }
 
-    //                case ZapierTriggerEvents.Delete:
-    //                    if (ZapierTrigger.IsForm())
-    //                    {
-    //                        BizFormItemEvents.Delete.After += FormHandler;
-    //                    }
-    //                    else
-    //                    {
-    //                        typeInfo.Events.Delete.After += ObjectInfoHandler;
-    //                    }
-    //                    eventLogService.LogEvent(EventTypeEnum.Information, nameof(ZapierEventRegistrationService), "REGISTER", $"Registered handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} delete event.");
-    //                    break;
+        if (eventType is ZapierTriggerEvents.Delete)
+        {
+            if (register)
+            {
+                objHandler.Before += FormHandler;
+            }
+            else
+            {
+                objHandler.Before -= FormHandler;
+            }
+        }
+        else
+        {
+            if (register)
+            {
+                objHandler.After += FormHandler;
+            }
+            else
+            {
+                objHandler.After -= FormHandler;
+            }
+        }
+        eventLogService.LogEvent(EventTypeEnum.Information, nameof(ZapierTriggerHandler), $"{(register ? "REGISTER" : "UNREGISTER")}", $"Action for form handler '{ZapierTrigger.ZapierTriggerDisplayName}' to {ZapierTrigger.mZapierTriggerObjectType} for event {eventType} was successful.");
+        return true;
+    }
 
-    //                case ZapierTriggerEvents.None:
-    //                    eventLogService.LogEvent(EventTypeEnum.Error, nameof(ZapierEventRegistrationService), "REGISTER", $"Handler '{ZapierTrigger.ZapierTriggerDisplayName}' could not be registered.");
-    //                    break;
-
-    //                default:
-    //                    return false;
-    //            }
-
-    //            return true;
-    //        }
-    //        else
-    //        {
-    //            LogService.LogEvent(EventTypeEnum.Error, nameof(ZapierTriggerHandler), "REGISTER", $"Unable to register handler '{ZapierTrigger.ZapierTriggerDisplayName}': TypeInfo for {ZapierTrigger.mZapierTriggerObjectType} not found.");
-    //            return false;
-    //        }
-
-    //    }
-
-    //    LogService.LogEvent(EventTypeEnum.Error, nameof(ZapierTriggerHandler), "REGISTER", $"Unable to register handler: not found.");
-    //    return false;
-
-    //}
 
     private void ObjectInfoHandler(object? sender, ObjectEventArgs e) => Handler(e.Object);
     private void FormHandler(object? sender, BizFormItemEventArgs e)
@@ -246,14 +163,32 @@ public class ZapierTriggerHandler
     }
 
 
-
-
     private void Handler(BaseInfo @object)
     {
-        //CMS thread?
-        if (ZapierTrigger != null && ZapierTrigger.ZapierTriggerEnabled && @object != null)
+        if (ZapierTrigger != null && @object != null)
         {
-            ZapierHelper.SendPostToWebhook(ZapierTrigger.ZapierTriggerZapierURL, @object);
+            _ = SendPostToWebhook(ZapierTrigger.ZapierTriggerZapierURL, @object);
         }
     }
+
+    private async Task SendPostToWebhook(string url, BaseInfo data) => await DoPost(url, data.TozapierDictionary());
+
+    #region PostData
+    private async Task DoPost(string url, Dictionary<string, object>? content)
+    {
+        if (DataHelper.IsEmpty(url))
+        {
+            return;
+        }
+
+        var response = await client.PostAsJsonAsync(new Uri(url), content);
+
+        if (response.StatusCode != HttpStatusCode.OK)
+        {
+            string message = await response.Content.ReadAsStringAsync();
+
+            eventLogService.LogEvent(EventTypeEnum.Information, nameof(ZapierTriggerHandler), "POST", $"POST to {url} failed with the following message:<br/> {message}");
+        }
+    }
+    #endregion
 }

@@ -15,6 +15,8 @@ internal class ZapierModule : Module
 {
     private IZapierModuleInstaller? installer;
 
+    private IZapierRegistrationService? zapierRegistrationService;
+
     public ZapierModule() : base(nameof(ZapierModule)) { }
 
 
@@ -25,6 +27,7 @@ internal class ZapierModule : Module
         var services = parameters.Services;
 
         installer = services.GetRequiredService<IZapierModuleInstaller>();
+        zapierRegistrationService = services.GetRequiredService<IZapierRegistrationService>();
 
         ApplicationEvents.Initialized.Execute += InitializeModule;
         ApplicationEvents.Initialized.Execute += InitZapierRegistrations;
@@ -39,7 +42,7 @@ internal class ZapierModule : Module
 
         foreach (var zapInfo in zapsToRegister)
         {
-            ZapierHelper.RegisterWebhook(zapInfo);
+            zapierRegistrationService?.RegisterWebhook(zapInfo);
         }
     }
 
@@ -49,11 +52,11 @@ internal class ZapierModule : Module
         {
             if (webhook.ZapierTriggerEnabled)
             {
-                ZapierHelper.RegisterWebhook(webhook);
+                zapierRegistrationService?.RegisterWebhook(webhook);
             }
             else
             {
-                ZapierHelper.UnregisterWebhook(webhook);
+                zapierRegistrationService?.UnregisterWebhook(webhook);
             }
         }
     }
@@ -63,7 +66,7 @@ internal class ZapierModule : Module
     {
         if (e.Object is ZapierTriggerInfo webhook)
         {
-            ZapierHelper.UnregisterWebhook(webhook);
+            zapierRegistrationService?.UnregisterWebhook(webhook);
         }
     }
 
@@ -71,7 +74,7 @@ internal class ZapierModule : Module
     {
         if (e.Object is ZapierTriggerInfo webhook)
         {
-            ZapierHelper.RegisterWebhook(webhook);
+            zapierRegistrationService?.RegisterWebhook(webhook);
         }
     }
 
