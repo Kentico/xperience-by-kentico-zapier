@@ -5,6 +5,7 @@ using CMS.DataEngine;
 using CMS.Helpers;
 using CMS.OnlineForms;
 using Kentico.Integration.Zapier;
+using Kentico.Xperience.Zapier.Admin;
 using Kentico.Xperience.Zapier.Admin.UIPages;
 
 namespace Kentico.Xperience.Zapier;
@@ -176,7 +177,13 @@ public class ZapierTriggerHandler
     #region PostData
     private async Task DoPost(string url, Dictionary<string, object>? content)
     {
+        var contentResult = content ?? [];
         if (DataHelper.IsEmpty(url))
+        {
+            return;
+        }
+
+        if (!contentResult.TryAdd("AppId", ZapierConstants.AppId))
         {
             return;
         }
