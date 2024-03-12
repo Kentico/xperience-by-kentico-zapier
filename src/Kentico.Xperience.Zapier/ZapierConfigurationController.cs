@@ -158,6 +158,12 @@ public class ZapierConfigurationController : ControllerBase
                 result[coldef.ColumnName] = GetDefaultValue(coldef.ColumnType);
             }
         }
+
+        if (!result.TryAdd("AppId", ZapierConstants.AppId))
+        {
+            return result;
+        }
+
         return result;
     }
 

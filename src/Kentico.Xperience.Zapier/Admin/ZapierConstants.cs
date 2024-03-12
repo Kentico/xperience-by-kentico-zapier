@@ -4,6 +4,8 @@ namespace Kentico.Xperience.Zapier.Admin;
 
 internal static class ZapierConstants
 {
+    public const string AppId = "Xperience by Kentico Zapier";
+
     internal static class TriggerResourceConstants
     {
         public const string ResourceDisplayName = "Kentico Integration - Zapier Trigger";

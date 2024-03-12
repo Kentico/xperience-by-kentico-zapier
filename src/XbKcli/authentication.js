@@ -92,7 +92,7 @@ module.exports = {
         key: 'apiKey',
         type: 'string',
         required: true,
-        helpText: 'Find the API Key in your Xperience by Kentico admin application',
+        helpText: 'Find the API Key in your Xperience by Kentico admin application [API key Details](https://github.com/Kentico/xperience-by-kentico-zapier)',
       }
     ],
 

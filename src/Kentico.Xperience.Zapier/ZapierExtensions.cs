@@ -13,7 +13,8 @@ public static class ZapierExtensions
             var obj = new Dictionary<string, object>();
             foreach (string? col in baseInfo.ColumnNames)
             {
-                obj[col] = baseInfo.GetValue(col);
+                object val = baseInfo.GetValue(col);
+                obj[col] = val is DateTime dt ? dt.ToUniversalTime() : baseInfo.GetValue(col);
             }
 
             return obj;

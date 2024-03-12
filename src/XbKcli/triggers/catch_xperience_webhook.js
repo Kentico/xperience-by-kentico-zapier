@@ -118,7 +118,7 @@ const getFallbackData = async (z, bundle) => {
 
 
 const sampleObj = {
-  'Id': 1,
+  'AppId': "Xperience by Kentico",
 };
 
 
