@@ -71,6 +71,7 @@ internal class ZapierTriggerEditPage : ModelEditPage<ZapierTriggerEditModel>
 
     public override Task ConfigurePage()
     {
+        PageConfiguration.Disabled = true;
         PageConfiguration.SubmitConfiguration.Visible = false;
 
         return base.ConfigurePage();

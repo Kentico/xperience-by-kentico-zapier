@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using CMS.DataEngine;
+﻿using CMS.DataEngine;
 using CMS.Helpers;
 using Kentico.Integration.Zapier;
 using Kentico.Xperience.Admin.Base.FormAnnotations;
@@ -11,22 +10,22 @@ namespace Kentico.Xperience.Zapier.Admin.UIPages;
 internal class ZapierTriggerEditModel
 {
     [RequiredValidationRule]
-    [TextInputComponent(Label = "Name", Order = 0, Disabled = true)]
+    [TextInputComponent(Label = "Name", Order = 0)]
     public string? Name { get; set; }
 
-    [CheckBoxComponent(Label = "Enabled", Order = 1, Disabled = true)]
+    [CheckBoxComponent(Label = "Enabled", Order = 1)]
     public bool Enabled { get; set; }
 
     [RequiredValidationRule]
-    [ObjectSelectorComponent("cms.class", Label = "Object type", Disabled = true, MaximumItems = 1, Placeholder = "Choose an option", Order = 2, WhereConditionProviderType = typeof(ZapierTriggerObjectTypesWhereConditionProvider))]
+    [ObjectSelectorComponent("cms.class", Label = "Object type", MaximumItems = 1, Placeholder = "Choose an option", Order = 2, WhereConditionProviderType = typeof(ZapierTriggerObjectTypesWhereConditionProvider))]
     public IEnumerable<ObjectRelatedItem>? ObjectType { get; set; }
 
     [RequiredValidationRule]
-    [DropDownComponent(Label = "Event", Order = 3, Disabled = true, DataProviderType = typeof(ZapierTriggerEventTypesDropdownOptionsProvider))]
+    [DropDownComponent(Label = "Event", Order = 3, DataProviderType = typeof(ZapierTriggerEventTypesDropdownOptionsProvider))]
     public string? EventType { get; set; }
 
 
-    [TextInputComponent(Label = "Zapier Url", Order = 4, Disabled = true)]
+    [TextInputComponent(Label = "Zapier Url", Order = 4)]
     public string? ZapierURL { get; set; }
 
 

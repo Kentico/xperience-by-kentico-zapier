@@ -1,5 +1,5 @@
-﻿using System.Data;
-using AspNetCore.Authentication.ApiKey;
+﻿using System.Collections;
+using System.Data;
 using CMS.ContentEngine;
 using CMS.DataEngine;
 using CMS.DataEngine.Internal;
@@ -8,13 +8,15 @@ using CMS.OnlineForms;
 using CMS.Websites.Routing;
 using Kentico.Integration.Zapier;
 using Kentico.Xperience.Admin.Base;
+using Kentico.Xperience.Zapier.Admin;
 using Kentico.Xperience.Zapier.Admin.UIPages;
+using Kentico.Xperience.Zapier.Resources;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kentico.Xperience.Zapier;
 
-[Authorize(AuthenticationSchemes = ApiKeyDefaults.AuthenticationScheme)]
+[Authorize(AuthenticationSchemes = ZapierConstants.AuthenticationScheme.XbyKZapierApiKeyScheme)]
 [ApiController]
 public class ZapierConfigurationController : ControllerBase
 {
@@ -25,13 +27,13 @@ public class ZapierConfigurationController : ControllerBase
     private readonly IContentQueryExecutor contentQueryExecutor;
     private readonly IContentQueryResultMapper mapper;
 
+    public static readonly List<ZapierTriggerEvents> EnabledEvents = [ZapierTriggerEvents.Create, ZapierTriggerEvents.Update, ZapierTriggerEvents.Delete];
 
     public ZapierConfigurationController(
         IZapierTriggerInfoProvider zapierTriggerInfoProvider,
         IWebsiteChannelContext websiteChannelContext,
         IContentQueryExecutor contentQueryExecutor,
-        IContentQueryResultMapper mapper
-        )
+        IContentQueryResultMapper mapper)
     {
         this.zapierTriggerInfoProvider = zapierTriggerInfoProvider;
         this.websiteChannelContext = websiteChannelContext;
@@ -41,20 +43,15 @@ public class ZapierConfigurationController : ControllerBase
 
     [HttpGet]
     [Route("auth/me")]
-    public IActionResult CheckAuth() => Ok(new { Message = "You are Authenticated", Channel = websiteChannelContext?.WebsiteChannelName ?? "Unknown" });
+    public IActionResult CheckAuth() => Ok(new { Message = Localization.auth_successtext, Channel = websiteChannelContext?.WebsiteChannelName ?? "Unknown" });
 
     [HttpGet]
     [Route("zapier/data/events")]
-    public ActionResult<IEnumerable<EventItemDto>> Events()
-    {
-        var events = new List<ZapierTriggerEvents> { ZapierTriggerEvents.Create, ZapierTriggerEvents.Update, ZapierTriggerEvents.Delete };
-
-        return events.Select(e => new EventItemDto((int)e, e.ToString())).ToList();
-    }
+    public ActionResult<IEnumerable<EventItemDto>> Events() => EnabledEvents.Select(e => new EventItemDto((int)e, e.ToString())).ToList();
 
     [HttpGet]
     [Route("zapier/data/objects")]
-    public ActionResult<IEnumerable<KenticoInfoDto>> Objects()
+    public ActionResult<List<KenticoInfoDto>> Objects()
     {
         var infoObjects = DataClassInfoProvider.ProviderObject.Get()
             .WhereNull(nameof(DataClassInfo.ClassContentTypeType))
@@ -90,10 +87,12 @@ public class ZapierConfigurationController : ControllerBase
 
         if (dataClass.IsForm())
         {
-            return Ok(GetDataFromForm(objectType));
+            var objectTypeInfo = BizFormItemProvider.GetTypeInfo(objectType);
+            return Ok(GetDataFromObjectTypeInfo(objectTypeInfo));
         }
 
-        return Ok(GetDataFromInfoObject(objectType));
+        var typeInfo = ObjectTypeManager.GetTypeInfo(objectType);
+        return Ok(GetDataFromObjectTypeInfo(typeInfo));
 
     }
 
@@ -141,49 +140,48 @@ public class ZapierConfigurationController : ControllerBase
 
 
 
-    private Dictionary<string, object> GetDataFromInfoObject(string objectType)
+    private Dictionary<string, object> GetDataFromObjectTypeInfo(ObjectTypeInfo objectTypeInfo)
     {
-        var generalizedInfo = (GeneralizedInfo)ModuleManager.GetObject(objectType);
-        var type = ObjectTypeManager.GetTypeInfo(objectType);
-
-        if (generalizedInfo == null || type == null)
-        {
-            return [];
-        }
-
-        var result = generalizedInfo.GetDataQuery(true, s => s.TopN(1));
-
-        var dataSet = result.Result;
-
-        var dataTable = dataSet.Tables[0];
-
-        type?.SensitiveColumns?
-            .ForEach(colName => dataSet.Tables[0].Columns.Remove(colName));
-
-        var columns = dataTable.Columns.OfType<DataColumn>();
-
-        var data = dataTable.Rows.OfType<DataRow>().Select(r => columns.ToDictionary(c => c.ColumnName, c => r[c]));
-
-        return data.FirstOrDefault() ?? [];
-    }
-
-
-
-    private Dictionary<string, object> GetDataFromForm(string objectType)
-    {
-        var formData = BizFormItemProvider.GetItems(objectType).TopN(1).GetEnumerableTypedResult();
-        var cols = formData.FirstOrDefault()?.ColumnNames ?? new List<string> { };
-
         var result = new Dictionary<string, object>();
 
-        foreach (string? col in cols)
+        if (objectTypeInfo is null)
         {
-            result[col] = formData.First().GetValue(col);
+            return result;
+        }
+
+        var sensitiveCols = objectTypeInfo.SensitiveColumns ?? [];
+
+        foreach (var coldef in objectTypeInfo.ClassStructureInfo.ColumnDefinitions)
+        {
+            if (!sensitiveCols.Contains(coldef.ColumnName))
+            {
+                result[coldef.ColumnName] = GetDefaultValue(coldef.ColumnType);
+            }
         }
         return result;
     }
-}
 
+    private object GetDefaultValue(Type t)
+    {
+        if (t.IsValueType)
+        {
+            return Activator.CreateInstance(t)!;
+        }
+
+        if (t == typeof(string))
+        {
+            return "text";
+        }
+
+        if (t.IsAssignableTo(typeof(IEnumerable)))
+        {
+            return Array.Empty<object>();
+        }
+
+
+        return new object();
+    }
+}
 
 public record EventItemDto(int Id, string Name);
 

@@ -22,10 +22,7 @@ namespace Kentico.Xperience.Zapier.Admin
         internal static bool VerifyToken(string input, string hash)
         {
             string hashOfInput = GetToken(input);
-
-            var comparer = StringComparer.OrdinalIgnoreCase;
-
-            return comparer.Compare(hashOfInput, hash) == 0;
+            return hashOfInput == hash;
         }
     }
 }
