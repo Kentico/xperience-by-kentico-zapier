@@ -1,24 +1,12 @@
+# Configuration of Zapier
+
+This is example of ZapierConfiguration in appsettings.json.
+The appropriate name of the allowed object corresponds to the ClassName in the CMS Class table.
+
+```json
 {
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft": "Warning",
-      "Microsoft.Hosting.Lifetime": "Information"
-    },
-    "KenticoEventLog": {
-      "LogLevel": {
-        "Default": "Error",
-        "Microsoft.AspNetCore.Server.Kestrel": "None"
-      }
-    }
-  },
-  "AllowedHosts": "*",
-  "ConnectionStrings": {
-    "CMSConnectionString": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=DancingGoatZapier;Integrated Security=True;Persist Security Info=False;Connect Timeout=60;Encrypt=False;Current Language=English;"
-  },
-  "CMSHashStringSalt": "40974ad7-76dd-4d5d-a70e-4539d5410492",
   "ZapierConfiguration": {
-    "WebAdminDomain": "nf54t8h6-26547.euw.devtunnels.ms",
+    "WebAdminDomain": "dancinggoatzapier.com",
     "AllowedObjects": [
       "cms.Role",
       "cms.user",
@@ -130,3 +118,4 @@
     ]
   }
 }
+```
