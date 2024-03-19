@@ -30,7 +30,7 @@ const insertFormRecordAction = {
   display: {
     hidden: false,
     description: "Insert record into XbK form",
-    label: "Insert form record",
+    label: "Insert Form Record",
   },
   key: "insertFormRecordAction",
   operation: {

@@ -145,7 +145,7 @@ const moveToStepAction = {
   display: {
     hidden: false,
     description: "Move to step content type in XbK",
-    label: "Move to step",
+    label: "Move to Step",
   },
   key: "moveToStepAction",
   operation: {
