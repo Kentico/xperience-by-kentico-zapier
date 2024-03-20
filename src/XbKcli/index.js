@@ -4,7 +4,11 @@ const {
   afters = [],
 } = require("./authentication");
 
-const getCatchXperienceWebhook = require("./triggers/catch_xperience_webhook");
+//const getCatchXperienceWebhook = require("./triggers/catch_xperience_webhook");
+const getFormSubmissionTrigger = require("./triggers/form_submission_trigger");
+const getEventLogCreateTrigger = require("./triggers/event_log_create_trigger");
+const getContactCreateTrigger = require("./triggers/contact_create_trigger");
+const getMoveToStepTrigger = require("./triggers/move_to_step_trigger");
 
 const getObjectTypes = require("./triggers/dropdowns/getObjectTypes");
 const getEventTypes = require("./triggers/dropdowns/getEventTypes");
@@ -25,6 +29,7 @@ const getHeadlessTypes = require("./triggers/dropdowns/getHeadlessTypes");
 const getHeadlessItems = require("./triggers/dropdowns/getHeadlessItems");
 const getHeadlessChannels = require("./triggers/dropdowns/getHeadlessChannels");
 const getStepsForItem = require("./triggers/dropdowns/getStepsForItem");
+const getContentTypesObjects = require("./triggers/dropdowns/getContentTypesObjects");
 
 module.exports = {
   // This is just shorthand to reference the installed dependencies you have.
@@ -40,7 +45,11 @@ module.exports = {
 
   // If you want your trigger to show up, you better include it here!
   triggers: {
-    [getCatchXperienceWebhook.key]: getCatchXperienceWebhook,
+    //[getCatchXperienceWebhook.key]: getCatchXperienceWebhook,
+    [getFormSubmissionTrigger.key]: getFormSubmissionTrigger,
+    [getEventLogCreateTrigger.key]: getEventLogCreateTrigger,
+    [getContactCreateTrigger.key]: getContactCreateTrigger,
+    [getMoveToStepTrigger.key]: getMoveToStepTrigger,
 
     [getObjectTypes.key]: getObjectTypes,
     [getEventTypes.key]: getEventTypes,
@@ -56,6 +65,7 @@ module.exports = {
     [getHeadlessItems.key]: getHeadlessItems,
     [getReusableItems.key]: getReusableItems,
     [getStepsForItem.key]: getStepsForItem,
+    [getContentTypesObjects.key]: getContentTypesObjects,
   },
 
   // If you want your searches to show up, you better include it here!

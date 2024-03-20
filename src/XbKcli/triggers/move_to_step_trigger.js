@@ -1,6 +1,7 @@
-const triggerNoun = 'Catch Xperience by Kentico Webhook'
-const getObjectTypesField = require('../fields/getObjectTypesField');
+const triggerNoun = 'Catch Move to Step'
+
 const getEventTypesField = require('../fields/getEventTypesField');
+const getContentTypesObjectsField = require('../fields/getContentTypesObjectsField');
 
 
 const performHook = async (z, bundle) => {
@@ -9,14 +10,13 @@ const performHook = async (z, bundle) => {
 
 const performSubscribe = async (z, bundle) => {
   const hook = {
-      'EventType': bundle.inputData.eventType,
-      'Name': bundle.inputData.name,
-      'ObjectType': bundle.inputData.objectType,
-      'ZapierUrl': bundle.targetUrl,
-      'WebhookCreatedManually': false
+    'EventType': bundle.inputData.eventType,
+    'Name': bundle.inputData.name,
+    'ObjectType': bundle.inputData.objectType,
+    'ZapierUrl': bundle.targetUrl,
   };
   const options = {
-      url: `${bundle.authData.website}/zapier/trigger`,
+      url: `${bundle.authData.website}/zapier/triggers/movetostep`,
       params: {
           format: 'json'
       },
@@ -38,7 +38,7 @@ const performUnsubscribe = async (z, bundle) => {
   const webhook = bundle.subscribeData;
 
   const options = {
-      url: `${bundle.authData.website}/zapier/trigger/${webhook.triggerId}`,
+      url: `${bundle.authData.website}/zapier/triggers/movetostep/${webhook.triggerId}`,
       method: 'DELETE',
       headers: {
           'Accept': 'application/json'
@@ -81,21 +81,16 @@ const sampleObj = {
 
 
 module.exports = {
-  // see here for a full list of available properties:
-  // https://github.com/zapier/zapier-platform/blob/main/packages/schema/docs/build/schema.md#triggerschema
-  key: 'catch_xperience_webhook',
+  key: 'move_to_step',
   noun: triggerNoun,
 
   display: {
     label: triggerNoun,
-    description: 'Triggers when a new catchxperiencebykenticowebhook is created.'
+    description: 'Triggers when content item moves to a step.'
   },
 
   operation: {
       type: 'hook',
-
-      // `inputFields` defines the fields a user could provide
-      // Zapier will pass them in as `bundle.inputData` later. They're optional.
       inputFields: [
         {
             label: 'Webhook name',
@@ -104,18 +99,31 @@ module.exports = {
             type: 'string',
             required: true
         },
-        getObjectTypesField(),
-        getEventTypesField(),
+        async function makeFieldsForWebsite(z, bundle) {
+            const res = [];
+            res.push(
+              getContentTypesObjectsField({
+                required: true,
+                altersDynamicFields: true,
+              })
+            );
+            if (bundle.inputData.objectType != undefined) {
+              res.push(
+                getEventTypesField({
+                  required: true,
+                  altersDynamicFields: true,
+                })
+              );
+              
+            }
+            return res;
+          }
     ],
 
       perform: performHook,
       performSubscribe,
       performUnsubscribe,
       performList: getFallbackData,
-
-      // In cases where Zapier needs to show an example record to the user, but we are unable to get a live example
-      // from the API, Zapier will fallback to this hard-coded sample. It should reflect the data structure of
-      // returned records, and have obvious placeholder values that we can show to any user.
       sample: sampleObj
     }
 };

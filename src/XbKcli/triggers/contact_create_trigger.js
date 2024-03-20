@@ -1,7 +1,4 @@
-const triggerNoun = 'Catch Xperience by Kentico Webhook'
-const getObjectTypesField = require('../fields/getObjectTypesField');
-const getEventTypesField = require('../fields/getEventTypesField');
-
+const triggerNoun = 'Catch Contact'
 
 const performHook = async (z, bundle) => {
   return [bundle.cleanedRequest];
@@ -9,14 +6,11 @@ const performHook = async (z, bundle) => {
 
 const performSubscribe = async (z, bundle) => {
   const hook = {
-      'EventType': bundle.inputData.eventType,
       'Name': bundle.inputData.name,
-      'ObjectType': bundle.inputData.objectType,
       'ZapierUrl': bundle.targetUrl,
-      'WebhookCreatedManually': false
   };
   const options = {
-      url: `${bundle.authData.website}/zapier/trigger`,
+      url: `${bundle.authData.website}/zapier/triggers/contactcreate`,
       params: {
           format: 'json'
       },
@@ -38,7 +32,7 @@ const performUnsubscribe = async (z, bundle) => {
   const webhook = bundle.subscribeData;
 
   const options = {
-      url: `${bundle.authData.website}/zapier/trigger/${webhook.triggerId}`,
+      url: `${bundle.authData.website}/zapier/triggers/contactcreate/${webhook.triggerId}`,
       method: 'DELETE',
       headers: {
           'Accept': 'application/json'
@@ -53,7 +47,7 @@ const performUnsubscribe = async (z, bundle) => {
 
 const getFallbackData = async (z, bundle) => {
   const options = {
-      url: `${bundle.authData.website}/zapier/object/${bundle.inputData.objectType}/${bundle.inputData.eventType}`,
+      url: `${bundle.authData.website}/zapier/object/OM.Contact/Create`,
       method: 'GET',
       params: {
           topN: 1,
@@ -81,21 +75,16 @@ const sampleObj = {
 
 
 module.exports = {
-  // see here for a full list of available properties:
-  // https://github.com/zapier/zapier-platform/blob/main/packages/schema/docs/build/schema.md#triggerschema
-  key: 'catch_xperience_webhook',
+  key: 'contact_create',
   noun: triggerNoun,
 
   display: {
     label: triggerNoun,
-    description: 'Triggers when a new catchxperiencebykenticowebhook is created.'
+    description: 'Triggers when a new contact is created.'
   },
 
   operation: {
       type: 'hook',
-
-      // `inputFields` defines the fields a user could provide
-      // Zapier will pass them in as `bundle.inputData` later. They're optional.
       inputFields: [
         {
             label: 'Webhook name',
@@ -104,8 +93,6 @@ module.exports = {
             type: 'string',
             required: true
         },
-        getObjectTypesField(),
-        getEventTypesField(),
     ],
 
       perform: performHook,
@@ -113,9 +100,6 @@ module.exports = {
       performUnsubscribe,
       performList: getFallbackData,
 
-      // In cases where Zapier needs to show an example record to the user, but we are unable to get a live example
-      // from the API, Zapier will fallback to this hard-coded sample. It should reflect the data structure of
-      // returned records, and have obvious placeholder values that we can show to any user.
       sample: sampleObj
     }
 };
