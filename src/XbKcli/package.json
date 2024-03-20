@@ -1,13 +1,14 @@
 {
   "name": "xperience-by-kentico-zapier-cli",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "jest --testTimeout 10000"
   },
   "dependencies": {
-    "zapier-platform-core": "15.5.2"
+    "zapier-platform-core": "15.5.2",
+    "xml2js": "0.6.2"
   },
   "devDependencies": {
     "jest": "^29.6.0"

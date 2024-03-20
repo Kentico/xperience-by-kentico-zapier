@@ -96,7 +96,7 @@ const performUnsubscribe = async (z, bundle) => {
 
 const getFallbackData = async (z, bundle) => {
   const options = {
-      url: `${bundle.authData.website}/zapier/object/${bundle.inputData.objectType}`,
+      url: `${bundle.authData.website}/zapier/object/${bundle.inputData.objectType}/${bundle.inputData.eventType}`,
       method: 'GET',
       params: {
           topN: 1,

@@ -36,7 +36,7 @@ internal class ZapierTriggerEditModel
 
         infoObject.ZapierTriggerObjectClassType = ZapierTriggerExtensions.GetType(objectType);
         infoObject.ZapierTriggerDisplayName = Name;
-        infoObject.ZapierTriggerCodeName = ValidationHelper.GetCodeName(Name);
+        infoObject.ZapierTriggerCodeName = ZapierTriggerExtensions.GetUniqueCodename(Name);
         infoObject.ZapierTriggerEnabled = Enabled;
         infoObject.ZapierTriggerEventType = EventType;
         infoObject.mZapierTriggerObjectType = objectType;
@@ -63,7 +63,17 @@ internal static class ZapierTriggerExtensions
         return !string.IsNullOrEmpty(contentType) ? contentType : type;
     }
 
+    public static string GetUniqueCodename(string? name)
+    {
+        string codeName = ValidationHelper.GetCodeName(name);
 
+        string guid = Guid.NewGuid().ToString();
+        string? randString = guid.Split('-').FirstOrDefault();
+
+        string uniqueCodeName = $"{codeName}-{randString}";
+
+        return uniqueCodeName;
+    }
 
     public static bool IsForm(this ZapierTriggerInfo info) => Enum.TryParse(info.ZapierTriggerObjectClassType, out ZapierTriggerObjectClassType type) && type == ZapierTriggerObjectClassType.Form;
 
@@ -76,5 +86,6 @@ public enum ZapierTriggerObjectClassType
     System,
     Website,
     Reusable,
+    Headless,
     Email,
 }

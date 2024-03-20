@@ -13,9 +13,13 @@ public static class ZapierServiceCollectionExtensions
 {
     public static IServiceCollection AddKenticoZapier(this IServiceCollection services)
     {
+        services.AddOptions<ZapierConfiguration>().BindConfiguration("ZapierConfiguration");
         services.AddSingleton<IZapierModuleInstaller, ZapierModuleInstaller>();
         services.AddSingleton<IZapierRegistrationService, ZapierRegistrationService>();
         services.AddSingleton<IApiKeyCachedService, ApiKeyCachedService>();
+
+        services.AddSingleton<IWorkflowScopeService, WorkflowScopeService>();
+        services.AddSingleton<IContentHelper, ContentHelper>();
 
         services.AddAuthentication()
             .AddApiKeyInAuthorizationHeader(ZapierConstants.AuthenticationScheme.XbyKZapierApiKeyScheme, options =>
@@ -57,3 +61,11 @@ public static class ZapierServiceCollectionExtensions
 
     }
 }
+
+
+public class ZapierConfiguration
+{
+    public string? WebAdminDomain { get; set; }
+    public HashSet<string> AllowedObjects { get; set; } = [];
+}
+
