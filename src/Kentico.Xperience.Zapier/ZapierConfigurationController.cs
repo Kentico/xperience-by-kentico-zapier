@@ -47,7 +47,7 @@ public class ZapierConfigurationController : ControllerBase
 
     public static readonly List<ZapierTriggerEvents> InfoEvents = [ZapierTriggerEvents.Create, ZapierTriggerEvents.Update, ZapierTriggerEvents.Delete];
 
-    public static readonly List<ZapierTriggerEvents> ContentItemEvents = [ZapierTriggerEvents.Create, ZapierTriggerEvents.Update, ZapierTriggerEvents.Delete, ZapierTriggerEvents.Publish];
+    public static readonly List<ZapierTriggerEvents> ContentItemEvents = [ZapierTriggerEvents.Publish];
 
 
     public ZapierConfigurationController(

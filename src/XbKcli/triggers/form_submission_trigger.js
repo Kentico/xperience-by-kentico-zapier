@@ -1,6 +1,6 @@
-const triggerNoun = 'Catch Xperience by Kentico Webhook'
-const getObjectTypesField = require('../fields/getObjectTypesField');
-const getEventTypesField = require('../fields/getEventTypesField');
+const triggerNoun = 'Catch Form Submission'
+
+const getFormClassNamesField = require('../fields/getFormClassNamesField');
 
 
 const performHook = async (z, bundle) => {
@@ -9,14 +9,12 @@ const performHook = async (z, bundle) => {
 
 const performSubscribe = async (z, bundle) => {
   const hook = {
-      'EventType': bundle.inputData.eventType,
       'Name': bundle.inputData.name,
-      'ObjectType': bundle.inputData.objectType,
+      'ObjectType': bundle.inputData.classname,
       'ZapierUrl': bundle.targetUrl,
-      'WebhookCreatedManually': false
   };
   const options = {
-      url: `${bundle.authData.website}/zapier/trigger`,
+      url: `${bundle.authData.website}/zapier/triggers/formsubmission`,
       params: {
           format: 'json'
       },
@@ -38,7 +36,7 @@ const performUnsubscribe = async (z, bundle) => {
   const webhook = bundle.subscribeData;
 
   const options = {
-      url: `${bundle.authData.website}/zapier/trigger/${webhook.triggerId}`,
+      url: `${bundle.authData.website}/zapier/triggers/formsubmission/${webhook.triggerId}`,
       method: 'DELETE',
       headers: {
           'Accept': 'application/json'
@@ -53,7 +51,7 @@ const performUnsubscribe = async (z, bundle) => {
 
 const getFallbackData = async (z, bundle) => {
   const options = {
-      url: `${bundle.authData.website}/zapier/object/${bundle.inputData.objectType}/${bundle.inputData.eventType}`,
+      url: `${bundle.authData.website}/zapier/object/${bundle.inputData.classname}/Create`,
       method: 'GET',
       params: {
           topN: 1,
@@ -83,12 +81,12 @@ const sampleObj = {
 module.exports = {
   // see here for a full list of available properties:
   // https://github.com/zapier/zapier-platform/blob/main/packages/schema/docs/build/schema.md#triggerschema
-  key: 'catch_xperience_webhook',
+  key: 'form_submission',
   noun: triggerNoun,
 
   display: {
     label: triggerNoun,
-    description: 'Triggers when a new catchxperiencebykenticowebhook is created.'
+    description: 'Triggers when a new form submission is created.'
   },
 
   operation: {
@@ -104,8 +102,7 @@ module.exports = {
             type: 'string',
             required: true
         },
-        getObjectTypesField(),
-        getEventTypesField(),
+        getFormClassNamesField(),
     ],
 
       perform: performHook,
