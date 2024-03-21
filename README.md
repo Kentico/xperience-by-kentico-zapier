@@ -1,13 +1,13 @@
 # Xperience by Kentico Zapier
 
 [![Kentico Labs](https://img.shields.io/badge/Kentico_Labs-grey?labelColor=orange&logo=data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic3ZnLWljb24iIHN0eWxlPSJ3aWR0aDogMWVtOyBoZWlnaHQ6IDFlbTt2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO2ZpbGw6IGN1cnJlbnRDb2xvcjtvdmVyZmxvdzogaGlkZGVuOyIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik05NTYuMjg4IDgwNC40OEw2NDAgMjc3LjQ0VjY0aDMyYzE3LjYgMCAzMi0xNC40IDMyLTMycy0xNC40LTMyLTMyLTMyaC0zMjBjLTE3LjYgMC0zMiAxNC40LTMyIDMyczE0LjQgMzIgMzIgMzJIMzg0djIxMy40NEw2Ny43MTIgODA0LjQ4Qy00LjczNiA5MjUuMTg0IDUxLjIgMTAyNCAxOTIgMTAyNGg2NDBjMTQwLjggMCAxOTYuNzM2LTk4Ljc1MiAxMjQuMjg4LTIxOS41MnpNMjQxLjAyNCA2NDBMNDQ4IDI5NS4wNFY2NGgxMjh2MjMxLjA0TDc4Mi45NzYgNjQwSDI0MS4wMjR6IiAgLz48L3N2Zz4=)](https://github.com/Kentico/.github/blob/main/SUPPORT.md#labs-limited-support)
-[![CI: Build and Test](https://github.com/Kentico/repo-template/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Kentico/repo-template/actions/workflows/ci.yml)
-
+[![CI: Build and Test](https://github.com/Kentico/xperience-by-kentico-zapier/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Kentico/xperience-by-kentico-zapier/actions/workflows/ci.yml)
+[![NuGet Package](https://img.shields.io/nuget/vpre/Kentico.Xperience.Zapier.svg)](https://www.nuget.org/packages/Kentico.Xperience.Zapier)
 
 > [!WARNING]  
-> This integration is currently preview only with limited Kentico Labs support. The Zapier application is in public beta, you can get access through this link: https://zapier.com/developer/public-invite/197164/a81b6e163e6b8128b380c7a72e10552d/
+> This integration is currently preview only with limited Kentico Labs support. The Zapier application is in public beta here: https://zapier.com/apps/xperience-by-kentico/integrations
 >
-> Fully featured and supported Zapier integration is coming in Xperience by Kentico April Refresh
+> Updated and fully supported Zapier integration is coming in Xperience by Kentico April Refresh
 
 
 ## Description
@@ -28,7 +28,7 @@ This version supports content workflows added in version 28.3.0. Please ensure t
 
 | Xperience Version | Library Version |
 | ----------------- | --------------- |
-| >= 28.3.*         | PREVIEW         |
+| >= 28.3.*         | 0.1.0 PREVIEW   |
 
 ### Dependencies
 
@@ -36,9 +36,6 @@ This version supports content workflows added in version 28.3.0. Please ensure t
 - [Xperience by Kentico](https://docs.xperience.io/xp/changelog)
 
 ## Package Installation
-
-> [!WARNING]  
-> The nuget is not published yet, include this respository into your project directly
 
 Add the package to your application using the .NET CLI
 
