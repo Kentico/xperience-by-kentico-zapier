@@ -63,6 +63,8 @@ internal static class ZapierTriggerExtensions
         return !string.IsNullOrEmpty(contentType) ? contentType : type;
     }
 
+    public static string GenerateWebhookName() =>
+         Guid.NewGuid().ToString().Split('-').FirstOrDefault() ?? string.Empty;
     public static string GetUniqueCodename(string? name)
     {
         string codeName = ValidationHelper.GetCodeName(name);

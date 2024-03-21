@@ -17,7 +17,9 @@ Zapier integration enables seamless connectivity between a wide range of web app
 ## Screenshots
 
 ![List of zapier triggers](/images/screenshots/listofzapiertriggers.png "List of zapier triggers")
-![Zap creation in zapier UI](/images/screenshots/zapieruitrigger.png "Zap creation in zapier UI")
+![Trigger in zapier UI](/images/screenshots/zapieruitrigger.png "Zap creation in zapier UI: Triggers")
+![Actions in zapier UI](/images/screenshots/zapieruiactions.png "Zap creation in zapier UI: Actions")
+
 
 
 ## Library Version Matrix
@@ -88,17 +90,12 @@ dotnet add package Kentico.Xperience.Zapier --prerelease
 4. On the API Key menu generate new API key for your Zapier application.
     * Save the API key as it will appear only once.
 5. Open your Zapier UI and create new Zap.
-    * As a trigger pick Xperience by Kentico application
-    * Select Event "Catch Xperience by Kentico Webhook"
-    * Then you have to connect an Account using URL of your website (without trailing slash) and your generated API Key from previous step
-    * After your connection, you can set configuration for your trigger. 
-        * Name your trigger
-        * Pick object in Xperience by Kentico which you want to set for an automation process
-        * Select type Event for your object
-    * Test your trigger
-6. Now you can create your own workflow eg. connect with Gmail, Microsoft Teams, ...
-    * You can find more information on https://zapier.com/workflows 
-7. After you finish your automation workflow... Publication of your Zap will create an object in your Xperience by Kentico application.
+    * Select Xperience by Kentico as your trigger or an action.
+    * Then you have to connect an Account using URL of your website (without trailing slash) and your generated API Key from previous step.
+    * After your connection, you can set configuration for your trigger or action. 
+    * Follow the Zapier UI. If you need more information, visit the [Usage Guide](./docs/Usage-Guide.md)
+    * Test your Zap.
+6. After you finish your Zap... Publication of your Zap will create an object in your Xperience by Kentico application.
     * You can find it in administration -> Zapier UI application -> List of Zapier triggers
 
 

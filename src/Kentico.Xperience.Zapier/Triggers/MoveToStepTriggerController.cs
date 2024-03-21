@@ -43,10 +43,11 @@ public class MoveToStepTriggerController : ControllerBase
     [Route("zapier/triggers/movetostep")]
     public ActionResult CreateTrigger(MoveToStepTriggerDto trigger)
     {
+        string name = ZapierTriggerExtensions.GenerateWebhookName();
         var infoObject = new ZapierTriggerInfo
         {
-            ZapierTriggerDisplayName = trigger.Name,
-            ZapierTriggerCodeName = ZapierTriggerExtensions.GetUniqueCodename(trigger.Name),
+            ZapierTriggerDisplayName = name,
+            ZapierTriggerCodeName = ZapierTriggerExtensions.GetUniqueCodename(name),
             ZapierTriggerObjectClassType = ZapierTriggerExtensions.GetType(trigger.ObjectType),
             ZapierTriggerEnabled = true,
             ZapierTriggerEventType = trigger.EventType,
@@ -81,4 +82,4 @@ public class MoveToStepTriggerController : ControllerBase
 
 }
 
-public record MoveToStepTriggerDto(string Name, string ObjectType, string EventType, string ZapierUrl);
+public record MoveToStepTriggerDto(string ObjectType, string EventType, string ZapierUrl);

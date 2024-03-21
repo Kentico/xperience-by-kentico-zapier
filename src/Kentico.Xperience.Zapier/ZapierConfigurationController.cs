@@ -192,11 +192,11 @@ public class ZapierConfigurationController : ControllerBase
     [Route("zapier/trigger")]
     public ActionResult CreateTrigger(TriggerDto newTrigger)
     {
-
+        string name = ZapierTriggerExtensions.GenerateWebhookName();
         var infoObject = new ZapierTriggerInfo
         {
-            ZapierTriggerDisplayName = newTrigger.Name,
-            ZapierTriggerCodeName = ZapierTriggerExtensions.GetUniqueCodename(newTrigger.Name),
+            ZapierTriggerDisplayName = name,
+            ZapierTriggerCodeName = ZapierTriggerExtensions.GetUniqueCodename(name),
             ZapierTriggerObjectClassType = ZapierTriggerExtensions.GetType(newTrigger.ObjectType),
             ZapierTriggerEnabled = true,
             ZapierTriggerEventType = newTrigger.EventType,
@@ -353,7 +353,7 @@ public class ZapierConfigurationController : ControllerBase
 
 public record EventItemDto(string Id, string Name);
 public record KenticoInfoDto(string Id, string Name);
-public record TriggerDto(string Name, string ObjectType, string EventType, string ZapierUrl);
+public record TriggerDto(string ObjectType, string EventType, string ZapierUrl);
 
 
 
