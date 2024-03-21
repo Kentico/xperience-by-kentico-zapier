@@ -23,10 +23,11 @@ public class EventLogTriggerController : ControllerBase
     public ActionResult CreateTrigger(EventLogTriggerDto trigger)
     {
         string objectType = EventLogInfo.OBJECT_TYPE;
+        string name = ZapierTriggerExtensions.GenerateWebhookName();
         var infoObject = new ZapierTriggerInfo
         {
-            ZapierTriggerDisplayName = trigger.Name,
-            ZapierTriggerCodeName = ZapierTriggerExtensions.GetUniqueCodename(trigger.Name),
+            ZapierTriggerDisplayName = name,
+            ZapierTriggerCodeName = ZapierTriggerExtensions.GetUniqueCodename(name),
             ZapierTriggerObjectClassType = ZapierTriggerExtensions.GetType(objectType),
             ZapierTriggerEnabled = true,
             ZapierTriggerEventType = nameof(ZapierTriggerEvents.Create),
@@ -61,4 +62,4 @@ public class EventLogTriggerController : ControllerBase
 }
 
 
-public record EventLogTriggerDto(string Name, string ZapierUrl);
+public record EventLogTriggerDto(string ZapierUrl);

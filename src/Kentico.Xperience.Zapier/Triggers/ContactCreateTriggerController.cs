@@ -21,10 +21,11 @@ public class ContactCreateTriggerController : ControllerBase
     public ActionResult CreateTrigger(ContactTriggerDto trigger)
     {
         string objectType = ContactInfo.OBJECT_TYPE;
+        string name = ZapierTriggerExtensions.GenerateWebhookName();
         var infoObject = new ZapierTriggerInfo
         {
-            ZapierTriggerDisplayName = trigger.Name,
-            ZapierTriggerCodeName = ZapierTriggerExtensions.GetUniqueCodename(trigger.Name),
+            ZapierTriggerDisplayName = name,
+            ZapierTriggerCodeName = ZapierTriggerExtensions.GetUniqueCodename(name),
             ZapierTriggerObjectClassType = ZapierTriggerExtensions.GetType(objectType),
             ZapierTriggerEnabled = true,
             ZapierTriggerEventType = nameof(ZapierTriggerEvents.Create),
@@ -60,4 +61,4 @@ public class ContactCreateTriggerController : ControllerBase
 
 }
 
-public record ContactTriggerDto(string Name, string ZapierUrl);
+public record ContactTriggerDto(string ZapierUrl);

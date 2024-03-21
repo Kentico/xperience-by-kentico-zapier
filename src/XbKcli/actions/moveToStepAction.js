@@ -144,8 +144,8 @@ const moveToStepAction = {
   noun: "Move to step action",
   display: {
     hidden: false,
-    description: "Move to step content type in XbK",
-    label: "Move to Step",
+    description: "Moves a content type to a step in Xbk",
+    label: "Move Content Type to Step",
   },
   key: "moveToStepAction",
   operation: {

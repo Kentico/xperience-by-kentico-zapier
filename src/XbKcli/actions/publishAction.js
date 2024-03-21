@@ -119,8 +119,8 @@ const publishAction = {
   noun: "Publish action",
   display: {
     hidden: false,
-    description: "Publish content type in XbK",
-    label: "Publish",
+    description: "Publishes a content type in Xbk",
+    label: "Publish Content Type",
   },
   key: "publishAction",
   operation: {

@@ -1,4 +1,5 @@
 ﻿using CMS.DataEngine;
+using HotChocolate.Types;
 using Kentico.Integration.Zapier;
 using Kentico.Xperience.Zapier.Admin;
 using Kentico.Xperience.Zapier.Admin.UIPages;
@@ -47,10 +48,11 @@ public class FormSubmissionTriggerController : ControllerBase
     [Route("zapier/triggers/formsubmission")]
     public ActionResult CreateTrigger(FormSubmissionDto newTrigger)
     {
+        string name = ZapierTriggerExtensions.GenerateWebhookName();
         var infoObject = new ZapierTriggerInfo
         {
-            ZapierTriggerDisplayName = newTrigger.Name,
-            ZapierTriggerCodeName = ZapierTriggerExtensions.GetUniqueCodename(newTrigger.Name),
+            ZapierTriggerDisplayName = name,
+            ZapierTriggerCodeName = ZapierTriggerExtensions.GetUniqueCodename(name),
             ZapierTriggerObjectClassType = ZapierTriggerExtensions.GetType(newTrigger.ObjectType),
             ZapierTriggerEnabled = true,
             ZapierTriggerEventType = nameof(ZapierTriggerEvents.Create),
@@ -86,4 +88,4 @@ public class FormSubmissionTriggerController : ControllerBase
 }
 
 
-public record FormSubmissionDto(string Name, string ObjectType, string ZapierUrl);
+public record FormSubmissionDto(string ObjectType, string ZapierUrl);

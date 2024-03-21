@@ -29,7 +29,7 @@ const insertFormRecordAction = {
   noun: "Insert form record action",
   display: {
     hidden: false,
-    description: "Insert record into XbK form",
+    description: "Inserts record into an Xbk form",
     label: "Insert Form Record",
   },
   key: "insertFormRecordAction",
