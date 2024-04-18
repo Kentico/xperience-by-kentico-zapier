@@ -1,4 +1,6 @@
-const triggerNoun = "Content Item Moves to a Step";
+const deleteTrigger = require("../utils/deleteTrigger");
+
+const triggerNoun = "Content Moves to a Workflow Step";
 
 const getEventTypesField = require("../fields/getEventTypesField");
 const getContentTypesObjectsField = require("../fields/getContentTypesObjectsField");
@@ -31,26 +33,12 @@ const performSubscribe = async (z, bundle) => {
 };
 
 const performUnsubscribe = async (z, bundle) => {
-  // bundle.subscribeData contains the parsed response JSON from the subscribe
-  // request made initially.
-  const webhook = bundle.subscribeData;
-
-  const options = {
-    url: `${bundle.authData.website}/zapier/triggers/movetostep/${webhook.triggerId}`,
-    method: "DELETE",
-    headers: {
-      Accept: "application/json",
-    },
-  };
-
-  const response = await z.request(options);
-
-  return response.status === 200;
+  return await deleteTrigger(z, bundle);
 };
 
 const getFallbackData = async (z, bundle) => {
   const options = {
-    url: `${bundle.authData.website}/zapier/object/${bundle.inputData.objectType}/${bundle.inputData.eventType}`,
+    url: `${bundle.authData.website}/zapier/triggers/movetostep/${bundle.inputData.objectType}/${bundle.inputData.eventType}`,
     method: "GET",
     params: {
       topN: 1,
@@ -70,7 +58,7 @@ const getFallbackData = async (z, bundle) => {
 };
 
 const sampleObj = {
-  AppId: "Xperience by Kentico",
+  ContentTypeName: "ContentType.Type",
 };
 
 module.exports = {

@@ -4,4 +4,12 @@ const ClassContentTypeType = {
   WEBSITE: "Website",
 };
 
-module.exports = ClassContentTypeType;
+const ClassType = {
+  FORM: "Form",
+  CONTENT_TYPE: "Content",
+};
+
+module.exports = {
+  ClassContentTypeType: ClassContentTypeType,
+  ClassType: ClassType,
+};

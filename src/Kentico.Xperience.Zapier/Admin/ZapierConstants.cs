@@ -1,31 +1,21 @@
-﻿
-
-namespace Kentico.Xperience.Zapier.Admin;
+﻿namespace Kentico.Xperience.Zapier.Admin;
 
 internal static class ZapierConstants
 {
-    public const string AppId = "Xperience by Kentico Zapier";
-
-    internal static class TriggerResourceConstants
+    internal static class ZapierResourceConstants
     {
-        public const string ResourceDisplayName = "Kentico Integration - Zapier Trigger";
-        public const string ResourceName = "CMS.Integration.ZapierTrigger";
-        public const string ResourceDescription = "Kentico Zapier triggers";
+        public const string ResourceDisplayName = "Kentico Integration - Zapier";
+        public const string ResourceName = "CMS.Integration.Zapier";
+        public const string ResourceDescription = "The module integrates Zapier functionality for streamlined automation.";
         public const bool ResourceIsInDevelopment = false;
     }
 
-    internal static class ApiKeyResourceConstants
-    {
-        public const string ResourceDisplayName = "Kentico Integration - Zapier Api Key";
-        public const string ResourceName = "CMS.Integration.ZapierKey";
-        public const string ResourceDescription = "Kentico Zapier API keys";
-        public const bool ResourceIsInDevelopment = false;
-    }
 
     internal static class Permissions
     {
         public const string GENERATE = "Generate";
     }
+
 
     internal static class AuthenticationScheme
     {

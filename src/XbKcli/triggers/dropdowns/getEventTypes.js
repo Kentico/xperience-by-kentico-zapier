@@ -1,6 +1,6 @@
 async function execute(z, bundle) {
   const options = {
-    url: `${bundle.authData.website}/zapier/data/events/${bundle.inputData.objectType}`,
+    url: `${bundle.authData.website}/zapier/data/workflow-steps/${bundle.inputData.objectType}`,
     method: "GET",
   };
 

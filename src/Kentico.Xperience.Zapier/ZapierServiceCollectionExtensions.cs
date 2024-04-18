@@ -1,7 +1,13 @@
 ﻿using AspNetCore.Authentication.ApiKey;
+
 using CMS.Localization;
+
 using Kentico.Xperience.Zapier.Admin;
+using Kentico.Xperience.Zapier.Auth;
 using Kentico.Xperience.Zapier.Resources;
+using Kentico.Xperience.Zapier.Triggers;
+using Kentico.Xperience.Zapier.Triggers.Handlers;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
 
@@ -9,6 +15,10 @@ using Microsoft.Net.Http.Headers;
 
 namespace Kentico.Xperience.Zapier;
 
+
+/// <summary>
+/// Enables Kentico Zapier feature
+/// </summary>
 public static class ZapierServiceCollectionExtensions
 {
     public static IServiceCollection AddKenticoZapier(this IServiceCollection services)
@@ -17,9 +27,11 @@ public static class ZapierServiceCollectionExtensions
         services.AddSingleton<IZapierModuleInstaller, ZapierModuleInstaller>();
         services.AddSingleton<IZapierRegistrationService, ZapierRegistrationService>();
         services.AddSingleton<IApiKeyCachedService, ApiKeyCachedService>();
+        services.AddSingleton<IZapierTriggerService, ZapierTriggerService>();
+        services.AddSingleton<IZapierTokenManager, ZapierTokenManager>();
+        services.AddSingleton<IZapierTriggerHandlerFactory, ZapierTriggerHandlerFactory>();
 
         services.AddSingleton<IWorkflowScopeService, WorkflowScopeService>();
-        services.AddSingleton<IContentHelper, ContentHelper>();
 
         services.AddAuthentication()
             .AddApiKeyInAuthorizationHeader(ZapierConstants.AuthenticationScheme.XbyKZapierApiKeyScheme, options =>
@@ -32,15 +44,14 @@ public static class ZapierServiceCollectionExtensions
                     {
                         var apiKeyProvider = context.HttpContext.RequestServices.GetRequiredService<IApiKeyCachedService>();
 
-                        string? token = apiKeyProvider.GetApiKeyToken();
+                        string? tokenHash = apiKeyProvider.GetApiKeyTokenHash();
 
-                        if (token is null)
+                        if (tokenHash is null)
                         {
                             context.ValidationFailed();
                             return Task.CompletedTask;
                         }
-
-                        bool isValid = ApiKeyHelper.VerifyToken(context.ApiKey, token);
+                        bool isValid = ApiKeyHelper.VerifyToken(context.ApiKey, tokenHash);
 
                         if (isValid)
                         {
@@ -58,14 +69,11 @@ public static class ZapierServiceCollectionExtensions
         services.AddAuthorization();
 
         return services;
-
     }
 }
 
 
 public class ZapierConfiguration
 {
-    public string? WebAdminDomain { get; set; }
     public HashSet<string> AllowedObjects { get; set; } = [];
 }
-

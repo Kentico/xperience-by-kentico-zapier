@@ -1,8 +1,8 @@
-﻿
-using Kentico.Xperience.Admin.Base.UIPages;
+﻿using CMS.Membership;
+
 using Kentico.Xperience.Admin.Base;
+using Kentico.Xperience.Admin.Base.UIPages;
 using Kentico.Xperience.Zapier.Admin.UIPages;
-using CMS.Membership;
 
 [assembly: UIApplication(
     identifier: ZapierApplicationPage.IDENTIFIER,
@@ -25,5 +25,8 @@ namespace Kentico.Xperience.Zapier.Admin.UIPages;
 [UIPermission(ZapierConstants.Permissions.GENERATE)]
 internal class ZapierApplicationPage : ApplicationPage
 {
+    /// <summary>
+    /// Unique identifier of Zapier application
+    /// </summary>
     public const string IDENTIFIER = "zapier";
 }

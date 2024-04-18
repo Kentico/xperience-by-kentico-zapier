@@ -1,6 +1,8 @@
+const ClassType = require("../../utils/enums").ClassType;
+
 async function execute(z, bundle) {
   const options = {
-    url: `${bundle.authData.website}/zapier/triggers/contentobjects`,
+    url: `${bundle.authData.website}/zapier/data/types/movetostep`,
     method: "GET",
   };
 

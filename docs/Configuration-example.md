@@ -6,7 +6,6 @@ The appropriate name of the allowed object corresponds to the ClassName in the C
 ```json
 {
   "ZapierConfiguration": {
-    "WebAdminDomain": "dancinggoatzapier.com",
     "AllowedObjects": [
       "cms.Role",
       "cms.user",

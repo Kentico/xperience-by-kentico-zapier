@@ -1,10 +1,12 @@
-﻿
-using CMS;
+﻿using CMS;
 using CMS.Base;
 using CMS.Core;
 using CMS.DataEngine;
+
 using Kentico.Integration.Zapier;
 using Kentico.Xperience.Zapier.Admin;
+using Kentico.Xperience.Zapier.Triggers;
+
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: RegisterModule(type: typeof(ZapierModule))]
@@ -14,8 +16,8 @@ namespace Kentico.Xperience.Zapier.Admin;
 internal class ZapierModule : Module
 {
     private IZapierModuleInstaller? installer;
-
     private IZapierRegistrationService? zapierRegistrationService;
+
 
     public ZapierModule() : base(nameof(ZapierModule)) { }
 
@@ -32,13 +34,14 @@ internal class ZapierModule : Module
         ApplicationEvents.Initialized.Execute += InitializeModule;
         ApplicationEvents.Initialized.Execute += InitZapierRegistrations;
         ZapierTriggerInfo.TYPEINFO.Events.Insert.After += (s, e) => AddNewZapWebhook(e);
-        ZapierTriggerInfo.TYPEINFO.Events.Update.Before += (s, e) => UpdateIfEnabled(e);
+        ZapierTriggerInfo.TYPEINFO.Events.Update.Before += (s, e) => Update(e);
         ZapierTriggerInfo.TYPEINFO.Events.Delete.After += (s, e) => RemoveZapWebhook(e);
     }
 
+
     private void InitZapierRegistrations(object? sender, EventArgs e)
     {
-        var zapsToRegister = ZapierTriggerInfoProvider.ProviderObject.Get().WhereTrue(nameof(ZapierTriggerInfo.ZapierTriggerEnabled));
+        var zapsToRegister = ZapierTriggerInfo.Provider.Get();
 
         foreach (var zapInfo in zapsToRegister)
         {
@@ -46,18 +49,12 @@ internal class ZapierModule : Module
         }
     }
 
-    private void UpdateIfEnabled(ObjectEventArgs e)
+
+    private void Update(ObjectEventArgs e)
     {
-        if (e.Object is ZapierTriggerInfo webhook && webhook.ChangedColumns().Contains(nameof(webhook.ZapierTriggerEnabled)))
+        if (e.Object is ZapierTriggerInfo webhook)
         {
-            if (webhook.ZapierTriggerEnabled)
-            {
-                zapierRegistrationService?.RegisterWebhook(webhook);
-            }
-            else
-            {
-                zapierRegistrationService?.UnregisterWebhook(webhook);
-            }
+            zapierRegistrationService?.RegisterWebhook(webhook);
         }
     }
 
@@ -70,6 +67,7 @@ internal class ZapierModule : Module
         }
     }
 
+
     private void AddNewZapWebhook(ObjectEventArgs e)
     {
         if (e.Object is ZapierTriggerInfo webhook)
@@ -80,5 +78,4 @@ internal class ZapierModule : Module
 
 
     private void InitializeModule(object? sender, EventArgs e) => installer?.Install();
-
 }
