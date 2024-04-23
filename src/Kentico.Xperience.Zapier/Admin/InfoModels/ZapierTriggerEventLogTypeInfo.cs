@@ -15,7 +15,7 @@ namespace Kentico.Integration.Zapier;
 /// Data container class for <see cref="ZapierTriggerEventLogTypeInfo"/>.
 /// </summary>
 [Serializable]
-public partial class ZapierTriggerEventLogTypeInfo : AbstractInfo<ZapierTriggerEventLogTypeInfo, IZapierTriggerEventLogTypeInfoProvider>, IInfoWithId
+public partial class ZapierTriggerEventLogTypeInfo : AbstractInfo<ZapierTriggerEventLogTypeInfo, IInfoProvider<ZapierTriggerEventLogTypeInfo>>, IInfoWithId
 {
     /// <summary>
     /// Object type.
@@ -26,7 +26,7 @@ public partial class ZapierTriggerEventLogTypeInfo : AbstractInfo<ZapierTriggerE
     /// <summary>
     /// Type information.
     /// </summary>
-    public static readonly ObjectTypeInfo TYPEINFO = new(typeof(ZapierTriggerEventLogTypeInfoProvider), OBJECT_TYPE, "KenticoZapier.ZapierTriggerEventLogType", "ZapierTriggerEventLogTypeID", null, null, null, null, null, null, null)
+    public static readonly ObjectTypeInfo TYPEINFO = new(typeof(ZapierTriggerEventLogTypeInfoProvider), OBJECT_TYPE, "KenticoZapier.ZapierTriggerEventLogType", nameof(ZapierTriggerEventLogTypeID), null, null, null, null, null, null, null)
     {
         TouchCacheDependencies = true,
         DependsOn = new List<ObjectDependency>()

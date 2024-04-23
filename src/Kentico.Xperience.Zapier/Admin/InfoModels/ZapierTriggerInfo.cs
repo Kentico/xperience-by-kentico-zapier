@@ -15,7 +15,7 @@ namespace Kentico.Integration.Zapier;
 /// Data container class for <see cref="ZapierTriggerInfo"/>.
 /// </summary>
 [Serializable]
-public partial class ZapierTriggerInfo : AbstractInfo<ZapierTriggerInfo, IZapierTriggerInfoProvider>
+public partial class ZapierTriggerInfo : AbstractInfo<ZapierTriggerInfo, IInfoProvider<ZapierTriggerInfo>>, IInfoWithId
 {
     /// <summary>
     /// Object type.
@@ -26,7 +26,7 @@ public partial class ZapierTriggerInfo : AbstractInfo<ZapierTriggerInfo, IZapier
     /// <summary>
     /// Type information.
     /// </summary>
-    public static readonly ObjectTypeInfo TYPEINFO = new(typeof(ZapierTriggerInfoProvider), OBJECT_TYPE, "KenticoZapier.ZapierTrigger", "ZapierTriggerID", null, null, "ZapierTriggerCodeName", null, null, null, null)
+    public static readonly ObjectTypeInfo TYPEINFO = new(typeof(ZapierTriggerInfoProvider), OBJECT_TYPE, "KenticoZapier.ZapierTrigger", nameof(ZapierTriggerID), null, null, nameof(ZapierTriggerCodeName), null, null, null, null)
     {
         TouchCacheDependencies = true,
         DependsOn = new List<ObjectDependency>()

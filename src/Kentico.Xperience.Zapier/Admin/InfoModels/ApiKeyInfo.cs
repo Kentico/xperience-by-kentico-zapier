@@ -15,7 +15,7 @@ namespace Kentico.Integration.Zapier;
 /// Data container class for <see cref="ApiKeyInfo"/>.
 /// </summary>
 [Serializable]
-public partial class ApiKeyInfo : AbstractInfo<ApiKeyInfo, IApiKeyInfoProvider>
+public partial class ApiKeyInfo : AbstractInfo<ApiKeyInfo, IInfoProvider<ApiKeyInfo>>, IInfoWithId
 {
     /// <summary>
     /// Object type.
@@ -26,7 +26,7 @@ public partial class ApiKeyInfo : AbstractInfo<ApiKeyInfo, IApiKeyInfoProvider>
     /// <summary>
     /// Type information.
     /// </summary>
-    public static readonly ObjectTypeInfo TYPEINFO = new(typeof(ApiKeyInfoProvider), OBJECT_TYPE, "KenticoZapier.ApiKey", "ApiKeyID", "ApiKeyCreated", null, null, null, null, null, null)
+    public static readonly ObjectTypeInfo TYPEINFO = new(typeof(ApiKeyInfoProvider), OBJECT_TYPE, "KenticoZapier.ApiKey", nameof(ApiKeyID), nameof(ApiKeyCreated), null, null, null, null, null, null)
     {
         TouchCacheDependencies = true,
     };
@@ -44,7 +44,7 @@ public partial class ApiKeyInfo : AbstractInfo<ApiKeyInfo, IApiKeyInfoProvider>
 
 
     /// <summary>
-    /// Api key key.
+    /// Api key token.
     /// </summary>
     [DatabaseField]
     public virtual string ApiKeyToken

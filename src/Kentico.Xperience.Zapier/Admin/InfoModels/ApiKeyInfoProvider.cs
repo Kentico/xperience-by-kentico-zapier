@@ -5,8 +5,7 @@ namespace Kentico.Integration.Zapier;
 /// <summary>
 /// Class providing <see cref="ApiKeyInfo"/> management.
 /// </summary>
-[ProviderInterface(typeof(IApiKeyInfoProvider))]
-public partial class ApiKeyInfoProvider : AbstractInfoProvider<ApiKeyInfo, ApiKeyInfoProvider>, IApiKeyInfoProvider
+public partial class ApiKeyInfoProvider : AbstractInfoProvider<ApiKeyInfo, ApiKeyInfoProvider>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ApiKeyInfoProvider"/> class.

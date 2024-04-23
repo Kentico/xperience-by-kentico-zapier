@@ -5,8 +5,7 @@ namespace Kentico.Integration.Zapier;
 /// <summary>
 /// Class providing <see cref="ZapierTriggerInfo"/> management.
 /// </summary>
-[ProviderInterface(typeof(IZapierTriggerInfoProvider))]
-public partial class ZapierTriggerInfoProvider : AbstractInfoProvider<ZapierTriggerInfo, ZapierTriggerInfoProvider>, IZapierTriggerInfoProvider
+public partial class ZapierTriggerInfoProvider : AbstractInfoProvider<ZapierTriggerInfo, ZapierTriggerInfoProvider>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ZapierTriggerInfoProvider"/> class.
