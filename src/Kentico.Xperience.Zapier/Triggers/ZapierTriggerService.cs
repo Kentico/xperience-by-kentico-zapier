@@ -20,7 +20,7 @@ public interface IZapierTriggerService
     /// </summary>
     /// <param name="objectType">Info object type.</param>
     /// <param name="eventType">Name of event type which starts the trigger.</param>
-    /// <param name="eventType">Name of event type which starts the trigger.
+    /// <param name="zapierUrl">Url of trigger in zapier.
     ///     Possible values:
     ///         - "Create"
     ///         - "Update"
