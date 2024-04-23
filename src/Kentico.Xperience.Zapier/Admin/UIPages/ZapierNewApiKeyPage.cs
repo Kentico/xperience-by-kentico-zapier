@@ -26,10 +26,6 @@ internal class ZapierNewApiKeyPage : InfoEditPage<ApiKeyInfo>
 
     private string? Token { get; set; }
 
-
-    /// <summary>
-    /// Name of dummy field
-    /// </summary>
     internal const string RawTokenFieldName = "ApiKeyRawToken";
 
 

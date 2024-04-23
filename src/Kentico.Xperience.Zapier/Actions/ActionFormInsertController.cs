@@ -5,7 +5,6 @@ using CMS.DataEngine;
 using CMS.OnlineForms;
 
 using Kentico.Xperience.Zapier.Auth;
-using Kentico.Xperience.Zapier.Common;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

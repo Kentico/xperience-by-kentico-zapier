@@ -1,7 +1,5 @@
 ﻿using CMS.DataEngine;
 
-using Kentico.Integration.Zapier;
-
 namespace Kentico.Xperience.Zapier.Triggers.Extensions;
 
 internal static class ZapierTriggerExtensions

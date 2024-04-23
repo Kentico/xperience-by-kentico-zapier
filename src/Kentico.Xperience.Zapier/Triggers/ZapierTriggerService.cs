@@ -16,36 +16,55 @@ namespace Kentico.Xperience.Zapier.Triggers;
 public interface IZapierTriggerService
 {
     /// <summary>
-    /// Creates trigger
+    /// Creates trigger.
     /// </summary>
-    /// <param name="objectType"></param>
-    /// <param name="eventType"></param>
-    /// <param name="zapierUrl"></param>
-    /// <returns></returns>
+    /// <param name="objectType">Info object type.</param>
+    /// <param name="eventType">Name of event type which starts the trigger.</param>
+    /// <param name="eventType">Name of event type which starts the trigger.
+    ///     Possible values:
+    ///         - "Create"
+    ///         - "Update"
+    ///         - "Delete"
+    ///         - "Publish"
+    ///         - Any custom worflow step's name.
+    /// </param>
+    /// <returns>Identification of created trigger.</returns>
     int CreateTrigger(string objectType, string eventType, string zapierUrl);
 
 
     /// <summary>
-    /// Deletes trigger
+    /// Deletes trigger.
     /// </summary>
-    /// <param name="info"></param>
+    /// <param name="info">Info object of Zapier trigger.</param>
     void DeleteTrigger(ZapierTriggerInfo info);
 
 
     /// <summary>
-    /// Assigns event log severity to Zapier trigger
+    /// Assigns event log severity to Zapier trigger.
     /// </summary>
-    /// <param name="zapierTriggerID"></param>
-    /// <param name="severities"></param>
+    /// <param name="zapierTriggerID">Identification of Zapier trigger info object.</param>
+    /// <param name="severities">List of event log types. 
+    ///     Possible values:
+    ///         - "I" (Information)
+    ///         - "W" (Warning)
+    ///         - "E" (Error)
+    /// </param>
     void AssignEventSeverities(int zapierTriggerID, IEnumerable<string> severities);
 
 
     /// <summary>
-    /// Gets the fallback data for given object type and event type
+    /// Gets the fallback data for given object type and event type.
     /// </summary>
-    /// <param name="objectType"></param>
-    /// <param name="eventType"></param>
-    /// <returns></returns>
+    /// <param name="objectType">Info object type.</param>
+    /// <param name="eventType">Name of event type which starts the trigger.
+    ///     Possible values:
+    ///         - "Create"
+    ///         - "Update"
+    ///         - "Delete"
+    ///         - "Publish"
+    ///         - Any custom worflow step's name.
+    /// </param>
+    /// <returns>Dictionary of string-object pairs representing the sample or fallback data according to specified object type and event type.</returns>
     Task<IDictionary<string, object>?> GetFallbackDataAsync(string objectType, string eventType);
 }
 internal class ZapierTriggerService : IZapierTriggerService

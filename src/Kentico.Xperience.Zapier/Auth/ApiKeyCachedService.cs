@@ -5,7 +5,7 @@ using Kentico.Integration.Zapier;
 
 namespace Kentico.Xperience.Zapier.Auth;
 
-public interface IApiKeyCachedService
+internal interface IApiKeyCachedService
 {
     string? GetApiKeyTokenHash();
 }
