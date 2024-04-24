@@ -26,7 +26,7 @@ public partial class ZapierTriggerInfo : AbstractInfo<ZapierTriggerInfo, IInfoPr
     /// <summary>
     /// Type information.
     /// </summary>
-    public static readonly ObjectTypeInfo TYPEINFO = new(typeof(ZapierTriggerInfoProvider), OBJECT_TYPE, "KenticoZapier.ZapierTrigger", nameof(ZapierTriggerID), null, null, nameof(ZapierTriggerCodeName), null, null, null, null)
+    public static readonly ObjectTypeInfo TYPEINFO = new(typeof(IInfoProvider<ZapierTriggerInfo>), OBJECT_TYPE, "KenticoZapier.ZapierTrigger", nameof(ZapierTriggerID), null, null, nameof(ZapierTriggerCodeName), null, null, null, null)
     {
         TouchCacheDependencies = true,
         DependsOn = new List<ObjectDependency>()

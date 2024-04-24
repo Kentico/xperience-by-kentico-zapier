@@ -26,7 +26,7 @@ public partial class ApiKeyInfo : AbstractInfo<ApiKeyInfo, IInfoProvider<ApiKeyI
     /// <summary>
     /// Type information.
     /// </summary>
-    public static readonly ObjectTypeInfo TYPEINFO = new(typeof(ApiKeyInfoProvider), OBJECT_TYPE, "KenticoZapier.ApiKey", nameof(ApiKeyID), nameof(ApiKeyCreated), null, null, null, null, null, null)
+    public static readonly ObjectTypeInfo TYPEINFO = new(typeof(IInfoProvider<ApiKeyInfo>), OBJECT_TYPE, "KenticoZapier.ApiKey", nameof(ApiKeyID), nameof(ApiKeyCreated), null, null, null, null, null, null)
     {
         TouchCacheDependencies = true,
     };
