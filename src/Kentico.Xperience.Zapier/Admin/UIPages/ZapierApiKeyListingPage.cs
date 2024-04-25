@@ -1,10 +1,11 @@
-﻿using CMS.DataEngine;
+﻿using CMS.Base;
+using CMS.DataEngine;
 using CMS.Membership;
+
 using Kentico.Integration.Zapier;
 using Kentico.Xperience.Admin.Base;
-using Kentico.Xperience.Zapier.Admin.UIPages;
 using Kentico.Xperience.Admin.Base.Authentication;
-using CMS.Base;
+using Kentico.Xperience.Zapier.Admin.UIPages;
 
 [assembly: UIPage(
     parentType: typeof(ZapierApplicationPage),
@@ -19,19 +20,23 @@ namespace Kentico.Xperience.Zapier.Admin.UIPages;
 
 internal class ZapierApiKeyListingPage : ListingPage
 {
-    private readonly IApiKeyInfoProvider apiKeyInfoProvider;
+    private readonly IInfoProvider<ApiKeyInfo> apiKeyInfoProvider;
     private readonly IAuthenticatedUserAccessor userAccessor;
     private readonly IUserInfoProvider userProvider;
+    private readonly IPageUrlGenerator pageUrlGenerator;
 
 
-    public ZapierApiKeyListingPage(IApiKeyInfoProvider apiKeyInfoProvider, IAuthenticatedUserAccessor userAccessor, IUserInfoProvider userProvider)
+    public ZapierApiKeyListingPage(IInfoProvider<ApiKeyInfo> apiKeyInfoProvider, IAuthenticatedUserAccessor userAccessor, IUserInfoProvider userProvider, IPageUrlGenerator pageUrlGenerator)
     {
         this.apiKeyInfoProvider = apiKeyInfoProvider;
         this.userAccessor = userAccessor;
         this.userProvider = userProvider;
+        this.pageUrlGenerator = pageUrlGenerator;
     }
 
+
     protected override string ObjectType => ApiKeyInfo.OBJECT_TYPE;
+
 
     public override Task ConfigurePage()
     {
@@ -53,6 +58,7 @@ internal class ZapierApiKeyListingPage : ListingPage
         return base.ConfigurePage();
     }
 
+
     private string GetUserName(object formattedValue, IDataContainer _)
     {
         int userId = (int)formattedValue;
@@ -62,15 +68,15 @@ internal class ZapierApiKeyListingPage : ListingPage
         return user.UserName ?? user.Email ?? string.Empty;
     }
 
+
     [PageCommand(Permission = SystemPermissions.DELETE)]
     public override Task<ICommandResponse<RowActionResult>> Delete(int id) => base.Delete(id);
 
+
     [PageCommand(Permission = ZapierConstants.Permissions.GENERATE)]
-    public async Task<ICommandResponse<RowActionResult>> Generate(CancellationToken _)
+    public async Task<INavigateResponse> Generate(CancellationToken _)
     {
-        var rowAction = new RowActionResult(true, true);
         var user = await userAccessor.Get();
-        string apiKey = ApiKeyHelper.GenerateApiKey();
 
         using var transaction = new CMSTransactionScope();
 
@@ -79,15 +85,12 @@ internal class ZapierApiKeyListingPage : ListingPage
         var apiKeyInfo = new ApiKeyInfo()
         {
             ApiKeyCreatedBy = user.UserID,
-            ApiKeyToken = ApiKeyHelper.GetToken(apiKey),
+            ApiKeyToken = string.Empty,
         };
 
         apiKeyInfoProvider.Set(apiKeyInfo);
 
         transaction.Commit();
-
-        return ResponseFrom(rowAction).UseCommand("LoadData").AddWarningMessage(string.Format(LocalizationService.GetString("apikey.savemessage"), apiKey)); //Nice to have - Can be redirected to a separate page to display ApiKey
+        return NavigateTo(pageUrlGenerator.GenerateUrl<ZapierNewApiKeyPage>(apiKeyInfo.ApiKeyID.ToString()));
     }
-
-
 }

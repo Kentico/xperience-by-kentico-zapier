@@ -126,4 +126,13 @@
   <data name="auth.successtext" xml:space="preserve">
     <value>You are Authenticated</value>
   </data>
+  <data name="zapier.apikey.generate" xml:space="preserve">
+    <value>Save your API key now</value>
+  </data>
+  <data name="zapier.apikey.generate.callout" xml:space="preserve">
+    <value>Copy the generated API key to a secure location before continuing. The key is not stored and you will &lt;b&gt;not be able to see it again&lt;/b&gt;.</value>
+  </data>
+  <data name="zapier.apikey.generate.continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
 </root>

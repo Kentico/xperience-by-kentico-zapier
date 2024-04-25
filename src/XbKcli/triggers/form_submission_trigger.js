@@ -1,3 +1,5 @@
+const deleteTrigger = require("../utils/deleteTrigger");
+
 const triggerNoun = "New Form Submission";
 
 const getFormClassNamesField = require("../fields/getFormClassNamesField");
@@ -29,26 +31,12 @@ const performSubscribe = async (z, bundle) => {
 };
 
 const performUnsubscribe = async (z, bundle) => {
-  // bundle.subscribeData contains the parsed response JSON from the subscribe
-  // request made initially.
-  const webhook = bundle.subscribeData;
-
-  const options = {
-    url: `${bundle.authData.website}/zapier/triggers/formsubmission/${webhook.triggerId}`,
-    method: "DELETE",
-    headers: {
-      Accept: "application/json",
-    },
-  };
-
-  const response = await z.request(options);
-
-  return response.status === 200;
+  return await deleteTrigger(z, bundle);
 };
 
 const getFallbackData = async (z, bundle) => {
   const options = {
-    url: `${bundle.authData.website}/zapier/object/${bundle.inputData.classname}/Create`,
+    url: `${bundle.authData.website}/zapier/triggers/formsubmission/${bundle.inputData.classname}`,
     method: "GET",
     params: {
       topN: 1,
@@ -68,7 +56,7 @@ const getFallbackData = async (z, bundle) => {
 };
 
 const sampleObj = {
-  AppId: "Xperience by Kentico",
+  FormInserted: "2012-12-12",
 };
 
 module.exports = {

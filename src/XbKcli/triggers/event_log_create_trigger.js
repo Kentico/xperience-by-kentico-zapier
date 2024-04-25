@@ -1,4 +1,7 @@
-const triggerNoun = "New Event Log";
+const deleteTrigger = require("../utils/deleteTrigger");
+const getEventLogSeverityField = require("../fields/getEventLogSeverityField");
+
+const triggerNoun = "New Event Log Entry";
 
 const performHook = async (z, bundle) => {
   return [bundle.cleanedRequest];
@@ -7,6 +10,7 @@ const performHook = async (z, bundle) => {
 const performSubscribe = async (z, bundle) => {
   const hook = {
     ZapierUrl: bundle.targetUrl,
+    Severity: JSON.parse(JSON.stringify(bundle.inputData.severity)),
   };
   const options = {
     url: `${bundle.authData.website}/zapier/triggers/eventlogcreate`,
@@ -26,26 +30,12 @@ const performSubscribe = async (z, bundle) => {
 };
 
 const performUnsubscribe = async (z, bundle) => {
-  // bundle.subscribeData contains the parsed response JSON from the subscribe
-  // request made initially.
-  const webhook = bundle.subscribeData;
-
-  const options = {
-    url: `${bundle.authData.website}/zapier/triggers/eventlogcreate/${webhook.triggerId}`,
-    method: "DELETE",
-    headers: {
-      Accept: "application/json",
-    },
-  };
-
-  const response = await z.request(options);
-
-  return response.status === 200;
+  return await deleteTrigger(z, bundle);
 };
 
 const getFallbackData = async (z, bundle) => {
   const options = {
-    url: `${bundle.authData.website}/zapier/object/CMS.EventLog/Create`,
+    url: `${bundle.authData.website}/zapier/triggers/eventlogcreate`,
     method: "GET",
     params: {
       topN: 1,
@@ -65,7 +55,7 @@ const getFallbackData = async (z, bundle) => {
 };
 
 const sampleObj = {
-  AppId: "Xperience by Kentico",
+  EventID: "0",
 };
 
 module.exports = {
@@ -84,7 +74,7 @@ module.exports = {
 
     // `inputFields` defines the fields a user could provide
     // Zapier will pass them in as `bundle.inputData` later. They're optional.
-    inputFields: [],
+    inputFields: [getEventLogSeverityField()],
 
     perform: performHook,
     performSubscribe,

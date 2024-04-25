@@ -1,85 +1,92 @@
-﻿
+﻿using System.Data;
+
+using CMS.ContentWorkflowEngine;
 using CMS.DataEngine;
-using Kentico.Integration.Zapier;
-using Kentico.Xperience.Zapier.Admin;
-using Kentico.Xperience.Zapier.Admin.UIPages;
-using Microsoft.AspNetCore.Authorization;
+
+using Kentico.Xperience.Zapier.Auth;
+using Kentico.Xperience.Zapier.Common;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 namespace Kentico.Xperience.Zapier.Triggers;
 
-[Authorize(AuthenticationSchemes = ZapierConstants.AuthenticationScheme.XbyKZapierApiKeyScheme)]
+[AuthorizeZapier]
 [ApiController]
 public class MoveToStepTriggerController : ControllerBase
 {
-    private readonly IZapierTriggerInfoProvider zapierTriggerInfoProvider;
+    private readonly IZapierTriggerService triggerService;
     private readonly ZapierConfiguration zapierConfiguration;
 
-    public MoveToStepTriggerController(IZapierTriggerInfoProvider zapierTriggerInfoProvider, IOptionsMonitor<ZapierConfiguration> config)
+
+    public MoveToStepTriggerController(IZapierTriggerService triggerService, IOptionsMonitor<ZapierConfiguration> zapierConfiguration)
     {
-        this.zapierTriggerInfoProvider = zapierTriggerInfoProvider;
-        zapierConfiguration = config.CurrentValue;
+        this.triggerService = triggerService;
+        this.zapierConfiguration = zapierConfiguration.CurrentValue;
     }
 
-    [HttpGet]
-    [Route("zapier/triggers/contentobjects")]
-    public ActionResult<List<KenticoInfoDto>> Objects()
+
+    [HttpPost("zapier/triggers/movetostep")]
+    public ActionResult<CreateTriggerResponse> CreateTrigger(MoveToStepTriggerDto trigger)
+    {
+        int triggerId = triggerService.CreateTrigger(trigger.ObjectType, trigger.EventType, trigger.ZapierUrl);
+        return Ok(new CreateTriggerResponse(triggerId));
+    }
+
+
+    [HttpGet("zapier/triggers/movetostep/{objectType}/{eventType}")]
+    public async Task<ActionResult> GetFallbackDataAsync(string objectType, string eventType)
+    {
+        var fallbackData = await triggerService.GetFallbackDataAsync(objectType, eventType);
+        return fallbackData != null ? Ok(fallbackData) : BadRequest();
+    }
+
+
+    [HttpGet("zapier/data/workflow-steps/{className}")]
+    public ActionResult<IEnumerable<SelectOptionItem>> GetWorkflowSteps(string className)
     {
         var allowedObjects = zapierConfiguration.AllowedObjects.ToList();
-        var infoObjects = DataClassInfoProvider.ProviderObject.Get()
-            .WhereIn(nameof(DataClassInfo.ClassName), allowedObjects)
-            .WhereEquals(nameof(DataClassInfo.ClassType), ClassType.CONTENT_TYPE)
+        if (!allowedObjects.Contains(className, StringComparer.OrdinalIgnoreCase))
+        {
+            return Array.Empty<SelectOptionItem>();
+        }
+        var data = DataClassInfoProvider.ProviderObject.Get()
+            .Source(x => x.Join<ContentWorkflowContentTypeInfo>(
+                nameof(DataClassInfo.ClassID), nameof(ContentWorkflowContentTypeInfo.ContentWorkflowContentTypeContentTypeID)
+            )).Source(x => x.Join<ContentWorkflowStepInfo>(
+                nameof(ContentWorkflowContentTypeInfo.ContentWorkflowContentTypeContentWorkflowID), nameof(ContentWorkflowStepInfo.ContentWorkflowStepWorkflowID))
+            ).Source(x => x.Join<ContentWorkflowInfo>(
+                nameof(ContentWorkflowStepInfo.ContentWorkflowStepWorkflowID), nameof(ContentWorkflowInfo.ContentWorkflowID))
+            )
+            .WhereEquals(nameof(ContentWorkflowStepInfo.ContentWorkflowStepType), ContentWorkflowStepType.Custom)
+            .WhereEquals(nameof(DataClassInfo.ClassName), className)
+            .Columns(nameof(ContentWorkflowInfo.ContentWorkflowDisplayName),
+            nameof(ContentWorkflowStepInfo.ContentWorkflowStepDisplayName),
+            nameof(ContentWorkflowStepInfo.ContentWorkflowStepName))
+            .Result;
+        if (data == null || data.Tables.Count == 0)
+        {
+            return Array.Empty<SelectOptionItem>();
+        }
+        return data.Tables[0].AsEnumerable().Select(row => new SelectOptionItem
+            (
+                row[nameof(ContentWorkflowStepInfo.ContentWorkflowStepName)]?.ToString() ?? string.Empty,
+                $"{row[nameof(ContentWorkflowStepInfo.ContentWorkflowStepDisplayName)]} ({row[nameof(ContentWorkflowInfo.ContentWorkflowDisplayName)]})"
+            ));
+    }
+
+
+    [HttpGet($"zapier/data/types/movetostep")]
+    public ActionResult<IEnumerable<SelectOptionItem>> GetContentTypesWithWorkflows() =>
+        DataClassInfoProvider.ProviderObject.GetZapierTypesQuery(classType: ClassType.CONTENT_TYPE, zapierConfiguration.AllowedObjects.ToList())
             .WhereNotEquals(nameof(DataClassInfo.ClassContentTypeType), ClassContentTypeType.EMAIL)
-            .Columns(nameof(DataClassInfo.ClassDisplayName), nameof(DataClassInfo.ClassName), nameof(DataClassInfo.ClassType), nameof(DataClassInfo.ClassContentTypeType))
-            .OrderBy(nameof(DataClassInfo.ClassName))
-            .GetEnumerableTypedResult();
-
-        return infoObjects.Select(x => new KenticoInfoDto(x.ClassName, $"{x.ClassDisplayName} ({x.ClassType}{(!string.IsNullOrEmpty(x.ClassContentTypeType) ? $" - {x.ClassContentTypeType}" : string.Empty)})"))
-            .ToList();
-    }
-
-    [HttpPost]
-    [Route("zapier/triggers/movetostep")]
-    public ActionResult CreateTrigger(MoveToStepTriggerDto trigger)
-    {
-        string name = ZapierTriggerExtensions.GenerateWebhookName();
-        var infoObject = new ZapierTriggerInfo
-        {
-            ZapierTriggerDisplayName = name,
-            ZapierTriggerCodeName = ZapierTriggerExtensions.GetUniqueCodename(name),
-            ZapierTriggerObjectClassType = ZapierTriggerExtensions.GetType(trigger.ObjectType),
-            ZapierTriggerEnabled = true,
-            ZapierTriggerEventType = trigger.EventType,
-            mZapierTriggerObjectType = trigger.ObjectType,
-            ZapierTriggerZapierURL = trigger.ZapierUrl
-        };
-
-        zapierTriggerInfoProvider.Set(infoObject);
-
-        return Ok(new { TriggerId = infoObject.ZapierTriggerID });
-    }
-
-
-    [HttpDelete]
-    [Route("zapier/triggers/movetostep/{zapId}")]
-    public IActionResult DeleteTrigger(string zapId)
-    {
-        if (!int.TryParse(zapId, out int zapierTriggerID))
-        {
-            BadRequest();
-        }
-
-        var ZapInfoToDelete = zapierTriggerInfoProvider.Get(zapierTriggerID);
-
-        if (ZapInfoToDelete != null)
-        {
-            zapierTriggerInfoProvider.Delete(ZapInfoToDelete);
-        }
-
-        return Ok(new { Status = ZapInfoToDelete != null ? "Success" : $"Info object with provided id {zapierTriggerID} does not exist" });
-    }
-
+            .Source(x => x.Join<ContentWorkflowContentTypeInfo>(
+                nameof(DataClassInfo.ClassID), nameof(ContentWorkflowContentTypeInfo.ContentWorkflowContentTypeContentTypeID))
+            ).Select(x => new SelectOptionItem(
+                    x.ClassName,
+                    $"{x.ClassDisplayName} ({x.ClassContentTypeType})"
+            )).ToList();
 }
+
 
 public record MoveToStepTriggerDto(string ObjectType, string EventType, string ZapierUrl);

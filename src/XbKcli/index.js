@@ -4,31 +4,16 @@ const {
   afters = [],
 } = require("./authentication");
 
-//const getCatchXperienceWebhook = require("./triggers/catch_xperience_webhook");
 const getFormSubmissionTrigger = require("./triggers/form_submission_trigger");
 const getEventLogCreateTrigger = require("./triggers/event_log_create_trigger");
-const getContactCreateTrigger = require("./triggers/contact_create_trigger");
 const getMoveToStepTrigger = require("./triggers/move_to_step_trigger");
 
-const getObjectTypes = require("./triggers/dropdowns/getObjectTypes");
 const getEventTypes = require("./triggers/dropdowns/getEventTypes");
+const getEventLogSeverity = require("./triggers/dropdowns/getEventLogSeverity");
 
 const insertFormRecordAction = require("./actions/insertFormRecordAction");
-const publishAction = require("./actions/publishAction");
-const moveToStepAction = require("./actions/moveToStepAction");
 
 const getFormClassNames = require("./triggers/dropdowns/getFormClassNames");
-const getLanguageNames = require("./triggers/dropdowns/getLanguageNames");
-const getClassContentTypeTypes = require("./triggers/dropdowns/getClassContentTypeTypes");
-const getReusableTypes = require("./triggers/dropdowns/getReusableTypes");
-const getReusableItems = require("./triggers/dropdowns/getReusableItems");
-const getWebsiteTypes = require("./triggers/dropdowns/getWebsiteTypes");
-const getWebsiteItems = require("./triggers/dropdowns/getWebsiteItems");
-const getWebsiteChannels = require("./triggers/dropdowns/getWebsiteChannels");
-const getHeadlessTypes = require("./triggers/dropdowns/getHeadlessTypes");
-const getHeadlessItems = require("./triggers/dropdowns/getHeadlessItems");
-const getHeadlessChannels = require("./triggers/dropdowns/getHeadlessChannels");
-const getStepsForItem = require("./triggers/dropdowns/getStepsForItem");
 const getContentTypesObjects = require("./triggers/dropdowns/getContentTypesObjects");
 
 module.exports = {
@@ -45,27 +30,14 @@ module.exports = {
 
   // If you want your trigger to show up, you better include it here!
   triggers: {
-    //[getCatchXperienceWebhook.key]: getCatchXperienceWebhook,
     [getFormSubmissionTrigger.key]: getFormSubmissionTrigger,
     [getEventLogCreateTrigger.key]: getEventLogCreateTrigger,
-    [getContactCreateTrigger.key]: getContactCreateTrigger,
     [getMoveToStepTrigger.key]: getMoveToStepTrigger,
 
-    [getObjectTypes.key]: getObjectTypes,
     [getEventTypes.key]: getEventTypes,
     [getFormClassNames.key]: getFormClassNames,
-    [getLanguageNames.key]: getLanguageNames,
-    [getClassContentTypeTypes.key]: getClassContentTypeTypes,
-    [getReusableTypes.key]: getReusableTypes,
-    [getWebsiteTypes.key]: getWebsiteTypes,
-    [getWebsiteChannels.key]: getWebsiteChannels,
-    [getWebsiteItems.key]: getWebsiteItems,
-    [getHeadlessTypes.key]: getHeadlessTypes,
-    [getHeadlessChannels.key]: getHeadlessChannels,
-    [getHeadlessItems.key]: getHeadlessItems,
-    [getReusableItems.key]: getReusableItems,
-    [getStepsForItem.key]: getStepsForItem,
     [getContentTypesObjects.key]: getContentTypesObjects,
+    [getEventLogSeverity.key]: getEventLogSeverity,
   },
 
   // If you want your searches to show up, you better include it here!
@@ -74,8 +46,6 @@ module.exports = {
   // If you want your creates to show up, you better include it here!
   creates: {
     [insertFormRecordAction.key]: insertFormRecordAction,
-    [publishAction.key]: publishAction,
-    [moveToStepAction.key]: moveToStepAction,
   },
 
   resources: {},
