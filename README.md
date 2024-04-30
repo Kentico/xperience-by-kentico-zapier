@@ -20,7 +20,10 @@ This version supports content workflows added in version 28.3.0. Please ensure t
 
 | Xperience Version | Library Version |
 | ----------------- | --------------- |
-| >= 28.3.*         | 0.1.0 PREVIEW   |
+| >= 28.3.*         | 1.0.0           |
+
+## Zapier cli application
+The Zapier cli app version 1.0.0 will initially be beta flagged, but this is the full version. The beta flag is just a zapier flag for new app integrations. This Flag will disappear after 90 days.
 
 ### Dependencies
 
