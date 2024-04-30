@@ -35,7 +35,7 @@ The Zapier cli app version 1.0.0 will initially be beta flagged, but this is the
 Add the package to your application using the .NET CLI
 
 ```powershell
-dotnet add package Kentico.Xperience.Zapier --prerelease
+dotnet add package Kentico.Xperience.Zapier
 ```
 
 ## Quick Start (with trigger example)
