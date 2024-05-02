@@ -6,10 +6,10 @@
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Kentico.Xperience.Admin" Version="29.0.2" />
-    <PackageVersion Include="Kentico.Xperience.WebApp" Version="29.0.2" />
-    <PackageVersion Include="kentico.xperience.azurestorage" Version="29.0.2" />
-    <PackageVersion Include="kentico.xperience.imageprocessing" Version="29.0.2" />
+    <PackageVersion Include="Kentico.Xperience.Admin" Version="29.0.0" />
+    <PackageVersion Include="Kentico.Xperience.WebApp" Version="29.0.0" />
+    <PackageVersion Include="kentico.xperience.azurestorage" Version="29.0.0" />
+    <PackageVersion Include="kentico.xperience.imageprocessing" Version="29.0.0" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.6.0.74858" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />

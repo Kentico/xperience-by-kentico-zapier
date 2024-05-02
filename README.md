@@ -20,8 +20,8 @@ This version supports content workflows added in version 28.3.0. Please ensure t
 
 | Xperience Version | Library Version |
 | ----------------- | --------------- |
-| >= 28.3.*         | 0.1.0 PREVIEW   |
-| >= 29.0.2         | 1.0             |
+| >= 28.3.*        | 0.1.0 PREVIEW   |
+| >= 29.0.*        | 1.0             |
 
 ### Dependencies
 

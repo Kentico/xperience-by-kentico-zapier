@@ -10,27 +10,27 @@
       },
       "Kentico.Xperience.Admin": {
         "type": "Direct",
-        "requested": "[29.0.2, )",
-        "resolved": "29.0.2",
-        "contentHash": "ZYq04Haq1RE3+WKCroM5stwnLTsaGZwb8HWq5ZOPeb4meSdZDzaQZgqOpjXHqOSpw1aWEef99SKOfsPTPeM2zg==",
+        "requested": "[29.0.0, )",
+        "resolved": "29.0.0",
+        "contentHash": "0PZqIlNEjpE5GHPtTMHzd5KkO428oRJlYEDx2YmLLYkm+UDMsRIwaS91UtmZTP5FYlDzv7yq0zgB4hqbcdsZTA==",
         "dependencies": {
           "Kentico.Aira.Client": "1.0.25",
-          "Kentico.Xperience.WebApp": "[29.0.2]",
+          "Kentico.Xperience.WebApp": "[29.0.0]",
           "Microsoft.AspNetCore.SpaServices.Extensions": "6.0.29",
           "Microsoft.Extensions.FileProviders.Embedded": "6.0.29"
         }
       },
       "Kentico.Xperience.WebApp": {
         "type": "Direct",
-        "requested": "[29.0.2, )",
-        "resolved": "29.0.2",
-        "contentHash": "V72Q4sSRgF/TonSgYxuPI5IHIMNx2fU8zIWy8wudUJgw3T/pP0qEwdLXsXWjIUcuA8QHgoBaubOUJOz8PMS3Sw==",
+        "requested": "[29.0.0, )",
+        "resolved": "29.0.0",
+        "contentHash": "LXTK6WPoEThc+K2cSGa3GbKg1Zute0tjELazK6JURnGEF7xdoRiVE8ty6WeWFxmK6Cd+FwId10Q49C6SXlLL2A==",
         "dependencies": {
           "CommandLineParser": "2.9.1",
           "HotChocolate.AspNetCore": "13.9.0",
           "HotChocolate.Data": "13.9.0",
           "HtmlSanitizer": "8.0.843",
-          "Kentico.Xperience.Core": "[29.0.2]",
+          "Kentico.Xperience.Core": "[29.0.0]",
           "Microsoft.Extensions.Caching.Memory": "6.0.1",
           "Microsoft.Extensions.FileProviders.Embedded": "6.0.29",
           "Microsoft.Extensions.Localization": "6.0.29"
@@ -376,8 +376,8 @@
       },
       "Kentico.Xperience.Core": {
         "type": "Transitive",
-        "resolved": "29.0.2",
-        "contentHash": "HooffI6zYBY0JHlU4jzKowvmcedfwfgrnsqg0r6cuqbiMP0MKhLDFVLnoO5NqleplSLzx+MR4o+fTB2+sOecQw==",
+        "resolved": "29.0.0",
+        "contentHash": "jG0gkDLE4H7ZNEdxdyZEzPxoAMlfx24oVdPeRa8RCUriOhBtleNREInbR9kYoMWwo456EaUaf3RPngArmZdy1g==",
         "dependencies": {
           "AngleSharp": "0.17.1",
           "MailKit": "4.5.0",
