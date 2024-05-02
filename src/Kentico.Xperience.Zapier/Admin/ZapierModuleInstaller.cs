@@ -19,10 +19,10 @@ internal interface IZapierModuleInstaller
 
 internal class ZapierModuleInstaller : IZapierModuleInstaller
 {
-    private readonly IResourceInfoProvider resourceInfoProvider;
+    private readonly IInfoProvider<ResourceInfo> resourceInfoProvider;
 
 
-    public ZapierModuleInstaller(IResourceInfoProvider resourceInfoProvider) => this.resourceInfoProvider = resourceInfoProvider;
+    public ZapierModuleInstaller(IInfoProvider<ResourceInfo> resourceInfoProvider) => this.resourceInfoProvider = resourceInfoProvider;
 
 
     public void Install()
