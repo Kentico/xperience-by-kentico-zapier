@@ -1,11 +1,11 @@
 # Configuration of Zapier
 
-This is example of ZapierConfiguration in appsettings.json.
+This is example of CMSZapierConfiguration in appsettings.json.
 The appropriate name of the allowed object corresponds to the ClassName in the CMS Class table.
 
 ```json
 {
-  "ZapierConfiguration": {
+  "CMSZapierConfiguration": {
     "AllowedObjects": [
       "cms.Role",
       "cms.user",

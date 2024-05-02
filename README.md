@@ -59,13 +59,13 @@ dotnet add package Kentico.Xperience.Zapier
    app.UseAuthorization() //place under app.UseKentico()
    ```
 
-2. Configure Zapier using ZapierConfiguration in appsettings.json of your application.
+2. Configure Zapier using CMSZapierConfiguration in appsettings.json of your application.
 
    - Specify allowed objects that can interact with your Zapier triggers and handlers.
 
    ```csharp
        // appsettings.json
-      "ZapierConfiguration": {
+      "CMSZapierConfiguration": {
         "AllowedObjects": [
           "cms.user",
           "CMS.EventLog",
