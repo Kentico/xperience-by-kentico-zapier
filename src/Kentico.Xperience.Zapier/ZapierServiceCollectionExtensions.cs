@@ -23,7 +23,7 @@ public static class ZapierServiceCollectionExtensions
 {
     public static IServiceCollection AddKenticoZapier(this IServiceCollection services)
     {
-        services.AddOptions<ZapierConfiguration>().BindConfiguration("ZapierConfiguration");
+        services.AddOptions<ZapierConfiguration>().BindConfiguration("CMSZapierConfiguration");
         services.AddSingleton<IZapierModuleInstaller, ZapierModuleInstaller>();
         services.AddSingleton<IZapierRegistrationService, ZapierRegistrationService>();
         services.AddSingleton<IApiKeyCachedService, ApiKeyCachedService>();
