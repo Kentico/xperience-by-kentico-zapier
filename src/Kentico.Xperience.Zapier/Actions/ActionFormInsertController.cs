@@ -1,10 +1,11 @@
 ﻿using System.Text;
 using System.Text.Json;
-
+using System.Xml.Serialization;
 using CMS.DataEngine;
 using CMS.OnlineForms;
 
 using Kentico.Xperience.Zapier.Auth;
+using Kentico.Xperience.Zapier.Helpers;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -38,6 +39,21 @@ public class ActionFormInsertController : ControllerBase
         {
             return BadRequest();
         }
+
+        var dataClass = DataClassInfoProvider.ProviderObject.Get()
+            .WhereEquals(nameof(DataClassInfo.ClassType), ClassType.FORM)
+            .WhereEquals(nameof(DataClassInfo.ClassName), classname)
+            .WhereNotEmpty(nameof(DataClassInfo.ClassFormDefinition))
+            .FirstOrDefault();
+
+        Form form;
+        var serializer = new XmlSerializer(typeof(Form));
+
+        using (var reader = new StringReader(dataClass?.ClassFormDefinition ?? string.Empty))
+        {
+            form = (Form)serializer.Deserialize(reader);
+        }
+
         foreach (var item in values)
         {
             switch (item.Value.ValueKind)
@@ -57,7 +73,16 @@ public class ActionFormInsertController : ControllerBase
                     }
                     break;
                 case JsonValueKind.String:
-                    newFormItem.SetValue(item.Key, item.Value.GetString());
+                    string value = item.Value.GetString() ?? string.Empty;
+
+                    var stringField = form?.Fields?.FirstOrDefault(x => x.Column == item.Key);
+
+                    if (stringField != null && stringField.ColumnType == FieldDataType.RichTextHTML)
+                    {
+                        value = RichTextHtmlHelper.EnsureValidHtmlValue(value);
+                    }
+
+                    newFormItem.SetValue(item.Key, value);
                     break;
                 case JsonValueKind.True:
                     newFormItem.SetValue(item.Key, true);
