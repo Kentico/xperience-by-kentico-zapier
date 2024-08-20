@@ -46,12 +46,12 @@ public class ActionFormInsertController : ControllerBase
             .WhereNotEmpty(nameof(DataClassInfo.ClassFormDefinition))
             .FirstOrDefault();
 
-        Form form;
+        Form? form;
         var serializer = new XmlSerializer(typeof(Form));
 
         using (var reader = new StringReader(dataClass?.ClassFormDefinition ?? string.Empty))
         {
-            form = (Form)serializer.Deserialize(reader);
+            form = (Form?)serializer.Deserialize(reader);
         }
 
         foreach (var item in values)
@@ -75,7 +75,7 @@ public class ActionFormInsertController : ControllerBase
                 case JsonValueKind.String:
                     string value = item.Value.GetString() ?? string.Empty;
 
-                    var stringField = form?.Fields?.FirstOrDefault(x => x.Column == item.Key);
+                    var stringField = form?.Fields?.Find(x => x.Column == item.Key);
 
                     if (stringField != null && stringField.ColumnType == FieldDataType.RichTextHTML)
                     {
