@@ -31,7 +31,7 @@ namespace Samples.DancingGoat
         private const string DATA_PROTECTION_SAMPLES_ENABLED_SETTINGS_KEY_NAME = "DataProtectionSamplesEnabled";
 
         private IInfoProvider<ContactInfo> contactInfoProvider;
-        private IMemberInfoProvider memberInfoProvider;
+        private IInfoProvider<MemberInfo> memberInfoProvider;
         private IInfoProvider<ConsentAgreementInfo> consentAgreementInfoProvider;
         private IInfoProvider<BizFormInfo> bizFormInfoProvider;
         private IInfoProvider<AccountContactInfo> accountContactInfoProvider;
@@ -58,7 +58,7 @@ namespace Samples.DancingGoat
             base.OnInit();
 
             contactInfoProvider = Service.Resolve<IInfoProvider<ContactInfo>>();
-            memberInfoProvider = Service.Resolve<IMemberInfoProvider>();
+            memberInfoProvider = Service.Resolve<IInfoProvider<MemberInfo>>();
             consentAgreementInfoProvider = Service.Resolve<IInfoProvider<ConsentAgreementInfo>>();
             bizFormInfoProvider = Service.Resolve<IInfoProvider<BizFormInfo>>();
             accountContactInfoProvider = Service.Resolve<IInfoProvider<AccountContactInfo>>();
