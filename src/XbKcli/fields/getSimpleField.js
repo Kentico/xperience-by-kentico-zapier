@@ -28,6 +28,7 @@ function getSimpleField(field) {
       return getField(field, { type: "string" });
 
     case "longtext":
+    case "richtexthtml":
       return getField(field, { type: "text" });
 
     case "integer":

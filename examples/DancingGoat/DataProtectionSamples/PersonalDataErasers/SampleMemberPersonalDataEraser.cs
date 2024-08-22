@@ -13,14 +13,14 @@ namespace Samples.DancingGoat
     /// </summary>
     internal class SampleMemberPersonalDataEraser : IPersonalDataEraser
     {
-        private readonly IMemberInfoProvider memberInfoProvider;
+        private readonly IInfoProvider<MemberInfo> memberInfoProvider;
 
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SampleMemberPersonalDataEraser"/> class.
         /// </summary>
         /// <param name="memberInfoProvider">Member info provider.</param>
-        public SampleMemberPersonalDataEraser(IMemberInfoProvider memberInfoProvider)
+        public SampleMemberPersonalDataEraser(IInfoProvider<MemberInfo> memberInfoProvider)
         {
             this.memberInfoProvider = memberInfoProvider;
         }

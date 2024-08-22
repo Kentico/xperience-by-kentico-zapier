@@ -12,14 +12,14 @@ namespace Samples.DancingGoat
     /// </summary>
     internal class SampleMemberInfoIdentityCollector : IIdentityCollector
     {
-        private readonly IMemberInfoProvider memberInfoProvider;
+        private readonly IInfoProvider<MemberInfo> memberInfoProvider;
 
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SampleMemberInfoIdentityCollector"/> class.
         /// </summary>
         /// <param name="memberInfoProvider">Member info provider.</param>
-        public SampleMemberInfoIdentityCollector(IMemberInfoProvider memberInfoProvider)
+        public SampleMemberInfoIdentityCollector(IInfoProvider<MemberInfo> memberInfoProvider)
         {
             this.memberInfoProvider = memberInfoProvider;
         }

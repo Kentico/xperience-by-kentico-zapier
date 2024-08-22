@@ -30,16 +30,16 @@ namespace Samples.DancingGoat
     {
         private const string DATA_PROTECTION_SAMPLES_ENABLED_SETTINGS_KEY_NAME = "DataProtectionSamplesEnabled";
 
-        private IContactInfoProvider contactInfoProvider;
-        private IMemberInfoProvider memberInfoProvider;
-        private IConsentAgreementInfoProvider consentAgreementInfoProvider;
-        private IBizFormInfoProvider bizFormInfoProvider;
-        private IAccountContactInfoProvider accountContactInfoProvider;
-        private ISettingsKeyInfoProvider settingsKeyInfoProvider;
-        private IActivityInfoProvider activityInfoProvider;
-        private ICountryInfoProvider countryInfoProvider;
-        private IStateInfoProvider stateInfoProvider;
-        private IAccountInfoProvider accountInfoProvider;
+        private IInfoProvider<ContactInfo> contactInfoProvider;
+        private IInfoProvider<MemberInfo> memberInfoProvider;
+        private IInfoProvider<ConsentAgreementInfo> consentAgreementInfoProvider;
+        private IInfoProvider<BizFormInfo> bizFormInfoProvider;
+        private IInfoProvider<AccountContactInfo> accountContactInfoProvider;
+        private IInfoProvider<SettingsKeyInfo> settingsKeyInfoProvider;
+        private IInfoProvider<ActivityInfo> activityInfoProvider;
+        private IInfoProvider<CountryInfo> countryInfoProvider;
+        private IInfoProvider<StateInfo> stateInfoProvider;
+        private IInfoProvider<AccountInfo> accountInfoProvider;
 
 
         /// <summary>
@@ -57,16 +57,16 @@ namespace Samples.DancingGoat
         {
             base.OnInit();
 
-            contactInfoProvider = Service.Resolve<IContactInfoProvider>();
-            memberInfoProvider = Service.Resolve<IMemberInfoProvider>();
-            consentAgreementInfoProvider = Service.Resolve<IConsentAgreementInfoProvider>();
-            bizFormInfoProvider = Service.Resolve<IBizFormInfoProvider>();
-            accountContactInfoProvider = Service.Resolve<IAccountContactInfoProvider>();
-            settingsKeyInfoProvider = Service.Resolve<ISettingsKeyInfoProvider>();
-            activityInfoProvider = Service.Resolve<IActivityInfoProvider>();
-            countryInfoProvider = Service.Resolve<ICountryInfoProvider>();
-            stateInfoProvider = Service.Resolve<IStateInfoProvider>();
-            accountInfoProvider = Service.Resolve<IAccountInfoProvider>();
+            contactInfoProvider = Service.Resolve<IInfoProvider<ContactInfo>>();
+            memberInfoProvider = Service.Resolve<IInfoProvider<MemberInfo>>();
+            consentAgreementInfoProvider = Service.Resolve<IInfoProvider<ConsentAgreementInfo>>();
+            bizFormInfoProvider = Service.Resolve<IInfoProvider<BizFormInfo>>();
+            accountContactInfoProvider = Service.Resolve<IInfoProvider<AccountContactInfo>>();
+            settingsKeyInfoProvider = Service.Resolve<IInfoProvider<SettingsKeyInfo>>();
+            activityInfoProvider = Service.Resolve<IInfoProvider<ActivityInfo>>();
+            countryInfoProvider = Service.Resolve<IInfoProvider<CountryInfo>>();
+            stateInfoProvider = Service.Resolve<IInfoProvider<StateInfo>>();
+            accountInfoProvider = Service.Resolve<IInfoProvider<AccountInfo>>();
 
             InitializeSamples();
         }
