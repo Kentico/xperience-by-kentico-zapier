@@ -23,15 +23,15 @@ internal class ZapierApiKeyListingPage : ListingPage
     private readonly IInfoProvider<ApiKeyInfo> apiKeyInfoProvider;
     private readonly IAuthenticatedUserAccessor userAccessor;
     private readonly IUserInfoProvider userProvider;
-    private readonly IPageUrlGenerator pageUrlGenerator;
+    private readonly IPageLinkGenerator pageLinkGenerator;
 
 
-    public ZapierApiKeyListingPage(IInfoProvider<ApiKeyInfo> apiKeyInfoProvider, IAuthenticatedUserAccessor userAccessor, IUserInfoProvider userProvider, IPageUrlGenerator pageUrlGenerator)
+    public ZapierApiKeyListingPage(IInfoProvider<ApiKeyInfo> apiKeyInfoProvider, IAuthenticatedUserAccessor userAccessor, IUserInfoProvider userProvider, IPageLinkGenerator pageLinkGenerator)
     {
         this.apiKeyInfoProvider = apiKeyInfoProvider;
         this.userAccessor = userAccessor;
         this.userProvider = userProvider;
-        this.pageUrlGenerator = pageUrlGenerator;
+        this.pageLinkGenerator = pageLinkGenerator;
     }
 
 
@@ -91,6 +91,9 @@ internal class ZapierApiKeyListingPage : ListingPage
         apiKeyInfoProvider.Set(apiKeyInfo);
 
         transaction.Commit();
-        return NavigateTo(pageUrlGenerator.GenerateUrl<ZapierNewApiKeyPage>(apiKeyInfo.ApiKeyID.ToString()));
+        return NavigateTo(pageLinkGenerator.GetPath<ZapierNewApiKeyPage>(new PageParameterValues
+        {
+            { typeof(ZapierApiKeyEditSection), apiKeyInfo.ApiKeyID }
+        }));
     }
 }
