@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cms.contentitemcommondata>
+  <ContentItemCommonDataContentItemID>
+    <CodeName>AnfimSuperCaimano-o6tkko7z</CodeName>
+    <GUID>1aaa937c-1423-4b69-947c-d1d5d1374a2e</GUID>
+    <ObjectType>cms.contentitem</ObjectType>
+  </ContentItemCommonDataContentItemID>
+  <ContentItemCommonDataContentLanguageID>
+    <CodeName>en</CodeName>
+    <GUID>e4a8fb12-ebc2-45d0-930f-c9fba2780c85</GUID>
+    <ObjectType>cms.contentlanguage</ObjectType>
+  </ContentItemCommonDataContentLanguageID>
+  <ContentItemCommonDataGUID>906ba58b-f60b-4f0b-9417-d06434fd4885</ContentItemCommonDataGUID>
+  <ContentItemCommonDataIsLatest>True</ContentItemCommonDataIsLatest>
+  <ContentItemCommonDataLastPublishedWhen>2024-04-09 08:07:17Z</ContentItemCommonDataLastPublishedWhen>
+  <ContentItemCommonDataVersionStatus>2</ContentItemCommonDataVersionStatus>
+  <ProductFieldsDescription>
+    <![CDATA[<p id="isPasted">The Anfim Super Caimano is a Grinder with a capital 'G'. Anfim only produces top level grinders. Their grinders are simple to maintain, have the highest-quality materials, and make a hell of a good coffee. What is the highest quality? Well, take the burrs, for example. They're neither steel nor ceramic. They're titanium. And do you know what? They can do six thousand pounds of coffee in their entire life. So, if you are looking for a grinder for commercial use or if coffee is simply your life, the Anfim Super Caimano is definitely your number one.</p><p><br></p><p>This grinder offers three dosers and a low-speed 450-Watt engine that prevents the grounds from overheating.</p><ul><li>Hardened titanium burrs</li><li>A lifetime capacity for making 5,500–6,600 lb (2,500–3,000 kg) of coffee</li><li>High-quality materials</li><li>Soft and smooth grind</li><li>Easy to use and maintain</li><li>Three seconds per espresso</li><li>Electronic digital timer</li></ul><p>Specifications:</p><ul><li>3" (77 mm) burrs</li><li>Hopper capacity: 4.4 lb (2 kg)</li><li>22.5" H x 7.75" W x 14.5" D (57.2 cm H x 19.7 cm W x 36.8 cm)</li><li>42 lb (19 kg)</li></ul><div class="product-detail-properties"><h4>Parameters</h4><dl class="row"><dt class="col-xs-12 col-sm-4">Power</dt><dd class="col-xs-12 col-sm-8">450W</dd></dl></div>]]>
+  </ProductFieldsDescription>
+  <ProductFieldsImage>
+    <![CDATA[[{"Identifier":"da0f6058-65b8-48d1-838d-b4d164839cb9"}]]]>
+  </ProductFieldsImage>
+  <ProductFieldsName>Anfim Super Caimano</ProductFieldsName>
+  <ProductFieldsShortDescription>
+    <![CDATA[Simple to maintain, titanium burrs, smooth grind, three secs per espresso. This is the Anfim Super Caimano.]]>
+  </ProductFieldsShortDescription>
+  <ContentItemReferences>
+    <cms.contentitemreference>
+      <ContentItemReferenceGroupGUID>af37d29a-2fc8-4ead-82ef-d5ec6998f910</ContentItemReferenceGroupGUID>
+      <ContentItemReferenceGUID>5fe2a78b-41f2-4b81-9357-36ec0959255f</ContentItemReferenceGUID>
+      <ContentItemReferenceSourceCommonDataID>
+        <GUID>906ba58b-f60b-4f0b-9417-d06434fd4885</GUID>
+        <ObjectType>cms.contentitemcommondata</ObjectType>
+      </ContentItemReferenceSourceCommonDataID>
+      <ContentItemReferenceTargetItemID>
+        <CodeName>Grinder_AnfimSuperCaimano-nu4aq432</CodeName>
+        <GUID>da0f6058-65b8-48d1-838d-b4d164839cb9</GUID>
+        <ObjectType>cms.contentitem</ObjectType>
+      </ContentItemReferenceTargetItemID>
+    </cms.contentitemreference>
+  </ContentItemReferences>
+</cms.contentitemcommondata>

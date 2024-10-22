@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cms.class>
+  <ClassDisplayName>Zapier trigger</ClassDisplayName>
+  <ClassFormDefinition>
+    <form>
+      <field column="ZapierTriggerID" columntype="integer" enabled="true" guid="f2597c8a-5327-48ee-9b75-d037e67439ff" isPK="true" />
+      <field column="ZapierTriggerCodeName" columntype="text" enabled="true" guid="81cb4e13-578b-4ba1-bd5b-3a7da4c750a6" />
+      <field column="ZapierTriggerObjectType" columntype="text" enabled="true" guid="f9f58b4f-2090-4b93-a15a-e710896656a9" visible="true">
+        <properties>
+          <fieldcaption>Object type</fieldcaption>
+        </properties>
+        <settings>
+          <controlname>Kentico.Administration.TextWithLabel</controlname>
+        </settings>
+      </field>
+      <field column="ZapierTriggerObjectClassType" columntype="text" enabled="true" guid="f7b23941-a239-49a9-ba05-f5c3b72a098b" visible="true">
+        <properties>
+          <fieldcaption>Object class type</fieldcaption>
+        </properties>
+        <settings>
+          <controlname>Kentico.Administration.TextWithLabel</controlname>
+        </settings>
+      </field>
+      <field column="ZapierTriggerEventType" columntype="text" enabled="true" guid="33ae176f-9c87-4b85-bebc-70812b857599" visible="true">
+        <properties>
+          <fieldcaption>Event type</fieldcaption>
+        </properties>
+        <settings>
+          <controlname>Kentico.Administration.TextWithLabel</controlname>
+        </settings>
+      </field>
+      <field allowempty="true" column="ZapierTriggerZapierURL" columntype="text" enabled="true" guid="168e6061-d6d5-4f41-bbd8-432066fb9c46" visible="true">
+        <properties>
+          <fieldcaption>Zapier Url</fieldcaption>
+        </properties>
+        <settings>
+          <controlname>Kentico.Administration.TextWithLabel</controlname>
+        </settings>
+      </field>
+    </form>
+  </ClassFormDefinition>
+  <ClassGUID>f439c332-61c9-4174-ad3c-7f5de2edffa7</ClassGUID>
+  <ClassHasUnmanagedDbSchema>False</ClassHasUnmanagedDbSchema>
+  <ClassName>KenticoZapier.ZapierTrigger</ClassName>
+  <ClassResourceID>
+    <CodeName>CMS.Integration.Zapier</CodeName>
+    <GUID>a8b5f76d-8def-451f-88ae-35814618ba34</GUID>
+    <ObjectType>cms.resource</ObjectType>
+  </ClassResourceID>
+  <ClassTableName>KenticoZapier_ZapierTrigger</ClassTableName>
+  <ClassType>Other</ClassType>
+</cms.class>

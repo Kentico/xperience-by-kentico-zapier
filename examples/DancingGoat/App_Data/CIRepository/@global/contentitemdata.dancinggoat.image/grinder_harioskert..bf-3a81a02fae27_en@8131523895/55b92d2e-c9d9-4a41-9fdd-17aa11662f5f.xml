@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentitemdata.dancinggoat.image>
+  <ContentItemDataCommonDataID>
+    <GUID>d09291ac-c853-4afe-9bbf-3a81a02fae27</GUID>
+    <ObjectType>cms.contentitemcommondata</ObjectType>
+    <Parent>
+      <CodeName>Grinder_HarioSkertonHandGrinder-kte265l3</CodeName>
+      <GUID>fe59453e-5e59-422f-97b7-0da25ac54354</GUID>
+      <ObjectType>cms.contentitem</ObjectType>
+    </Parent>
+  </ContentItemDataCommonDataID>
+  <ContentItemDataGUID>55b92d2e-c9d9-4a41-9fdd-17aa11662f5f</ContentItemDataGUID>
+  <ImageFile>
+    <![CDATA[{"Identifier":"c7037ecc-202b-423a-bce7-12d010eb7c2f","Name":"hario-skerton.jpg","Extension":".jpg","Size":21768,"LastModified":"2023-11-07T09:57:10.8861693Z"}]]>
+  </ImageFile>
+</contentitemdata.dancinggoat.image>

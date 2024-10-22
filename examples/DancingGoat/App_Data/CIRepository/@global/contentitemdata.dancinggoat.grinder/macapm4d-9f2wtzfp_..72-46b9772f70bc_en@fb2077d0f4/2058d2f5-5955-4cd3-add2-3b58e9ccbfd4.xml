@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentitemdata.dancinggoat.grinder>
+  <ContentItemDataCommonDataID>
+    <GUID>08aae5a8-574f-4514-9f72-46b9772f70bc</GUID>
+    <ObjectType>cms.contentitemcommondata</ObjectType>
+    <Parent>
+      <CodeName>MacapM4D-9f2wtzfp</CodeName>
+      <GUID>298115f9-55c0-48e3-aa20-3a0a1ce1a2e3</GUID>
+      <ObjectType>cms.contentitem</ObjectType>
+    </Parent>
+  </ContentItemDataCommonDataID>
+  <ContentItemDataGUID>2058d2f5-5955-4cd3-add2-3b58e9ccbfd4</ContentItemDataGUID>
+  <GrinderManufacturer>
+    <![CDATA[[{"Identifier":"adc75eca-d582-4a8a-83fb-49e7660ba5cb"}]]]>
+  </GrinderManufacturer>
+  <GrinderType>
+    <![CDATA[[{"Identifier":"9901b825-8e29-4d17-8cb1-47dc65679fd6"}]]]>
+  </GrinderType>
+</contentitemdata.dancinggoat.grinder>

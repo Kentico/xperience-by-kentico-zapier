@@ -60,6 +60,8 @@ builder.Services.AddDancingGoatServices();
 
 builder.Services.AddKenticoZapier();
 
+builder.Services.AddHealthChecks();
+
 ConfigureMembershipServices(builder.Services);
 
 var app = builder.Build();
@@ -86,6 +88,8 @@ app.MapControllerRoute(
    pattern: "error/{code}",
    defaults: new { controller = "HttpErrors", action = "Error" }
 );
+
+app.MapHealthChecks("/status");
 
 app.MapControllerRoute(
     name: DancingGoatConstants.DEFAULT_ROUTE_NAME,

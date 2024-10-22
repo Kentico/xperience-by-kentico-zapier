@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentitemdata.dancinggoat.coffeepage>
+  <ContentItemDataCommonDataID>
+    <GUID>5ceed8ff-bfc0-452d-8e4c-47e08ace5846</GUID>
+    <ObjectType>cms.contentitemcommondata</ObjectType>
+    <Parent>
+      <CodeName>ColombiaCarlosImbachi-jqs5axd7</CodeName>
+      <GUID>6902adcc-4278-4315-adae-c377044b8135</GUID>
+      <ObjectType>cms.contentitem</ObjectType>
+    </Parent>
+  </ContentItemDataCommonDataID>
+  <ContentItemDataGUID>cfc2e7ca-b2b2-440c-892b-b272f28f8a1e</ContentItemDataGUID>
+  <RelatedItem>
+    <![CDATA[[{"Identifier":"d81c0256-89eb-4e1f-88d2-34d8beefe8f6"}]]]>
+  </RelatedItem>
+</contentitemdata.dancinggoat.coffeepage>

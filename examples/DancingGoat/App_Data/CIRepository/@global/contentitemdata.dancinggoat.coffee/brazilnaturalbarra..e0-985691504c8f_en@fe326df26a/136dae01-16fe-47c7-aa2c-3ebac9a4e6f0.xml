@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentitemdata.dancinggoat.coffee>
+  <CoffeeProcessing>
+    <![CDATA[[{"Identifier":"272aebe9-a39c-4975-bdf6-cc1e122b36d3"}]]]>
+  </CoffeeProcessing>
+  <CoffeeTastes>
+    <![CDATA[[{"Identifier":"098eee31-e8bb-49b8-b425-f9a72e0e130b"}]]]>
+  </CoffeeTastes>
+  <ContentItemDataCommonDataID>
+    <GUID>c18421ee-678f-423a-bee0-985691504c8f</GUID>
+    <ObjectType>cms.contentitemcommondata</ObjectType>
+    <Parent>
+      <CodeName>BrazilNaturalBarraGrande-mtfd4bc3</CodeName>
+      <GUID>edb18903-129a-4c33-9ca1-506cfdf4496e</GUID>
+      <ObjectType>cms.contentitem</ObjectType>
+    </Parent>
+  </ContentItemDataCommonDataID>
+  <ContentItemDataGUID>136dae01-16fe-47c7-aa2c-3ebac9a4e6f0</ContentItemDataGUID>
+</contentitemdata.dancinggoat.coffee>

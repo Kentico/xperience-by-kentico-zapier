@@ -2,16 +2,16 @@ name: "CI: Build and Test"
 
 on:
   push:
-    branches: [main]
-    paths:
-      - "**.cs"
-      - "**.tsx"
-      - "**.js"
-      - "**.csproj"
-      - "**.props"
-      - "**.targets"
-      - "**.sln"
-      - "**/Client/**/*.json"
+    branches: [main, feat/automatic_E2E_testing]
+    # paths:
+    #   - "**.cs"
+    #   - "**.tsx"
+    #   - "**.js"
+    #   - "**.csproj"
+    #   - "**.props"
+    #   - "**.targets"
+    #   - "**.sln"
+    #   - "**/Client/**/*.json"
   pull_request:
     branches: [main]
     paths:
@@ -35,9 +35,13 @@ jobs:
 
     env:
       ASPNETCORE_ENVIRONMENT: CI
+      DATABASE_BACKUP_FILENAME: ""
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
       DOTNET_NOLOGO: 1
+      PROJECT_NAME: DancingGoat
+      ASPNETCORE_URLS: https://localhost:14070
+      STATUS_CHECK_URL: https://localhost:14070/status
 
     steps:
       - uses: actions/checkout@v4
@@ -58,9 +62,99 @@ jobs:
             --configuration Release `
             --no-restore
 
+      - name: Get Database Backup Name
+        run: |
+          $latestBackup = Get-Content -Path "./database/backups.txt" -TotalCount 1
+          "DATABASE_BACKUP_FILENAME=$latestBackup" >> $env:GITHUB_ENV
+
+      - name: Extract Database Backup
+        run: |
+          Expand-Archive `
+            -Path "./database/${{ env.DATABASE_BACKUP_FILENAME }}.zip" `
+            -DestinationPath "./database"
+
+      - name: Install a SQL Server suite of tools (SQLEngine, SQLPackage)
+        uses: potatoqualitee/mssqlsuite@9a0136e208df60b8ecb62909f076bc34854fa55a # set as a commit hash for security - v1.7
+        with:
+          install: sqlpackage, sqlengine
+          # TODO: Heslo v otevřené podobě?
+          sa-password: Pass@12345
+          version: 2022
+
+      - name: Restore Database .bak
+        # TODO: Heslo v otevřené podobě?
+        run: |
+          docker exec sql mkdir /var/opt/mssql/backup
+          docker cp "./database/${{ env.DATABASE_BACKUP_FILENAME }}" sql:/var/opt/mssql/backup
+          sqlcmd `
+            -S localhost `
+            -d master `
+            -U "sa" `
+            -P "Pass@12345" `
+            -Q "RESTORE DATABASE [XByK_DancingGoat_Zapier] FROM DISK='/var/opt/mssql/backup/${{ env.DATABASE_BACKUP_FILENAME }}' WITH MOVE 'XByK_DancingGoat_Zapier' TO '/var/opt/mssql/data/XByK_DancingGoat_Zapier.mdf', MOVE 'XByK_DancingGoat_Zapier_log' TO '/var/opt/mssql/data/XByK_DancingGoat_Zapier_log.ldf'"      
+
+      # - name: Restore CI Repository TODO
+      #   working-directory: "./scripts" 
+      #   run: |
+      #     ./Restore-CI.ps1
+
+      - name: Publish Application
+        run: |
+          dotnet publish `
+            ./examples/${{ env.PROJECT_NAME }} `
+            -c Release `
+            -o ./publish `
+            --no-build `
+            --no-restore
+      #- name: Install Playwright Dependencies
+          # TODO: to je blbost
+        #run: |
+        #  ./test/Kentico.Community.Portal.Web.E2E.Tests/bin/Release/net8.0/playwright.ps1 install
+        
+      - name: Install Azurite
+        id: azuright
+        uses: potatoqualitee/azuright@e56d2754eb15218d507961493bc83ca037216887 # set as a commit hash for security - v1.1
+
+
       - name: Test Solution
         run: |
           dotnet test `
             --configuration Release `
             --no-build `
             --no-restore
+
+      - name: Run Application and E2E Tests
+        run: |
+          # Run the ASP.NET Core app as a background job
+          cd ./publish
+          Start-Job -ScriptBlock { dotnet ./${{ env.PROJECT_NAME }}.dll } -Name ${{ env.PROJECT_NAME }}
+          Receive-Job -Name ${{ env.PROJECT_NAME }}
+          cd ../
+          # The ASP.NET Core app can take a few seconds to start, so we delay running tests
+          #   until it is ready, and fail if we go over a maximum wait time
+          $limit = 15
+          $attempts = 0
+          $success = $false
+          while ($attempts -lt $limit -and -not $success) {
+              Start-Sleep -Seconds 5
+              try {
+                  $response = Invoke-WebRequest -Uri ${{ env.STATUS_CHECK_URL }} -Method Get -SkipCertificateCheck
+                  if ($response.StatusCode -eq 200) {
+                      Write-Output "Application is ready."
+                      $success = $true
+                  }
+              }
+              catch {
+                  Write-Output "Attempt $attempts - Application not ready yet."
+              }
+              $attempts++
+          }
+          if (-not $success) {
+              Write-Output "Application did not respond in time."
+              exit 1
+          }
+          # TODO: Run the E2E tests
+          # Stop the background ASP.NET Core application
+          Receive-Job -Name ${{ env.PROJECT_NAME }}
+          Stop-Job -Name ${{ env.PROJECT_NAME }}
+          Remove-Job -Name ${{ env.PROJECT_NAME }}

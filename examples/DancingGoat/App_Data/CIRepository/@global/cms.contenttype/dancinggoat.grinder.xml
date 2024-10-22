@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cms.contenttype>
+  <ClassContentTypeType>Reusable</ClassContentTypeType>
+  <ClassDisplayName>Grinder</ClassDisplayName>
+  <ClassFormDefinition>
+    <form>
+      <field column="ContentItemDataID" columntype="integer" enabled="true" guid="0c43d93c-293a-4bd2-9051-131bf3a95dbf" isPK="true" />
+      <field column="ContentItemDataCommonDataID" columntype="integer" enabled="true" guid="1c8ea199-857c-4f1f-aceb-b034e50825fe" refobjtype="cms.contentitemcommondata" reftype="Required" system="true" />
+      <field column="ContentItemDataGUID" columntype="guid" enabled="true" guid="02e9ff20-e66c-47bc-ae89-025b506d2f9b" isunique="true" system="true" />
+      <schema guid="fe13f703-8744-4947-8c01-5f78bbd5039d" name="fe13f703-8744-4947-8c01-5f78bbd5039d">
+        <properties />
+      </schema>
+      <field allowempty="true" column="GrinderManufacturer" columnprecision="0" columntype="taxonomy" enabled="true" guid="9c9aa0b2-02f5-4ece-89d7-cb860116b433" visible="true">
+        <properties>
+          <explanationtextashtml>False</explanationtextashtml>
+          <fieldcaption>Manufacturer</fieldcaption>
+          <fielddescriptionashtml>False</fielddescriptionashtml>
+        </properties>
+        <settings>
+          <controlname>Kentico.Administration.TagSelector</controlname>
+          <TaxonomyGroup>
+            <![CDATA[["d9598b2d-9c50-4910-b554-9ee1f5cd5813"]]]>
+          </TaxonomyGroup>
+        </settings>
+      </field>
+      <field allowempty="true" column="GrinderType" columnprecision="0" columntype="taxonomy" enabled="true" guid="e7e6e1c3-5380-4e5b-a3c0-424178693aee" visible="true">
+        <properties>
+          <explanationtextashtml>False</explanationtextashtml>
+          <fieldcaption>Type</fieldcaption>
+          <fielddescriptionashtml>False</fielddescriptionashtml>
+        </properties>
+        <settings>
+          <controlname>Kentico.Administration.TagSelector</controlname>
+          <TaxonomyGroup>
+            <![CDATA[["6e03e3c6-d9e8-409f-9074-6a834fc00ff6"]]]>
+          </TaxonomyGroup>
+        </settings>
+      </field>
+    </form>
+  </ClassFormDefinition>
+  <ClassGUID>fa282f6c-4f05-435e-b520-720d1a5347d8</ClassGUID>
+  <ClassHasUnmanagedDbSchema>False</ClassHasUnmanagedDbSchema>
+  <ClassIconClass>xp-rotate-double-right</ClassIconClass>
+  <ClassName>DancingGoat.Grinder</ClassName>
+  <ClassShortName>DancingGoatGrinder</ClassShortName>
+  <ClassTableName>DancingGoat_Grinder</ClassTableName>
+  <ClassType>Content</ClassType>
+  <ClassWebPageHasUrl>False</ClassWebPageHasUrl>
+</cms.contenttype>

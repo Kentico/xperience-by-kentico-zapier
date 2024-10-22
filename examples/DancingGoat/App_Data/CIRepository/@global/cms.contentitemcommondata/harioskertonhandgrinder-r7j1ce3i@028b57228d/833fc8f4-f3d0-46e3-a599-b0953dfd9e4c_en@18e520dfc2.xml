@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cms.contentitemcommondata>
+  <ContentItemCommonDataContentItemID>
+    <CodeName>HarioSkertonHandGrinder-r7j1ce3i</CodeName>
+    <GUID>b38c7c0b-5b44-4980-a323-7ecb6ba25c93</GUID>
+    <ObjectType>cms.contentitem</ObjectType>
+  </ContentItemCommonDataContentItemID>
+  <ContentItemCommonDataContentLanguageID>
+    <CodeName>en</CodeName>
+    <GUID>e4a8fb12-ebc2-45d0-930f-c9fba2780c85</GUID>
+    <ObjectType>cms.contentlanguage</ObjectType>
+  </ContentItemCommonDataContentLanguageID>
+  <ContentItemCommonDataGUID>833fc8f4-f3d0-46e3-a599-b0953dfd9e4c</ContentItemCommonDataGUID>
+  <ContentItemCommonDataIsLatest>True</ContentItemCommonDataIsLatest>
+  <ContentItemCommonDataLastPublishedWhen>2024-04-09 08:07:37Z</ContentItemCommonDataLastPublishedWhen>
+  <ContentItemCommonDataVersionStatus>2</ContentItemCommonDataVersionStatus>
+  <ProductFieldsDescription>
+    <![CDATA[<p>This grinder is rather small, but it's quick, easy-to-use, and precise. Choose your favorite brewing method and those strong conical ceramic burrs of high quality with thick and durable glass assure you that you won't regret it. But this grinder not only makes good grounds, it's also a pleasure to use! On the bottom, there's anti-slip rubber, and the handle feels awesome. After use, just put it in the dishwasher or wash it by hand, it's so easy.<br id="isPasted"><br>The Hario Skerton Hand Grinder is also usable if you are a traveler. With the included screw top cover, grounds stay fresh and inside the grinder, even on bumpy roads.</p>]]>
+  </ProductFieldsDescription>
+  <ProductFieldsImage>
+    <![CDATA[[{"Identifier":"fe59453e-5e59-422f-97b7-0da25ac54354"}]]]>
+  </ProductFieldsImage>
+  <ProductFieldsName>Hario Skerton Hand Grinder</ProductFieldsName>
+  <ProductFieldsShortDescription>
+    <![CDATA[Small but quick, an easy-to-use and precise grinder with strong conical ceramic burrs.]]>
+  </ProductFieldsShortDescription>
+  <ContentItemReferences>
+    <cms.contentitemreference>
+      <ContentItemReferenceGroupGUID>af37d29a-2fc8-4ead-82ef-d5ec6998f910</ContentItemReferenceGroupGUID>
+      <ContentItemReferenceGUID>79f272a6-6b65-4692-a047-3ba560f24ad2</ContentItemReferenceGUID>
+      <ContentItemReferenceSourceCommonDataID>
+        <GUID>833fc8f4-f3d0-46e3-a599-b0953dfd9e4c</GUID>
+        <ObjectType>cms.contentitemcommondata</ObjectType>
+      </ContentItemReferenceSourceCommonDataID>
+      <ContentItemReferenceTargetItemID>
+        <CodeName>Grinder_HarioSkertonHandGrinder-kte265l3</CodeName>
+        <GUID>fe59453e-5e59-422f-97b7-0da25ac54354</GUID>
+        <ObjectType>cms.contentitem</ObjectType>
+      </ContentItemReferenceTargetItemID>
+    </cms.contentitemreference>
+  </ContentItemReferences>
+</cms.contentitemcommondata>

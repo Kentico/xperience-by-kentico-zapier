@@ -11,14 +11,22 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:26547"
+      "applicationUrl": "https://localhost:14070"
+    },
+    "Zapier.WebCI": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "applicationUrl": "https://localhost:14070",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "CI"
+      }
     }
   },
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:26547",
+      "applicationUrl": "http://localhost:14070",
       "sslPort": 0
     }
   }

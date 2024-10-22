@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cms.contentitemcommondata>
+  <ContentItemCommonDataContentItemID>
+    <CodeName>ColombiaCarlosImbachi-t5ps0qy3</CodeName>
+    <GUID>d81c0256-89eb-4e1f-88d2-34d8beefe8f6</GUID>
+    <ObjectType>cms.contentitem</ObjectType>
+  </ContentItemCommonDataContentItemID>
+  <ContentItemCommonDataContentLanguageID>
+    <CodeName>en</CodeName>
+    <GUID>e4a8fb12-ebc2-45d0-930f-c9fba2780c85</GUID>
+    <ObjectType>cms.contentlanguage</ObjectType>
+  </ContentItemCommonDataContentLanguageID>
+  <ContentItemCommonDataGUID>b6642ea7-7595-44c9-873c-f3f55e0afc43</ContentItemCommonDataGUID>
+  <ContentItemCommonDataIsLatest>True</ContentItemCommonDataIsLatest>
+  <ContentItemCommonDataLastPublishedWhen>2024-04-09 07:59:36Z</ContentItemCommonDataLastPublishedWhen>
+  <ContentItemCommonDataVersionStatus>2</ContentItemCommonDataVersionStatus>
+  <ProductFieldsDescription>
+    <![CDATA[<p id="isPasted">As a part of our farmer-direct Colombia program, we bring you a special (above 88!) farm-specific number. We had some very special cupping samples sent to us straight from Colombia. And although they were all fantastic, this one really stood out from the others. Previously, we offered the "First Place SCAA Coffee of the Year" Carlos Imbachi. Just so you know what we're on about here, the famous Panama Esmeralda Especial Gesha ended up in 2nd place to Carlos Imbachi. Take this as another testament to the greatness and potential of Colombian coffee.</p><p><br></p><p>One cupping of this specialty was enough to recognize the unprecedented quality and character of this coffee. Mr. Imbachi's farm is located in the San Augustin region of Hulia, where he grows this coffee at an altitude of 5,700 feet.</p>]]>
+  </ProductFieldsDescription>
+  <ProductFieldsImage>
+    <![CDATA[[{"Identifier":"0313c4b9-b165-4d4c-b22d-798065d46adf"}]]]>
+  </ProductFieldsImage>
+  <ProductFieldsName>Colombia Carlos Imbachi</ProductFieldsName>
+  <ProductFieldsShortDescription>
+    <![CDATA[The Colombian gold in the form of top quality coffee, recognizable for its character.]]>
+  </ProductFieldsShortDescription>
+  <ContentItemReferences>
+    <cms.contentitemreference>
+      <ContentItemReferenceGroupGUID>af37d29a-2fc8-4ead-82ef-d5ec6998f910</ContentItemReferenceGroupGUID>
+      <ContentItemReferenceGUID>0e25e370-9257-4dbe-8a87-ed4b05ae56b1</ContentItemReferenceGUID>
+      <ContentItemReferenceSourceCommonDataID>
+        <GUID>b6642ea7-7595-44c9-873c-f3f55e0afc43</GUID>
+        <ObjectType>cms.contentitemcommondata</ObjectType>
+      </ContentItemReferenceSourceCommonDataID>
+      <ContentItemReferenceTargetItemID>
+        <CodeName>Products_Colombia.jpg-pkmhet0j</CodeName>
+        <GUID>0313c4b9-b165-4d4c-b22d-798065d46adf</GUID>
+        <ObjectType>cms.contentitem</ObjectType>
+      </ContentItemReferenceTargetItemID>
+    </cms.contentitemreference>
+  </ContentItemReferences>
+</cms.contentitemcommondata>

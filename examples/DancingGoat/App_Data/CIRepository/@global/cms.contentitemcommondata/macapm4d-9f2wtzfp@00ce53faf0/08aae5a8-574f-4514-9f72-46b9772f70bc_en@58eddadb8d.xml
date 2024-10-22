@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cms.contentitemcommondata>
+  <ContentItemCommonDataContentItemID>
+    <CodeName>MacapM4D-9f2wtzfp</CodeName>
+    <GUID>298115f9-55c0-48e3-aa20-3a0a1ce1a2e3</GUID>
+    <ObjectType>cms.contentitem</ObjectType>
+  </ContentItemCommonDataContentItemID>
+  <ContentItemCommonDataContentLanguageID>
+    <CodeName>en</CodeName>
+    <GUID>e4a8fb12-ebc2-45d0-930f-c9fba2780c85</GUID>
+    <ObjectType>cms.contentlanguage</ObjectType>
+  </ContentItemCommonDataContentLanguageID>
+  <ContentItemCommonDataGUID>08aae5a8-574f-4514-9f72-46b9772f70bc</ContentItemCommonDataGUID>
+  <ContentItemCommonDataIsLatest>True</ContentItemCommonDataIsLatest>
+  <ContentItemCommonDataLastPublishedWhen>2024-04-09 08:07:54Z</ContentItemCommonDataLastPublishedWhen>
+  <ContentItemCommonDataVersionStatus>2</ContentItemCommonDataVersionStatus>
+  <ProductFieldsDescription>
+    <![CDATA[<p id="isPasted">Who can make a cup of coffee if not an Italian? This Italian-made espresso electric grinder is one of the best solutions for home and professional use. The Macap M4D is a super easy to use and yet highly expert appliance – only one button, an LED display providing information to ensure a precise dose, and a stepless adjustment wheel for the best quality grinding. This beautiful grinder and its flat steel burrs are powered by a high-performance 250-Watt engine.</p><ul><li>Stepless adjustment wheel for grinding</li><li>Three&nbsp;different settings of grinding dosage – 1-cup, 2-cup, and continuous</li><li>250-Watt engine</li><li>Made in Venice, Italy</li></ul><p>Specifications:</p><ul><li>16.9" H x 7.5" W x 12.2" D (43 cm H x 19 cm W x 31 cm D)</li><li>22 lb (10 kg)</li><li>Blade diameter: 2.3" (5.8 cm)</li></ul><div class="product-detail-properties"><h4>Parameters</h4><dl class="row"><dt class="col-xs-12 col-sm-4">Power</dt><dd class="col-xs-12 col-sm-8">250W</dd></dl></div>]]>
+  </ProductFieldsDescription>
+  <ProductFieldsImage>
+    <![CDATA[[{"Identifier":"60771371-3371-42cd-a101-8ffb6d90f318"}]]]>
+  </ProductFieldsImage>
+  <ProductFieldsName>Macap M4D</ProductFieldsName>
+  <ProductFieldsShortDescription>
+<![CDATA[
+Macap M4D is an easy-to-use, highly expert electric grinder with a stepless adjustment wheel for various settings.
+
+]]>
+  </ProductFieldsShortDescription>
+  <ContentItemReferences>
+    <cms.contentitemreference>
+      <ContentItemReferenceGroupGUID>af37d29a-2fc8-4ead-82ef-d5ec6998f910</ContentItemReferenceGroupGUID>
+      <ContentItemReferenceGUID>29767e63-4247-4725-b9a2-0795170663cf</ContentItemReferenceGUID>
+      <ContentItemReferenceSourceCommonDataID>
+        <GUID>08aae5a8-574f-4514-9f72-46b9772f70bc</GUID>
+        <ObjectType>cms.contentitemcommondata</ObjectType>
+      </ContentItemReferenceSourceCommonDataID>
+      <ContentItemReferenceTargetItemID>
+        <CodeName>MacapM4D-d8wt8jia</CodeName>
+        <GUID>60771371-3371-42cd-a101-8ffb6d90f318</GUID>
+        <ObjectType>cms.contentitem</ObjectType>
+      </ContentItemReferenceTargetItemID>
+    </cms.contentitemreference>
+  </ContentItemReferences>
+</cms.contentitemcommondata>

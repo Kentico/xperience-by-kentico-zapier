@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentitemdata.dancinggoat.image>
+  <ContentItemDataCommonDataID>
+    <GUID>dbaf10d2-f7e1-4813-a504-57925758cbbb</GUID>
+    <ObjectType>cms.contentitemcommondata</ObjectType>
+    <Parent>
+      <CodeName>Grinder_AnfimSuperCaimano-nu4aq432</CodeName>
+      <GUID>da0f6058-65b8-48d1-838d-b4d164839cb9</GUID>
+      <ObjectType>cms.contentitem</ObjectType>
+    </Parent>
+  </ContentItemDataCommonDataID>
+  <ContentItemDataGUID>87861dc2-d457-4130-b3a8-d13f3a0e5f1a</ContentItemDataGUID>
+  <ImageFile>
+    <![CDATA[{"Identifier":"390a5c69-11e2-41f0-9cb0-a716af074393","Name":"anfim-super-caimano.jpg","Extension":".jpg","Size":25422,"LastModified":"2023-11-07T09:59:18.1151431Z"}]]>
+  </ImageFile>
+</contentitemdata.dancinggoat.image>

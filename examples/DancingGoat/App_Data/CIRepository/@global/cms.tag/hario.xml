@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cms.tag>
+  <TagGUID>b8c50266-b496-4aaf-ab58-022be7c33366</TagGUID>
+  <TagMetadata>
+    <![CDATA[{"Translations":{"fc939370-8f94-4fc9-8cc4-bfdef6ab748c":{"Title":null,"Description":null}}}]]>
+  </TagMetadata>
+  <TagName>Hario</TagName>
+  <TagOrder>4</TagOrder>
+  <TagTaxonomyID>
+    <CodeName>GrinderManufacturer</CodeName>
+    <GUID>d9598b2d-9c50-4910-b554-9ee1f5cd5813</GUID>
+    <ObjectType>cms.taxonomy</ObjectType>
+  </TagTaxonomyID>
+  <TagTitle>Hario</TagTitle>
+</cms.tag>
