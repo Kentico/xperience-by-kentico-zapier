@@ -12,9 +12,11 @@ namespace Kentico.Xperience.Zapier.Triggers.Handlers;
 
 internal class WorkflowHeadlessHandler : ZapierWorkflowHandler
 {
-    private readonly IAdminLinkService adminLinkService;
-
-    public WorkflowHeadlessHandler(ZapierTriggerInfo zapierTrigger, IEventLogService? eventLogService, HttpClient client, IHttpContextAccessor httpContextAccessor, IAdminLinkService adminLinkService) : base(zapierTrigger, eventLogService, client, httpContextAccessor) => this.adminLinkService = adminLinkService;
+    public WorkflowHeadlessHandler(ZapierTriggerInfo zapierTrigger, IEventLogService? eventLogService,
+        HttpClient client, IHttpContextAccessor httpContextAccessor, IAdminLinkService adminLinkService) : base(
+        zapierTrigger, eventLogService, client, httpContextAccessor, adminLinkService)
+    {
+    }
 
 
     public override bool RegistrationProcessor(bool register = true)
@@ -48,7 +50,7 @@ internal class WorkflowHeadlessHandler : ZapierWorkflowHandler
         var data = e.GetZapierWorkflowPostObject();
 
         var pageParams = AdminUrlHelper.GetHeadlessParams(e.ID, e.HeadlessChannelID, e.ContentLanguageName);
-        string adminLink = adminLinkService.GenerateAdminLink<HeadlessContentTab>(pageParams, GetHostDomain());
+        string adminLink = AdminLinkService.GenerateAdminLink<HeadlessContentTab>(pageParams, GetHostDomain());
 
         data.TryAdd("AdminLink", adminLink);
 

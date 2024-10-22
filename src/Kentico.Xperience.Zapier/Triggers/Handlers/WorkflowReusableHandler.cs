@@ -18,8 +18,6 @@ internal class WorkflowReusableHandler : ZapierWorkflowHandler
     private readonly IInfoProvider<ContentLanguageInfo> contentLanguageProvider;
     private readonly IInfoProvider<ContentItemInfo> contentInfoProvider;
 
-    private readonly IAdminLinkService adminLinkService;
-
     public WorkflowReusableHandler(ZapierTriggerInfo zapierTrigger,
         IEventLogService? eventLogService,
         HttpClient client,
@@ -27,11 +25,10 @@ internal class WorkflowReusableHandler : ZapierWorkflowHandler
         IInfoProvider<ContentLanguageInfo> contentLanguageProvider,
         IInfoProvider<ContentItemInfo> contentInfoProvider,
         IAdminLinkService adminLinkService)
-        : base(zapierTrigger, eventLogService, client, httpContextAccessor)
+        : base(zapierTrigger, eventLogService, client, httpContextAccessor, adminLinkService)
     {
         this.contentLanguageProvider = contentLanguageProvider;
         this.contentInfoProvider = contentInfoProvider;
-        this.adminLinkService = adminLinkService;
     }
 
 
@@ -71,7 +68,7 @@ internal class WorkflowReusableHandler : ZapierWorkflowHandler
         var pageParams = AdminUrlHelper.GetReusableParams(e.ID, contentItemInfo.ContentItemContentFolderID,
             info.ContentLanguageName);
 
-        string adminLink = adminLinkService.GenerateAdminLink<ContentItemEdit>(pageParams, GetHostDomain());
+        string adminLink = AdminLinkService.GenerateAdminLink<ContentItemEdit>(pageParams, GetHostDomain());
 
         data.TryAdd("AdminLink", adminLink);
 

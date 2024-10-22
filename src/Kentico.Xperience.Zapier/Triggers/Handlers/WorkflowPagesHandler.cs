@@ -11,16 +11,16 @@ namespace Kentico.Xperience.Zapier.Triggers.Handlers;
 
 internal class WorkflowPagesHandler : ZapierWorkflowHandler
 {
-    private readonly IAdminLinkService adminLinkService;
-
     public WorkflowPagesHandler(
         ZapierTriggerInfo zapierTrigger,
         IEventLogService? eventLogService,
         HttpClient client,
         IHttpContextAccessor httpContextAccessor,
         IAdminLinkService adminLinkService)
-        : base(zapierTrigger, eventLogService, client, httpContextAccessor) =>
-        this.adminLinkService = adminLinkService;
+        : base(zapierTrigger, eventLogService, client, httpContextAccessor, adminLinkService)
+    {
+
+    }
 
 
     public override bool RegistrationProcessor(bool register = true)
@@ -55,7 +55,7 @@ internal class WorkflowPagesHandler : ZapierWorkflowHandler
         var data = e.GetZapierWorkflowPostObject();
 
         var pageParams = AdminUrlHelper.GetWebPageParams(e.ID, e.WebsiteChannelID, e.ContentLanguageName);
-        string adminLink = adminLinkService.GenerateAdminLink<ContentTab>(pageParams, GetHostDomain());
+        string adminLink = AdminLinkService.GenerateAdminLink<ContentTab>(pageParams, GetHostDomain());
 
         data.TryAdd("AdminLink", adminLink);
 
