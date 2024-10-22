@@ -42,6 +42,9 @@ jobs:
       PROJECT_NAME: DancingGoat
       ASPNETCORE_URLS: https://localhost:14070
       STATUS_CHECK_URL: https://localhost:14070/status
+      DATABASE_USER: "sa"
+      DATABASE_PASSWORD: "Pass@12345"
+      DATABASE_NAME: "XByK_DancingGoat_Zapier"
 
     steps:
       - uses: actions/checkout@v4
@@ -77,26 +80,24 @@ jobs:
         uses: potatoqualitee/mssqlsuite@9a0136e208df60b8ecb62909f076bc34854fa55a # set as a commit hash for security - v1.7
         with:
           install: sqlpackage, sqlengine
-          # TODO: Heslo v otevřené podobě?
-          sa-password: Pass@12345
+          sa-password: ${{ env.DATABASE_PASSWORD }}
           version: 2022
 
       - name: Restore Database .bak
-        # TODO: Heslo v otevřené podobě?
         run: |
           docker exec sql mkdir /var/opt/mssql/backup
           docker cp "./database/${{ env.DATABASE_BACKUP_FILENAME }}" sql:/var/opt/mssql/backup
           sqlcmd `
             -S localhost `
             -d master `
-            -U "sa" `
-            -P "Pass@12345" `
+            -U ${{ env.DATABASE_USER }} `
+            -P ${{ env.DATABASE_PASSWORD }} `
             -Q "RESTORE DATABASE [XByK_DancingGoat_Zapier] FROM DISK='/var/opt/mssql/backup/${{ env.DATABASE_BACKUP_FILENAME }}' WITH MOVE 'XByK_DancingGoat_Zapier' TO '/var/opt/mssql/data/XByK_DancingGoat_Zapier.mdf', MOVE 'XByK_DancingGoat_Zapier_log' TO '/var/opt/mssql/data/XByK_DancingGoat_Zapier_log.ldf'"      
 
-      # - name: Restore CI Repository TODO
-      #   working-directory: "./scripts" 
-      #   run: |
-      #     ./Restore-CI.ps1
+      - name: Restore CI Repository
+        working-directory: "./scripts" 
+        run: |
+          ./Restore-CI.ps1
 
       - name: Publish Application
         run: |
@@ -132,11 +133,11 @@ jobs:
           cd ../
           # The ASP.NET Core app can take a few seconds to start, so we delay running tests
           #   until it is ready, and fail if we go over a maximum wait time
-          $limit = 15
+          $limit = 10
           $attempts = 0
           $success = $false
           while ($attempts -lt $limit -and -not $success) {
-              Start-Sleep -Seconds 5
+              Start-Sleep -Seconds 1
               try {
                   $response = Invoke-WebRequest -Uri ${{ env.STATUS_CHECK_URL }} -Method Get -SkipCertificateCheck
                   if ($response.StatusCode -eq 200) {
