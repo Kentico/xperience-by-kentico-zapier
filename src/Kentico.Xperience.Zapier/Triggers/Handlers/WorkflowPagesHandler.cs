@@ -1,7 +1,8 @@
 ﻿using CMS.ContentWorkflowEngine;
 using CMS.Core;
-
 using Kentico.Integration.Zapier;
+using Kentico.Xperience.Admin.Websites.UIPages;
+using Kentico.Xperience.Zapier.Helpers;
 using Kentico.Xperience.Zapier.Triggers.Handlers.Abstractions;
 
 using Microsoft.AspNetCore.Http;
@@ -10,8 +11,15 @@ namespace Kentico.Xperience.Zapier.Triggers.Handlers;
 
 internal class WorkflowPagesHandler : ZapierWorkflowHandler
 {
-    public WorkflowPagesHandler(ZapierTriggerInfo zapierTrigger, IEventLogService? eventLogService, HttpClient client, IHttpContextAccessor httpContextAccessor) : base(zapierTrigger, eventLogService, client, httpContextAccessor)
+    public WorkflowPagesHandler(
+        ZapierTriggerInfo zapierTrigger,
+        IEventLogService? eventLogService,
+        HttpClient client,
+        IHttpContextAccessor httpContextAccessor,
+        IAdminLinkService adminLinkService)
+        : base(zapierTrigger, eventLogService, client, httpContextAccessor, adminLinkService)
     {
+
     }
 
 
@@ -45,10 +53,11 @@ internal class WorkflowPagesHandler : ZapierWorkflowHandler
 
 
         var data = e.GetZapierWorkflowPostObject();
-        var websiteUri = GetHostDomain();
-        var adminUrl = new Uri(websiteUri, $"/admin/webpages-{e.WebsiteChannelID}/{e.ContentLanguageName}_{e.ID}");
 
-        data.TryAdd("AdminLink", adminUrl);
+        var pageParams = AdminUrlHelper.GetWebPageParams(e.ID, e.WebsiteChannelID, e.ContentLanguageName);
+        string adminLink = AdminLinkService.GenerateAdminLink<ContentTab>(pageParams, GetHostDomain());
+
+        data.TryAdd("AdminLink", adminLink);
 
 
         if (ZapierTrigger != null)
