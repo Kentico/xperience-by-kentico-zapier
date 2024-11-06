@@ -1,4 +1,5 @@
 ﻿using CMS.ContentEngine;
+using CMS.ContentEngine.Internal;
 using CMS.Core;
 using CMS.DataEngine;
 using CMS.EventLog;
@@ -23,10 +24,13 @@ internal class ZapierTriggerHandlerFactory : IZapierTriggerHandlerFactory
     private readonly HttpClient client;
     private readonly IWorkflowScopeService workflowScopeService;
     private readonly IInfoProvider<ContentLanguageInfo> contentLanguageProvider;
+    private readonly IInfoProvider<ContentItemInfo> contentInfoProvider;
+
     private readonly IHttpContextAccessor httpContextAccessor;
     private readonly IInfoProvider<ZapierTriggerEventLogTypeInfo> triggerEventLogTypeInfoProvider;
     private readonly IProgressiveCache progressiveCache;
     private readonly IEventLogService logService;
+    private readonly IAdminLinkService adminLinkService;
 
 
     public ZapierTriggerHandlerFactory(HttpClient client,
@@ -35,7 +39,9 @@ internal class ZapierTriggerHandlerFactory : IZapierTriggerHandlerFactory
         IHttpContextAccessor httpContextAccessor,
         IInfoProvider<ZapierTriggerEventLogTypeInfo> triggerEventLogTypeInfoProvider,
         IProgressiveCache progressiveCache,
-        IEventLogService logService)
+        IEventLogService logService,
+        IAdminLinkService adminLinkService,
+        IInfoProvider<ContentItemInfo> contentInfoProvider)
     {
         this.client = client;
         this.workflowScopeService = workflowScopeService;
@@ -44,6 +50,8 @@ internal class ZapierTriggerHandlerFactory : IZapierTriggerHandlerFactory
         this.triggerEventLogTypeInfoProvider = triggerEventLogTypeInfoProvider;
         this.progressiveCache = progressiveCache;
         this.logService = logService;
+        this.adminLinkService = adminLinkService;
+        this.contentInfoProvider = contentInfoProvider;
     }
 
 
@@ -73,9 +81,9 @@ internal class ZapierTriggerHandlerFactory : IZapierTriggerHandlerFactory
 
                 ZapierWorkflowHandler workflowHandler = classType switch
                 {
-                    ZapierTriggerObjectClassType.Website => new WorkflowPagesHandler(trigger, logService, client, httpContextAccessor),
-                    ZapierTriggerObjectClassType.Reusable => new WorkflowReusableHandler(trigger, logService, client, httpContextAccessor, contentLanguageProvider),
-                    ZapierTriggerObjectClassType.Headless => new WorkflowHeadlessHandler(trigger, logService, client, httpContextAccessor),
+                    ZapierTriggerObjectClassType.Website => new WorkflowPagesHandler(trigger, logService, client, httpContextAccessor, adminLinkService),
+                    ZapierTriggerObjectClassType.Reusable => new WorkflowReusableHandler(trigger, logService, client, httpContextAccessor, contentLanguageProvider, contentInfoProvider, adminLinkService),
+                    ZapierTriggerObjectClassType.Headless => new WorkflowHeadlessHandler(trigger, logService, client, httpContextAccessor, adminLinkService),
                     ZapierTriggerObjectClassType.Form => throw new NotImplementedException(),
                     ZapierTriggerObjectClassType.Other => throw new NotImplementedException(),
                     ZapierTriggerObjectClassType.System => throw new NotImplementedException(),

@@ -2,6 +2,8 @@
 using CMS.Core;
 
 using Kentico.Integration.Zapier;
+using Kentico.Xperience.Admin.Headless.UIPages;
+using Kentico.Xperience.Zapier.Helpers;
 using Kentico.Xperience.Zapier.Triggers.Handlers.Abstractions;
 
 using Microsoft.AspNetCore.Http;
@@ -10,7 +12,9 @@ namespace Kentico.Xperience.Zapier.Triggers.Handlers;
 
 internal class WorkflowHeadlessHandler : ZapierWorkflowHandler
 {
-    public WorkflowHeadlessHandler(ZapierTriggerInfo zapierTrigger, IEventLogService? eventLogService, HttpClient client, IHttpContextAccessor httpContextAccessor) : base(zapierTrigger, eventLogService, client, httpContextAccessor)
+    public WorkflowHeadlessHandler(ZapierTriggerInfo zapierTrigger, IEventLogService? eventLogService,
+        HttpClient client, IHttpContextAccessor httpContextAccessor, IAdminLinkService adminLinkService) : base(
+        zapierTrigger, eventLogService, client, httpContextAccessor, adminLinkService)
     {
     }
 
@@ -44,9 +48,11 @@ internal class WorkflowHeadlessHandler : ZapierWorkflowHandler
         }
 
         var data = e.GetZapierWorkflowPostObject();
-        var websiteUri = GetHostDomain();
-        var adminUrl = new Uri(websiteUri, $"/admin/headless-{e.HeadlessChannelID}/{e.ContentLanguageName}/list/{e.ID}");
-        data.TryAdd("AdminLink", adminUrl);
+
+        var pageParams = AdminUrlHelper.GetHeadlessParams(e.ID, e.HeadlessChannelID, e.ContentLanguageName);
+        string adminLink = AdminLinkService.GenerateAdminLink<HeadlessContentTab>(pageParams, GetHostDomain());
+
+        data.TryAdd("AdminLink", adminLink);
 
         if (ZapierTrigger != null)
         {
