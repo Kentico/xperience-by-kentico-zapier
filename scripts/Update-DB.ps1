@@ -1,6 +1,6 @@
 <#
 .Synopsis
-    Updates the local database with all the objects in the CI repository
+    Updates the local with hotfix according to version of packages of live site.
 #>
 
 Import-Module (Resolve-Path Settings) `
@@ -22,10 +22,11 @@ $command = "dotnet run " + `
     "--no-build " + `
     "--no-restore " + `
     "--project $($appSettings.XbKProjectPath) " + `
-    "--kxp-ci-restore"
+    "--kxp-update " + `
+    "--skip-confirmation"
 
 Invoke-ExpressionWithException $command
 
 Write-Host "`n"
-Write-Status "CI files processed"
+Write-Status "Updated DB to latest hotfix"
 Write-Host "`n"

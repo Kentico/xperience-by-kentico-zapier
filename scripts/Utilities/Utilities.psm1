@@ -1,65 +1,15 @@
 # Utilities
 
-$scriptConfig = @{}
-$scriptConfig.WorkspaceFolder = ".."
-$scriptConfig.SolutionFileName = "Kentico.Xperience.Zapier.sln"
-$scriptConfig.AssemblyName = "DancingGoat"
-
-<#
-    .DESCRIPTION
-        Returns shared configuration for PowerShell scripts
-#>
-function Get-ScriptConfig {
-    return $scriptConfig
-}
-
-<#
-    .DESCRIPTION
-        Returns the main solution file path
-#>
-function Get-SolutionPath {
-    return Resolve-Path(Join-Path $($scriptConfig.WorkspaceFolder) $($scriptConfig.SolutionFileName))
-}
-
-<#
-    .DESCRIPTION
-        Returns the web application folder path from the workspace root
-#>
-function Get-WebProjectPath {
-    return Resolve-Path(Join-Path $($scriptConfig.WorkspaceFolder) "examples/DancingGoat")
-}
-
-<#
-    .DESCRIPTION
-        Returns the admin application folder path from the workspace root
-#>
-<#function Get-AdminProjectPath {
-    return Resolve-Path(Join-Path $($scriptConfig.WorkspaceFolder) "src/Kentico.Community.Portal.Admin")
-}#>
-
-<#
-    .DESCRIPTION
-        Returns the admin client application folder path from the workspace root
-#>
-<#function Get-AdminClientProjectPath {
-    return Resolve-Path(Join-Path $($scriptConfig.WorkspaceFolder) "src/Kentico.Community.Portal.Admin/Client")
-}#>
-
-<#
-    .DESCRIPTION
-        Returns the Core project folder path from the workspace root
-#>
-<#function Get-CoreProjectPath {
-    return Resolve-Path(Join-Path $($scriptConfig.WorkspaceFolder) "src/Kentico.Community.Portal.Core")
-}#>
-
-
 <#
     .DESCRIPTION
         Gets the database connection string from the user secrets or appsettings.json file
 #>
-<#function Get-ConnectionString {
-    $projectPath = Get-WebProjectPath
+function Get-ConnectionString {
+    param (
+        [PSCustomObject]$appSettings
+    )
+
+    $projectPath = $appSettings.XbKProjectPath
 
     # Try to get the connection string from user secrets first
     Write-Host "Checking for a connection string user secrets for project: $projectPath"
@@ -74,7 +24,7 @@ function Get-WebProjectPath {
         return $connectionString
     }
 
-    $appSettingFileName = $Env:ASPNETCORE_ENVIRONMENT -eq "CI" ? 'appsettings.CI.json' : 'appsettings.json'
+    $appSettingFileName = $appSettings.AppSettingsFileName
     
     $jsonFilePath = Join-Path $projectPath $appSettingFileName
 
@@ -92,12 +42,45 @@ function Get-WebProjectPath {
     }
 
     return $connectionString;
-}#>
+}
 
 <#
-.DESCRIPTION
-   Ensures the expression successfully exits and throws an exception
-   with the failed expression if it does not.
+    .DESCRIPTION
+        Executes SQL query given by string with provided connection string
+#>
+function Invoke-SqlQuery {
+    param (
+        [string]$connectionString,
+        [string]$query
+    )
+
+    # Create and open a SQL connection
+    $connection = New-Object System.Data.SqlClient.SqlConnection($connectionString)
+
+    try {
+        $connection.Open()
+        $command = $connection.CreateCommand()
+        $command.CommandText = $query
+        $rowsAffected = $command.ExecuteNonQuery()  # Return the number of affected rows
+        
+        if ($rowsAffected -ne $null) {
+            Write-Notification "Rows affected: $rowsAffected"
+        }
+        return $rowsAffected
+    }
+    catch {
+        Write-Error "An error occurred: $_"
+        return $null
+    }
+    finally {
+        $connection.Close()
+    }
+}
+
+<#
+    .DESCRIPTION
+        Ensures the expression successfully exits and throws an exception
+        with the failed expression if it does not.
 #>
 function Invoke-ExpressionWithException {
     param(

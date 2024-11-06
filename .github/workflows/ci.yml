@@ -27,7 +27,7 @@ on:
 
 jobs:
   build_and_test:
-    name: Build and Test
+    name: Test E2E
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -40,11 +40,11 @@ jobs:
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
       DOTNET_NOLOGO: 1
       PROJECT_NAME: DancingGoat
-      ASPNETCORE_URLS: https://localhost:14070
       STATUS_CHECK_URL: https://localhost:14070/status
       DATABASE_USER: "sa"
       DATABASE_PASSWORD: "Pass@12345"
       DATABASE_NAME: "XByK_DancingGoat_Zapier"
+      XPERIENCE_BY_KENTICO_LICENSE: ${{ secrets.XPERIENCE_BY_KENTICO_LICENSE }}
 
     steps:
       - uses: actions/checkout@v4
@@ -54,16 +54,17 @@ jobs:
         with:
           global-json-file: global.json
 
-      - name: Install dependencies
-        run: |
-          dotnet restore `
-            --locked-mode
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
 
-      - name: Build Solution
-        run: |
-          dotnet build `
-            --configuration Release `
-            --no-restore
+      # - name: Install NPM
+      #   run: |
+      #     cd test/Playwright
+      #     npm ci
+      #     npx playwright install --with-deps
+      #     cd ../..
 
       - name: Get Database Backup Name
         run: |
@@ -93,11 +94,32 @@ jobs:
             -U ${{ env.DATABASE_USER }} `
             -P ${{ env.DATABASE_PASSWORD }} `
             -Q "RESTORE DATABASE [XByK_DancingGoat_Zapier] FROM DISK='/var/opt/mssql/backup/${{ env.DATABASE_BACKUP_FILENAME }}' WITH MOVE 'XByK_DancingGoat_Zapier' TO '/var/opt/mssql/data/XByK_DancingGoat_Zapier.mdf', MOVE 'XByK_DancingGoat_Zapier_log' TO '/var/opt/mssql/data/XByK_DancingGoat_Zapier_log.ldf'"      
-
-      - name: Restore CI Repository
-        working-directory: "./scripts" 
+      
+      # - name: Imports license key to DB
+      #   run: |
+      #     sqlcmd `
+      #       -S localhost `
+      #       -d ${{ env.DATABASE_NAME }} `
+      #       -U ${{ env.DATABASE_USER }} `
+      #       -P ${{ env.DATABASE_PASSWORD }} `
+      #       -Q "UPDATE CMS_SettingsKey SET KeyValue='${{ env.XPERIENCE_BY_KENTICO_LICENSE }}' WHERE KeyName='CMSLicenseKey'"
+            
+      - name: Reset DB consistency for last applied hotfix
         run: |
-          ./Restore-CI.ps1
+          dotnet build `
+            --configuration Release
+          cd scripts
+          ./Reset-DatabaseConsistency.ps1
+          cd ..
+      
+      - name: Build Solution for last hotfix
+        run: |
+          dotnet build `
+            --configuration Release `
+            -p:XbyKVersion=*
+          cd scripts
+          ./Reset-DatabaseConsistency.ps1 -ExcludeCIRestore
+          cd ..
 
       - name: Publish Application
         run: |
@@ -107,10 +129,6 @@ jobs:
             -o ./publish `
             --no-build `
             --no-restore
-      #- name: Install Playwright Dependencies
-          # TODO: to je blbost
-        #run: |
-        #  ./test/Kentico.Community.Portal.Web.E2E.Tests/bin/Release/net8.0/playwright.ps1 install
         
       - name: Install Azurite
         id: azuright
@@ -155,7 +173,18 @@ jobs:
               exit 1
           }
           # TODO: Run the E2E tests
+          # cd test/Playwright
+          # npx playwright test
+          # cd ../..
+  
+
           # Stop the background ASP.NET Core application
           Receive-Job -Name ${{ env.PROJECT_NAME }}
           Stop-Job -Name ${{ env.PROJECT_NAME }}
           Remove-Job -Name ${{ env.PROJECT_NAME }}
+
+      # - uses: actions/upload-artifact@v4
+      #   with:
+      #     name: playwright-report
+      #     path: ./test/Playwright/playwright-report/
+      #     retention-days: 30  
