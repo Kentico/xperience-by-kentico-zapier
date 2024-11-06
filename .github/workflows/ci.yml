@@ -40,6 +40,7 @@ jobs:
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
       DOTNET_NOLOGO: 1
       PROJECT_NAME: DancingGoat
+      ASPNETCORE_URLS: https://localhost:14070
       STATUS_CHECK_URL: https://localhost:14070/status
       DATABASE_USER: "sa"
       DATABASE_PASSWORD: "Pass@12345"
