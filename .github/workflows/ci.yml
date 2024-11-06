@@ -96,14 +96,14 @@ jobs:
             -P ${{ env.DATABASE_PASSWORD }} `
             -Q "RESTORE DATABASE [XByK_DancingGoat_Zapier] FROM DISK='/var/opt/mssql/backup/${{ env.DATABASE_BACKUP_FILENAME }}' WITH MOVE 'XByK_DancingGoat_Zapier' TO '/var/opt/mssql/data/XByK_DancingGoat_Zapier.mdf', MOVE 'XByK_DancingGoat_Zapier_log' TO '/var/opt/mssql/data/XByK_DancingGoat_Zapier_log.ldf'"      
       
-      # - name: Imports license key to DB
-      #   run: |
-      #     sqlcmd `
-      #       -S localhost `
-      #       -d ${{ env.DATABASE_NAME }} `
-      #       -U ${{ env.DATABASE_USER }} `
-      #       -P ${{ env.DATABASE_PASSWORD }} `
-      #       -Q "UPDATE CMS_SettingsKey SET KeyValue='${{ env.XPERIENCE_BY_KENTICO_LICENSE }}' WHERE KeyName='CMSLicenseKey'"
+      - name: Imports license key to DB
+        run: |
+          sqlcmd `
+            -S localhost `
+            -d ${{ env.DATABASE_NAME }} `
+            -U ${{ env.DATABASE_USER }} `
+            -P ${{ env.DATABASE_PASSWORD }} `
+            -Q "UPDATE CMS_SettingsKey SET KeyValue='${{ env.XPERIENCE_BY_KENTICO_LICENSE }}' WHERE KeyName='CMSLicenseKey'"
             
       - name: Reset DB consistency for last applied hotfix
         run: |
