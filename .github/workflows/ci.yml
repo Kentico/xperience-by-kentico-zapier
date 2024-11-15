@@ -62,7 +62,7 @@ jobs:
 
       - name: Install NPM
         run: |
-          cd test/Playwright
+          cd tests/Playwright
           npm ci
           npx playwright install --with-deps
           cd ../..
