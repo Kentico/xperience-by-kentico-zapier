@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-using Kentico.Content.Web.Mvc.Routing;
+﻿using Kentico.Content.Web.Mvc.Routing;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,7 +18,7 @@ namespace DancingGoat.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var languageName = currentLanguageRetriever.Get();
+            string languageName = currentLanguageRetriever.Get();
 
             var navigationViewModels = await navigationService.GetNavigationItemViewModels(languageName, HttpContext.RequestAborted);
 

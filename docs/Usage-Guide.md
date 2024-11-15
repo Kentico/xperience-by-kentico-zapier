@@ -1,4 +1,4 @@
-### Configure your application
+# Configure your application
 
 Prerequisites for using this integration are a public Xperience by Kentico application and a Zapier account.
 
@@ -25,7 +25,7 @@ In the appsettings configuration, you need to specify the list of the allowed ob
 
 You can view a sample of such configuration [here](./docs/Configuration-example.md).
 
-### Zapier administration application
+## Zapier administration application
 
 After configuring your application, a new application named **Zapier** should appear in your application's administration.
 This application consists of two submodules: a listing page of created Zapier triggers from the Zapier UI and a submodule for managing the API Key.
