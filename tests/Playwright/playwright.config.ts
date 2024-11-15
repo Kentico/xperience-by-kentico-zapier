@@ -46,6 +46,7 @@ export default defineConfig({
       use: {
         ...devices["Desktop Chrome"],
         baseURL: XBYK_URL,
+        ignoreHTTPSErrors: true,
         // launchOptions: {
         //   slowMo: 250,
         // },
