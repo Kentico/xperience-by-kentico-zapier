@@ -47,14 +47,21 @@ test.describe("[Zapier integration]", () => {
   test(`[Zapier triggers] List Zapier triggers`, async ({ page }) => {
     test.info().annotations.push({
       type: "Info",
-      description: "Test checks for no errors to be visible after accessing zapier triggers",
+      description:
+        "Test checks for no errors to be visible after accessing zapier triggers and one of the triggers detail",
     });
 
     await test.step("Go to zapier/zaps", async () => {
       await page.goto("/admin/zapier/zaps");
-      await expect(page.getByText("There are no records to display")).toBeVisible(); // page is loaded
     });
-    await test.step("Check for errors", async () => {
+    await test.step("Check list of triggers", async () => {
+      await expect(page.getByTestId("table-row")).toHaveCount(3); // 3 triggers visible on page
+      await expect(page.getByTestId("snackbar-item-error")).not.toBeAttached();
+      await expect(page.getByText("error")).not.toBeAttached();
+    });
+    await test.step("Check trigger detail", async () => {
+      await page.getByTestId("table-row").first().click(); // view first trigger
+      await expect(page.getByTestId("ZapierTriggerZapierURL")).toBeVisible();
       await expect(page.getByTestId("snackbar-item-error")).not.toBeAttached();
       await expect(page.getByText("error")).not.toBeAttached();
     });
