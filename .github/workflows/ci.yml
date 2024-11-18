@@ -104,7 +104,13 @@ jobs:
             -U ${{ env.DATABASE_USER }} `
             -P ${{ env.DATABASE_PASSWORD }} `
             -Q "UPDATE CMS_SettingsKey SET KeyValue='${{ env.XPERIENCE_BY_KENTICO_LICENSE }}' WHERE KeyName='CMSLicenseKey'"
-            
+      
+      - name: Seed DB with data for testing purposes
+        run: |
+          cd scripts
+          ./Seed-Database.ps1
+          cd ..      
+
       - name: Reset DB consistency for last applied hotfix
         run: |
           dotnet build `
