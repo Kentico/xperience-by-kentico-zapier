@@ -8,7 +8,7 @@ namespace DancingGoat.Widgets
     /// <summary>
     /// CTA button widget properties.
     /// </summary>
-    public class CTAButtonWidgetProperties : IWidgetProperties
+    public class CtaButtonWidgetProperties : IWidgetProperties
     {
         /// <summary>
         /// Button text.

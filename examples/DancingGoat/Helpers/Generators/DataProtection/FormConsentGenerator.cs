@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-using CMS.DataEngine;
+﻿using CMS.DataEngine;
 using CMS.DataProtection;
 using CMS.FormEngine;
 using CMS.OnlineForms;
@@ -104,9 +101,9 @@ namespace DancingGoat.Helpers.Generator
             var formBuilderConfiguration = formBuilderConfigurationSerializer.Deserialize(contactUsForm.FormBuilderLayout);
             formBuilderConfiguration
                 .EditableAreas.LastOrDefault()
-                .Sections.LastOrDefault()
-                .Zones.LastOrDefault()
-                .FormComponents.Add(new FormComponentConfiguration { Properties = new ConsentAgreementProperties() { Guid = field.Guid } });
+                ?.Sections.LastOrDefault()
+                ?.Zones.LastOrDefault()
+                ?.FormComponents.Add(new FormComponentConfiguration { Properties = new ConsentAgreementProperties() { Guid = field.Guid } });
             contactUsForm.FormBuilderLayout = formBuilderConfigurationSerializer.Serialize(formBuilderConfiguration, true);
             contactUsForm.Update();
         }

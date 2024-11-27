@@ -3,7 +3,7 @@
     /// <summary>
     /// View model for the CTA Button widget.
     /// </summary>
-    public class CTAButtonWidgetViewModel
+    public class CtaButtonWidgetViewModel
     {
         /// <summary>
         /// Text of the button.

@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System.Text.Json;
 using System.Xml.Serialization;
+
 using CMS.DataEngine;
 using CMS.OnlineForms;
 
@@ -15,6 +16,7 @@ namespace Kentico.Xperience.Zapier.Actions;
 
 [AuthorizeZapier]
 [ApiController]
+[Route("zapier")]
 public class ActionFormInsertController : ControllerBase
 {
     private readonly ILogger<ActionFormInsertController> logger;
@@ -29,7 +31,7 @@ public class ActionFormInsertController : ControllerBase
     }
 
 
-    [HttpPost("zapier/actions/biz-form/{classname}")]
+    [HttpPost("actions/biz-form/{classname}")]
     public ActionResult<FormInsertActionResponse> InsertFormRecord(
         string classname,
         [FromBody] IDictionary<string, JsonElement> values)
@@ -121,7 +123,7 @@ public class ActionFormInsertController : ControllerBase
     }
 
 
-    [HttpGet("zapier/actions/biz-form/{classname}")]
+    [HttpGet("actions/biz-form/{classname}")]
     public IActionResult GetFormFields(string classname)
     {
         var allowedObjects = zapierConfiguration.AllowedObjects.ToList();

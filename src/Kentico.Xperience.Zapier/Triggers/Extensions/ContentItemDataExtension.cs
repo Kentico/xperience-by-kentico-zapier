@@ -12,10 +12,10 @@ internal static class ContentItemDataExtension
     public static readonly List<string> ForbiddenCols = ["ContentItemDataID", "ContentItemDataCommonDataID", "ContentItemDataGUID"];
 
 
-    public static Dictionary<string, object> GetDataForZapier(this ContentItemData contentItemData, string contentTypeName) => GetData(contentItemData.TryGetValue<object>, contentTypeName);
+    public static Dictionary<string, object> GetDataForZapier(this ContentItemData contentItemData, string contentTypeName) => GetData(contentItemData.TryGetValue, contentTypeName);
 
 
-    public static Dictionary<string, object> GetDataForZapier(this ContentItemDataEventContainer contentItemDataContainer, string contentTypeName) => GetData(contentItemDataContainer.TryGetValue<object>, contentTypeName);
+    public static Dictionary<string, object> GetDataForZapier(this ContentItemDataEventContainer contentItemDataContainer, string contentTypeName) => GetData(contentItemDataContainer.TryGetValue, contentTypeName);
 
 
     private static Dictionary<string, object> GetData(TryGetValue<string, object> tryGetMethod, string contentTypeName)

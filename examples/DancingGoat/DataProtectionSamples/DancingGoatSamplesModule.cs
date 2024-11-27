@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using CMS;
+﻿using CMS;
 using CMS.Activities;
 using CMS.Base;
 using CMS.ContactManagement;
@@ -107,7 +104,7 @@ namespace Samples.DancingGoat
                 accountContactInfoProvider, accountInfoProvider, bizFormInfoProvider));
             PersonalDataCollectorRegister.Instance.Add(new SampleMemberDataCollector());
 
-            PersonalDataEraserRegister.Instance.Add(new SampleContactPersonalDataEraser(consentAgreementInfoProvider, bizFormInfoProvider, accountContactInfoProvider, contactInfoProvider));
+            PersonalDataEraserRegister.Instance.Add(new SampleContactPersonalDataEraser(consentAgreementInfoProvider, bizFormInfoProvider, accountContactInfoProvider, contactInfoProvider, activityInfoProvider));
             PersonalDataEraserRegister.Instance.Add(new SampleMemberPersonalDataEraser(memberInfoProvider));
 
             RegisterConsentRevokeHandler();
@@ -121,33 +118,30 @@ namespace Samples.DancingGoat
                 { "deleteActivities", true }
             };
 
-            new SampleContactPersonalDataEraser(consentAgreementInfoProvider, bizFormInfoProvider, accountContactInfoProvider, contactInfoProvider)
+            new SampleContactPersonalDataEraser(consentAgreementInfoProvider, bizFormInfoProvider, accountContactInfoProvider, contactInfoProvider, activityInfoProvider)
                     .Erase(new[] { contact }, configuration);
         }
 
 
-        private void RegisterConsentRevokeHandler()
-        {
-            DataProtectionEvents.RevokeConsentAgreement.Execute += (sender, args) =>
-            {
-                if (args.Consent.ConsentName.Equals(TrackingConsentGenerator.CONSENT_NAME, StringComparison.Ordinal))
-                {
-                    DeleteContactActivities(args.Contact);
+        private void RegisterConsentRevokeHandler() => DataProtectionEvents.RevokeConsentAgreement.Execute += (sender, args) =>
+                                                                {
+                                                                    if (args.Consent.ConsentName.Equals(TrackingConsentGenerator.CONSENT_NAME, StringComparison.Ordinal))
+                                                                    {
+                                                                        DeleteContactActivities(args.Contact);
 
-                    // Remove cookies used for contact tracking
-                    var cookieAccessor = Service.Resolve<ICookieAccessor>();
+                                                                        // Remove cookies used for contact tracking
+                                                                        var cookieAccessor = Service.Resolve<ICookieAccessor>();
 
 #pragma warning disable CS0618 // CookieName is obsolete
-                    cookieAccessor.Remove(CookieName.CurrentContact);
-                    cookieAccessor.Remove(CookieName.CrossSiteContact);
+                                                                        cookieAccessor.Remove(CookieName.CurrentContact);
+                                                                        cookieAccessor.Remove(CookieName.CrossSiteContact);
 #pragma warning restore CS0618 // CookieName is obsolete
 
 
-                    // Set the cookie level to default
-                    var cookieLevelProvider = Service.Resolve<ICurrentCookieLevelProvider>();
-                    cookieLevelProvider.SetCurrentCookieLevel(cookieLevelProvider.GetDefaultCookieLevel());
-                }
-            };
-        }
+                                                                        // Set the cookie level to default
+                                                                        var cookieLevelProvider = Service.Resolve<ICurrentCookieLevelProvider>();
+                                                                        cookieLevelProvider.SetCurrentCookieLevel(cookieLevelProvider.GetDefaultCookieLevel());
+                                                                    }
+                                                                };
     }
 }

@@ -29,10 +29,10 @@ public partial class ZapierTriggerEventLogTypeInfo : AbstractInfo<ZapierTriggerE
     public static readonly ObjectTypeInfo TYPEINFO = new(typeof(IInfoProvider<ZapierTriggerEventLogTypeInfo>), OBJECT_TYPE, "KenticoZapier.ZapierTriggerEventLogType", nameof(ZapierTriggerEventLogTypeID), null, null, null, null, null, null, null)
     {
         TouchCacheDependencies = true,
-        DependsOn = new List<ObjectDependency>()
-        {
+        DependsOn =
+        [
             new("ZapierTriggerEventLogTypeZapierTriggerID", "kenticozapier.zapiertrigger", ObjectDependencyEnum.Required),
-        },
+        ],
     };
 
 

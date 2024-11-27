@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-using CMS.Helpers;
+﻿using CMS.Helpers;
 using CMS.Websites;
 using CMS.Websites.Routing;
 
@@ -63,8 +57,8 @@ namespace DancingGoat.ViewComponents
                                 navigationItem.NavigationItemName,
                                 urls[navigationItem.NavigationItemLink.First().WebPageGuid].RelativePath
                             ));
-
-                if (cacheSettings.Cached = navigationModels != null && navigationModels.Any())
+                cacheSettings.Cached = navigationModels != null && navigationModels.Any();
+                if (cacheSettings.Cached)
                 {
                     var cacheKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using CMS.ContentEngine;
+﻿using CMS.ContentEngine;
 
 using DancingGoat.Models;
 
@@ -18,6 +16,6 @@ namespace DancingGoat.Widgets
         /// Selected products.
         /// </summary>
         [ContentItemSelectorComponent(Coffee.CONTENT_TYPE_NAME, Label = "Selected products", Order = 1)]
-        public IEnumerable<ContentItemReference> SelectedProducts { get; set; } = new List<ContentItemReference>();
+        public IEnumerable<ContentItemReference> SelectedProducts { get; set; } = [];
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using CMS.Activities;
+﻿using CMS.Activities;
 using CMS.ContactManagement;
 using CMS.DataEngine;
 using CMS.DataProtection;
@@ -27,7 +23,7 @@ namespace Samples.DancingGoat
         /// <remarks>
         /// GUIDs are used to select only specific forms on the Dancing Goat sample sites.
         /// </remarks>
-        private readonly Dictionary<Guid, string> dancingGoatForms = new Dictionary<Guid, string>
+        private readonly Dictionary<Guid, string> dancingGoatForms = new()
         {
             // DancingGoatCoreContactUsNew
             { new Guid("0081DC2E-47F4-4ACD-80AE-FE39612F379C"), "UserEmail" },
@@ -39,6 +35,7 @@ namespace Samples.DancingGoat
         private readonly IInfoProvider<BizFormInfo> bizFormInfoProvider;
         private readonly IInfoProvider<AccountContactInfo> accountContactInfoProvider;
         private readonly IInfoProvider<ContactInfo> contactInfoProvider;
+        private readonly IInfoProvider<ActivityInfo> activityInfoProvider;
 
 
         /// <summary>
@@ -48,16 +45,19 @@ namespace Samples.DancingGoat
         /// <param name="bizFormInfoProvider">BizForm info provider.</param>
         /// <param name="accountContactInfoProvider">Account contact info provider.</param>
         /// <param name="contactInfoProvider">Contact info provider.</param>
+        /// <param name="activityInfoProvider">Activity info provider.</param>
         public SampleContactPersonalDataEraser(
             IInfoProvider<ConsentAgreementInfo> consentAgreementInfoProvider,
             IInfoProvider<BizFormInfo> bizFormInfoProvider,
             IInfoProvider<AccountContactInfo> accountContactInfoProvider,
-            IInfoProvider<ContactInfo> contactInfoProvider)
+            IInfoProvider<ContactInfo> contactInfoProvider,
+            IInfoProvider<ActivityInfo> activityInfoProvider)
         {
             this.consentAgreementInfoProvider = consentAgreementInfoProvider;
             this.bizFormInfoProvider = bizFormInfoProvider;
             this.accountContactInfoProvider = accountContactInfoProvider;
             this.contactInfoProvider = contactInfoProvider;
+            this.activityInfoProvider = activityInfoProvider;
         }
 
 
@@ -119,7 +119,7 @@ namespace Samples.DancingGoat
             if (configuration.TryGetValue("DeleteSubmittedFormsActivities", out object deleteSubmittedFormsActivities)
                 && ValidationHelper.GetBoolean(deleteSubmittedFormsActivities, false))
             {
-                ActivityInfoProvider.ProviderObject.BulkDelete(new WhereCondition().WhereEquals("ActivityType", PredefinedActivityType.BIZFORM_SUBMIT)
+                activityInfoProvider.BulkDelete(new WhereCondition().WhereEquals("ActivityType", PredefinedActivityType.BIZFORM_SUBMIT)
                                                                                    .WhereIn("ActivityContactID", contactIds));
             }
         }
@@ -173,7 +173,7 @@ namespace Samples.DancingGoat
             if (configuration.TryGetValue("deleteActivities", out object deleteActivities)
                 && ValidationHelper.GetBoolean(deleteActivities, false))
             {
-                ActivityInfoProvider.ProviderObject.BulkDelete(new WhereCondition().WhereIn("ActivityContactID", contactIds));
+                activityInfoProvider.BulkDelete(new WhereCondition().WhereIn("ActivityContactID", contactIds));
             }
         }
 

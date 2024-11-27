@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-using CMS.ContactManagement;
+﻿using CMS.ContactManagement;
 using CMS.DataEngine;
 using CMS.DataProtection;
 using CMS.Websites;
@@ -45,11 +43,11 @@ namespace DancingGoat.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var consent = consentInfoProvider.Get(TrackingConsentGenerator.CONSENT_NAME);
+            var consent = await consentInfoProvider.GetAsync(TrackingConsentGenerator.CONSENT_NAME);
 
             if (consent != null)
             {
-                var currentLanguage = currentLanguageRetriever.Get();
+                string currentLanguage = currentLanguageRetriever.Get();
                 var consentModel = new ConsentViewModel
                 {
                     ConsentShortText = (await consent.GetConsentTextAsync(currentLanguage)).ShortText,

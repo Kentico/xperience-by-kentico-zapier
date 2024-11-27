@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-using CMS.ContentEngine;
+﻿using CMS.ContentEngine;
 using CMS.Helpers;
 using CMS.Websites;
 using CMS.Websites.Routing;
@@ -31,7 +25,7 @@ namespace DancingGoat.Models
         /// <param name="executor">Content query executor.</param>
         /// <param name="mapper">Mapper to provide mapping from data container to model.</param>
         /// <param name="cache">Cache.</param>
-        public ContentRepositoryBase(IWebsiteChannelContext websiteChannelContext, IContentQueryExecutor executor, IWebPageQueryResultMapper mapper, IProgressiveCache cache)
+        protected ContentRepositoryBase(IWebsiteChannelContext websiteChannelContext, IContentQueryExecutor executor, IWebPageQueryResultMapper mapper, IProgressiveCache cache)
         {
             WebsiteChannelContext = websiteChannelContext;
             this.executor = executor;
@@ -74,10 +68,7 @@ namespace DancingGoat.Models
                 throw new ArgumentNullException(nameof(cacheDependenciesFunc));
             }
 
-            if (queryOptions == null)
-            {
-                queryOptions = new ContentQueryExecutionOptions();
-            }
+            queryOptions ??= new ContentQueryExecutionOptions();
 
             return GetCachedQueryResultInternal(queryBuilder, queryOptions, container => mapper.Map<T>(container), cacheSettings, cacheDependenciesFunc, cancellationToken);
         }
@@ -119,10 +110,7 @@ namespace DancingGoat.Models
                 throw new ArgumentNullException(nameof(cacheDependenciesFunc));
             }
 
-            if (queryOptions == null)
-            {
-                queryOptions = new ContentQueryExecutionOptions();
-            }
+            queryOptions ??= new ContentQueryExecutionOptions();
 
             return GetCachedQueryResultInternal(queryBuilder, queryOptions, resultSelector, cacheSettings, cacheDependenciesFunc, cancellationToken);
         }
@@ -147,8 +135,8 @@ namespace DancingGoat.Models
             return await cache.LoadAsync(async (cacheSettings) =>
             {
                 var result = await executor.GetWebPageResult(queryBuilder, resultSelector, options: queryOptions, cancellationToken: cancellationToken);
-
-                if (cacheSettings.Cached = (result != null && result.Any()))
+                cacheSettings.Cached = result != null && result.Any();
+                if (cacheSettings.Cached)
                 {
                     cacheSettings.CacheDependency = CacheHelper.GetCacheDependency(await cacheDependenciesFunc(result, cancellationToken));
                 }

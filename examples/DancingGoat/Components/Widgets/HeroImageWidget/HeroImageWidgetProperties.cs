@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using CMS.ContentEngine;
+﻿using CMS.ContentEngine;
 
 using Kentico.Forms.Web.Mvc;
 using Kentico.PageBuilder.Web.Mvc;
@@ -17,7 +15,7 @@ namespace DancingGoat.Widgets
         /// Background image.
         /// </summary>
         [ContentItemSelectorComponent(Models.Image.CONTENT_TYPE_NAME, Label = "Background image", Order = 1)]
-        public IEnumerable<ContentItemReference> Image { get; set; } = new List<ContentItemReference>();
+        public IEnumerable<ContentItemReference> Image { get; set; } = [];
 
 
         /// <summary>

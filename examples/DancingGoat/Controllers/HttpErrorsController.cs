@@ -6,6 +6,10 @@ namespace DancingGoat.Controllers
     {
         public IActionResult Error(int code)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             if (code == 404)
             {
                 return View("NotFound");

@@ -1,7 +1,7 @@
 ﻿@using DancingGoat.InlineEditors
 @using DancingGoat.Widgets
 
-@model ComponentViewModel<CTAButtonWidgetProperties>
+@model ComponentViewModel<CtaButtonWidgetProperties>
 
 <div class="clear center-text">
     @if (Context.Kentico().PageBuilder().EditMode)
@@ -10,7 +10,7 @@
             <partial name="~/Components/InlineEditors/TextEditor/_TextEditor.cshtml"
                      model="new TextEditorViewModel
                         {
-                            PropertyName = nameof(CTAButtonWidgetProperties.Text),
+                            PropertyName = nameof(CtaButtonWidgetProperties.Text),
                             Text = Model.Properties.Text,
                         }" />
         </div>

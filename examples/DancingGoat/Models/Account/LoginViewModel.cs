@@ -18,6 +18,6 @@ namespace DancingGoat.Models
 
 
         [DisplayName("Stay signed in")]
-        public bool StaySignedIn { get; set; }
+        public bool? StaySignedIn { get; set; }
     }
 }

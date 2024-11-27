@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-using CMS.ContactManagement;
+﻿using CMS.ContactManagement;
 using CMS.DataEngine;
 using CMS.DataProtection;
 
@@ -10,7 +7,6 @@ using DancingGoat.Controllers;
 using DancingGoat.Helpers.Generator;
 using DancingGoat.Models;
 
-using Kentico.Content.Web.Mvc;
 using Kentico.Content.Web.Mvc.Routing;
 
 using Microsoft.AspNetCore.Mvc;
@@ -34,10 +30,7 @@ namespace DancingGoat.Controllers
         {
             get
             {
-                if (currentContact == null)
-                {
-                    currentContact = ContactManagementContext.CurrentContact;
-                }
+                currentContact ??= ContactManagementContext.CurrentContact;
 
                 return currentContact;
             }
@@ -95,21 +88,15 @@ namespace DancingGoat.Controllers
         }
 
 
-        private IEnumerable<PrivacyConsentViewModel> GetAgreedConsentsForCurrentContact()
-        {
-            return consentAgreementService.GetAgreedConsents(CurrentContact)
+        private IEnumerable<PrivacyConsentViewModel> GetAgreedConsentsForCurrentContact() => consentAgreementService.GetAgreedConsents(CurrentContact)
                 .Select(consent => new PrivacyConsentViewModel
                 {
                     Name = consent.Name,
                     Title = consent.DisplayName,
                     Text = consent.GetConsentText(currentLanguageRetriever.Get()).ShortText
                 });
-        }
 
 
-        private bool IsDemoEnabled()
-        {
-            return consentInfoProvider.Get(TrackingConsentGenerator.CONSENT_NAME) != null;
-        }
+        private bool IsDemoEnabled() => consentInfoProvider.Get(TrackingConsentGenerator.CONSENT_NAME) != null;
     }
 }

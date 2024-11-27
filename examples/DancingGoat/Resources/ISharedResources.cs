@@ -1,6 +1,6 @@
 ﻿namespace DancingGoat
 {
-    public class SharedResources
+    public interface ISharedResources
     {
     }
 }

@@ -17,16 +17,10 @@ namespace DancingGoat.Helpers.Generator
         /// Initializes a new instance of the <see cref="FormContactGroupGenerator"/> class.
         /// </summary>
         /// <param name="contactGroupInfoProvider">Contact group info provider.</param>
-        public FormContactGroupGenerator(IInfoProvider<ContactGroupInfo> contactGroupInfoProvider)
-        {
-            this.contactGroupInfoProvider = contactGroupInfoProvider;
-        }
+        public FormContactGroupGenerator(IInfoProvider<ContactGroupInfo> contactGroupInfoProvider) => this.contactGroupInfoProvider = contactGroupInfoProvider;
 
 
-        public void Generate()
-        {
-            CreateContactGroupWithFormConsentAgreementRule();
-        }
+        public void Generate() => CreateContactGroupWithFormConsentAgreementRule();
 
 
         private void CreateContactGroupWithFormConsentAgreementRule()
@@ -48,9 +42,9 @@ namespace DancingGoat.Helpers.Generator
         }
 
 
-        private string GetFormConsentMacroRule()
+        private static string GetFormConsentMacroRule()
         {
-            var rule = $@"{{%Rule(""(Contact.AgreedWithConsent(""{FormConsentGenerator.CONSENT_NAME}""))"", "" <rules><r pos =\""0\"" par=\""\"" op=\""and\"" n=\""CMSContactHasAgreedWithConsent\"" >
+            string rule = $@"{{%Rule(""(Contact.AgreedWithConsent(""{FormConsentGenerator.CONSENT_NAME}""))"", "" <rules><r pos =\""0\"" par=\""\"" op=\""and\"" n=\""CMSContactHasAgreedWithConsent\"" >
                         <p n=\""consent\""><t>{FormConsentGenerator.CONSENT_DISPLAY_NAME}</t><v>{FormConsentGenerator.CONSENT_NAME}</v><r>0</r><d>select consent</d><vt>text</vt><tv>0</tv></p>
                         <p n=\""_perfectum\""><t>has</t><v></v><r>0</r><d>select operation</d><vt>text</vt><tv>0</tv></p></r></rules>"")%}}";
 

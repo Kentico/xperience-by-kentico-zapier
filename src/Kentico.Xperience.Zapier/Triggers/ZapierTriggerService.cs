@@ -215,7 +215,7 @@ internal class ZapierTriggerService : IZapierTriggerService
     }
 
 
-    private object GetDefaultValue(Type t)
+    private static object GetDefaultValue(Type t)
     {
         if (t.IsValueType)
         {
@@ -238,7 +238,7 @@ internal class ZapierTriggerService : IZapierTriggerService
     }
 
 
-    private Dictionary<string, object>? GetDataFromInfoObject(string objectType)
+    private static Dictionary<string, object>? GetDataFromInfoObject(string objectType)
     {
         var generalizedInfo = (GeneralizedInfo)ModuleManager.GetObject(objectType);
         var type = ObjectTypeManager.GetTypeInfo(objectType);
@@ -265,7 +265,7 @@ internal class ZapierTriggerService : IZapierTriggerService
     }
 
 
-    private Dictionary<string, object>? GetDataFromForm(string objectType)
+    private static Dictionary<string, object>? GetDataFromForm(string objectType)
     {
         var formData = BizFormItemProvider.GetItems(objectType).TopN(1).GetEnumerableTypedResult();
 
