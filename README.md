@@ -20,6 +20,7 @@ This version supports content workflows added in version 28.3.0. Please ensure t
 
 | Xperience Version | Library Version |
 | ----------------- | --------------- |
+| >= 29.7.*         | >= 2.2.0        |
 | >= 29.5.*         | >= 2.1.0        |
 | >= 29.3.*         | >= 2.0.0        |
 | >= 29.0.*         | 1.0.0           |
