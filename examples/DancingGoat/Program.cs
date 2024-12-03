@@ -1,5 +1,4 @@
-using System;
-using System.Threading.Tasks;
+﻿using CMS.Base;
 
 using DancingGoat;
 using DancingGoat.Models;
@@ -10,17 +9,14 @@ using Kentico.Membership;
 using Kentico.OnlineMarketing.Web.Mvc;
 using Kentico.PageBuilder.Web.Mvc;
 using Kentico.Web.Mvc;
+using Kentico.Xperience.Zapier;
 
-
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.DependencyInjection;
-using Kentico.Xperience.Zapier;
+
+using Samples.DancingGoat;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,16 +47,20 @@ builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true
 builder.Services.AddLocalization()
     .AddControllersWithViews()
     .AddViewLocalization()
-    .AddDataAnnotationsLocalization(options =>
-    {
-        options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(SharedResources));
-    });
+    .AddDataAnnotationsLocalization(options => options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(SharedResources)));
 
 builder.Services.AddDancingGoatServices();
 
 builder.Services.AddKenticoZapier();
 
+builder.Services.AddSingleton<IEmailActivityTrackingEvaluator, EmailActivityTrackingEvaluator>();
+
 ConfigureMembershipServices(builder.Services);
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.Configure<UrlResolveOptions>(options => options.UseSSL = false);
+}
 
 var app = builder.Build();
 
@@ -135,13 +135,17 @@ static void ConfigureMembershipServices(IServiceCollection services)
         {
             var factory = ctx.HttpContext.RequestServices.GetRequiredService<IUrlHelperFactory>();
             var urlHelper = factory.GetUrlHelper(new ActionContext(ctx.HttpContext, new RouteData(ctx.HttpContext.Request.RouteValues), new ActionDescriptor()));
-            var url = urlHelper.Action("Login", "Account") + new Uri(ctx.RedirectUri).Query;
+            string url = urlHelper.Action("Login", "Account") + new Uri(ctx.RedirectUri).Query;
 
             ctx.Response.Redirect(url);
 
             return Task.CompletedTask;
         };
     });
+
+    services.Configure<AdminIdentityOptions>(options =>
+        // The expiration time span of 8 hours is set for demo purposes only. In production environment, set expiration according to best practices.
+        options.AuthenticationOptions.ExpireTimeSpan = TimeSpan.FromHours(8));
 
     services.AddAuthorization();
 }

@@ -1,7 +1,4 @@
-using System.Linq;
-using System.Threading.Tasks;
-
-using DancingGoat.Models;
+﻿using DancingGoat.Models;
 using DancingGoat.Widgets;
 
 using Kentico.Content.Web.Mvc.Routing;
@@ -43,7 +40,7 @@ namespace DancingGoat.Widgets
 
         public async Task<ViewViewComponentResult> InvokeAsync(CardWidgetProperties properties)
         {
-            var languageName = currentLanguageRetriever.Get();
+            string languageName = currentLanguageRetriever.Get();
             var image = await GetImage(properties, languageName);
 
             return View("~/Components/Widgets/CardWidget/_CardWidget.cshtml", new CardWidgetViewModel
