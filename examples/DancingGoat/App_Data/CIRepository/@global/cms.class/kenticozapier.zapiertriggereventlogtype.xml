@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cms.class>
+  <ClassDisplayName>Zapier trigger event log severity</ClassDisplayName>
+  <ClassFormDefinition>
+    <form>
+      <field column="ZapierTriggerEventLogTypeID" columntype="integer" enabled="true" guid="92287f9e-b4fa-43ff-88ca-e3322ced637c" isPK="true" />
+      <field column="ZapierTriggerEventLogTypeZapierTriggerID" columntype="integer" enabled="true" guid="7df2957c-3307-4744-a8be-fed8c24c36cd" />
+      <field column="ZapierTriggerEventLogTypeType" columntype="text" enabled="true" guid="d09371b7-aac7-486e-a7d7-c6bcd2dd160d" />
+    </form>
+  </ClassFormDefinition>
+  <ClassGUID>dc5dec22-16d4-4a35-bef5-c0a086752a5d</ClassGUID>
+  <ClassHasUnmanagedDbSchema>False</ClassHasUnmanagedDbSchema>
+  <ClassName>KenticoZapier.ZapierTriggerEventLogType</ClassName>
+  <ClassResourceID>
+    <CodeName>CMS.Integration.Zapier</CodeName>
+    <GUID>ed8884b4-0dc7-46ff-afc6-73bb7db14d7c</GUID>
+    <ObjectType>cms.resource</ObjectType>
+  </ClassResourceID>
+  <ClassTableName>KenticoZapier_ZapierTriggerEventLogType</ClassTableName>
+  <ClassType>Other</ClassType>
+</cms.class>

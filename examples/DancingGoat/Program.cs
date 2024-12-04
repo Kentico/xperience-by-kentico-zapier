@@ -55,6 +55,8 @@ builder.Services.AddKenticoZapier();
 
 builder.Services.AddSingleton<IEmailActivityTrackingEvaluator, EmailActivityTrackingEvaluator>();
 
+builder.Services.AddHealthChecks();
+
 ConfigureMembershipServices(builder.Services);
 
 if (builder.Environment.IsDevelopment())
@@ -86,6 +88,8 @@ app.MapControllerRoute(
    pattern: "error/{code}",
    defaults: new { controller = "HttpErrors", action = "Error" }
 );
+
+app.MapHealthChecks("/status");
 
 app.MapControllerRoute(
     name: DancingGoatConstants.DEFAULT_ROUTE_NAME,

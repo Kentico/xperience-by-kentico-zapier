@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentitemdata.dancinggoat.grinderpage>
+  <ContentItemDataCommonDataID>
+    <GUID>93cab846-e72a-4f62-80cf-91917b49f1e4</GUID>
+    <ObjectType>cms.contentitemcommondata</ObjectType>
+    <Parent>
+      <CodeName>HarioSkertonHandGrinder-diiowbwz</CodeName>
+      <GUID>cd6a21e4-2006-493d-bf8c-1637bcf0a610</GUID>
+      <ObjectType>cms.contentitem</ObjectType>
+    </Parent>
+  </ContentItemDataCommonDataID>
+  <ContentItemDataGUID>215935e0-48c4-4edc-9acc-635c6ce7d75a</ContentItemDataGUID>
+  <RelatedItem>
+    <![CDATA[[{"Identifier":"b38c7c0b-5b44-4980-a323-7ecb6ba25c93"}]]]>
+  </RelatedItem>
+</contentitemdata.dancinggoat.grinderpage>

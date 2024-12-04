@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cms.resource>
+  <ResourceDescription>
+    <![CDATA[The module integrates Zapier functionality for streamlined automation.]]>
+  </ResourceDescription>
+  <ResourceDisplayName>Kentico Integration - Zapier</ResourceDisplayName>
+  <ResourceGUID>ed8884b4-0dc7-46ff-afc6-73bb7db14d7c</ResourceGUID>
+  <ResourceIsInDevelopment>False</ResourceIsInDevelopment>
+  <ResourceName>CMS.Integration.Zapier</ResourceName>
+</cms.resource>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentitemdata.dancinggoat.coffeepage>
+  <ContentItemDataCommonDataID>
+    <GUID>b84f95db-34f5-44c5-81e0-3284d3d133e8</GUID>
+    <ObjectType>cms.contentitemcommondata</ObjectType>
+    <Parent>
+      <CodeName>ElSalvadorFincaSanJose-ttfjisz3</CodeName>
+      <GUID>283f6888-603d-4e21-aeee-86da21efc6d4</GUID>
+      <ObjectType>cms.contentitem</ObjectType>
+    </Parent>
+  </ContentItemDataCommonDataID>
+  <ContentItemDataGUID>5b91c320-df44-4731-8c36-5a495c4078ea</ContentItemDataGUID>
+  <RelatedItem>
+    <![CDATA[[{"Identifier":"818df78b-353d-4863-8e9d-287040051249"}]]]>
+  </RelatedItem>
+</contentitemdata.dancinggoat.coffeepage>

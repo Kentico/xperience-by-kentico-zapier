@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cms.contenttype>
+  <ClassContentTypeType>Website</ClassContentTypeType>
+  <ClassDisplayName>Grinder page</ClassDisplayName>
+  <ClassFormDefinition>
+    <form>
+      <field column="ContentItemDataID" columntype="integer" enabled="true" guid="1bff0e95-dee4-4ff5-a578-dcf09c938ff9" isPK="true" />
+      <field column="ContentItemDataCommonDataID" columntype="integer" enabled="true" guid="56855908-5e49-40e8-b952-8f7c3ecc88ba" refobjtype="cms.contentitemcommondata" reftype="Required" system="true" />
+      <field column="ContentItemDataGUID" columntype="guid" enabled="true" guid="cdd34018-df99-44d2-9a35-e474efc7171f" isunique="true" system="true" />
+      <field allowempty="true" column="RelatedItem" columnprecision="0" columntype="contentitemreference" enabled="true" guid="5ccf1a1f-23b2-4ea2-a4f3-c8fbb5cb9df7" visible="true">
+        <properties>
+          <explanationtextashtml>False</explanationtextashtml>
+          <fieldcaption>Related Item</fieldcaption>
+          <fielddescriptionashtml>False</fielddescriptionashtml>
+        </properties>
+        <settings>
+          <AllowedContentItemTypeIdentifiers>
+            <![CDATA[["fa282f6c-4f05-435e-b520-720d1a5347d8"]]]>
+          </AllowedContentItemTypeIdentifiers>
+          <controlname>Kentico.Administration.ContentItemSelector</controlname>
+        </settings>
+      </field>
+    </form>
+  </ClassFormDefinition>
+  <ClassGUID>f073253e-564e-40a2-82b7-f487e26181ef</ClassGUID>
+  <ClassHasUnmanagedDbSchema>False</ClassHasUnmanagedDbSchema>
+  <ClassIconClass>xp-rotate-double-right</ClassIconClass>
+  <ClassName>DancingGoat.GrinderPage</ClassName>
+  <ClassShortName>DancingGoatGrinderPage</ClassShortName>
+  <ClassTableName>DancingGoat_GrinderPage</ClassTableName>
+  <ClassType>Content</ClassType>
+  <ClassWebPageHasUrl>True</ClassWebPageHasUrl>
+</cms.contenttype>

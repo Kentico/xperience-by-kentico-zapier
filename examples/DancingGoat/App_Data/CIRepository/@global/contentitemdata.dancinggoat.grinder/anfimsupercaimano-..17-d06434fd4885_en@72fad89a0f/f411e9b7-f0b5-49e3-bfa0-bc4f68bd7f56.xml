@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentitemdata.dancinggoat.grinder>
+  <ContentItemDataCommonDataID>
+    <GUID>906ba58b-f60b-4f0b-9417-d06434fd4885</GUID>
+    <ObjectType>cms.contentitemcommondata</ObjectType>
+    <Parent>
+      <CodeName>AnfimSuperCaimano-o6tkko7z</CodeName>
+      <GUID>1aaa937c-1423-4b69-947c-d1d5d1374a2e</GUID>
+      <ObjectType>cms.contentitem</ObjectType>
+    </Parent>
+  </ContentItemDataCommonDataID>
+  <ContentItemDataGUID>f411e9b7-f0b5-49e3-bfa0-bc4f68bd7f56</ContentItemDataGUID>
+  <GrinderManufacturer>
+    <![CDATA[[{"Identifier":"bb2f322a-e09b-40e9-a54d-4a00a11fbd21"}]]]>
+  </GrinderManufacturer>
+  <GrinderType>
+    <![CDATA[[{"Identifier":"9901b825-8e29-4d17-8cb1-47dc65679fd6"}]]]>
+  </GrinderType>
+</contentitemdata.dancinggoat.grinder>

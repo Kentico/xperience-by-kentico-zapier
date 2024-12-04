@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentitemdata.dancinggoat.grinder>
+  <ContentItemDataCommonDataID>
+    <GUID>833fc8f4-f3d0-46e3-a599-b0953dfd9e4c</GUID>
+    <ObjectType>cms.contentitemcommondata</ObjectType>
+    <Parent>
+      <CodeName>HarioSkertonHandGrinder-r7j1ce3i</CodeName>
+      <GUID>b38c7c0b-5b44-4980-a323-7ecb6ba25c93</GUID>
+      <ObjectType>cms.contentitem</ObjectType>
+    </Parent>
+  </ContentItemDataCommonDataID>
+  <ContentItemDataGUID>1be414b8-0e35-454c-821f-36c5f4a589dd</ContentItemDataGUID>
+  <GrinderManufacturer>
+    <![CDATA[[{"Identifier":"b8c50266-b496-4aaf-ab58-022be7c33366"}]]]>
+  </GrinderManufacturer>
+  <GrinderType>
+    <![CDATA[[{"Identifier":"edc520fe-7ad9-4c19-9e2a-ee2da56c41c4"}]]]>
+  </GrinderType>
+</contentitemdata.dancinggoat.grinder>

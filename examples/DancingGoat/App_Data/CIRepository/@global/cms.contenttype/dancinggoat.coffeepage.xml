@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cms.contenttype>
+  <ClassContentTypeType>Website</ClassContentTypeType>
+  <ClassDisplayName>Coffee page</ClassDisplayName>
+  <ClassFormDefinition>
+    <form>
+      <field column="ContentItemDataID" columntype="integer" enabled="true" guid="23fc0160-edcd-4c1d-86ec-0811b4441728" isPK="true" />
+      <field column="ContentItemDataCommonDataID" columntype="integer" enabled="true" guid="1812e810-ff08-4614-800e-99444c968849" refobjtype="cms.contentitemcommondata" reftype="Required" system="true" />
+      <field column="ContentItemDataGUID" columntype="guid" enabled="true" guid="a88d28e9-7b06-4e94-b2a5-dde2257cecbb" isunique="true" system="true" />
+      <field allowempty="true" column="RelatedItem" columnprecision="0" columntype="contentitemreference" enabled="true" guid="e9a5ee51-f80e-4005-8ecb-a9ab1d4a14e2" visible="true">
+        <properties>
+          <explanationtextashtml>False</explanationtextashtml>
+          <fieldcaption>Related Item</fieldcaption>
+          <fielddescriptionashtml>False</fielddescriptionashtml>
+        </properties>
+        <settings>
+          <AllowedContentItemTypeIdentifiers>
+            <![CDATA[["7f74020d-0a9e-46fd-bfcc-50b893e94452"]]]>
+          </AllowedContentItemTypeIdentifiers>
+          <controlname>Kentico.Administration.ContentItemSelector</controlname>
+        </settings>
+      </field>
+    </form>
+  </ClassFormDefinition>
+  <ClassGUID>b6830451-87c5-432c-afd3-013d9362abe4</ClassGUID>
+  <ClassHasUnmanagedDbSchema>False</ClassHasUnmanagedDbSchema>
+  <ClassIconClass>xp-cup</ClassIconClass>
+  <ClassName>DancingGoat.CoffeePage</ClassName>
+  <ClassShortName>DancingGoatCoffeePage</ClassShortName>
+  <ClassTableName>DancingGoat_CoffeePage</ClassTableName>
+  <ClassType>Content</ClassType>
+  <ClassWebPageHasUrl>True</ClassWebPageHasUrl>
+</cms.contenttype>
