@@ -1,9 +1,12 @@
 ﻿using CMS.ContentEngine;
+using CMS.ContentEngine.Internal;
 using CMS.ContentWorkflowEngine;
 using CMS.Core;
 using CMS.DataEngine;
 
 using Kentico.Integration.Zapier;
+using Kentico.Xperience.Admin.Base.UIPages;
+using Kentico.Xperience.Zapier.Helpers;
 using Kentico.Xperience.Zapier.Triggers.Handlers.Abstractions;
 
 using Microsoft.AspNetCore.Http;
@@ -13,13 +16,20 @@ namespace Kentico.Xperience.Zapier.Triggers.Handlers;
 internal class WorkflowReusableHandler : ZapierWorkflowHandler
 {
     private readonly IInfoProvider<ContentLanguageInfo> contentLanguageProvider;
+    private readonly IInfoProvider<ContentItemInfo> contentInfoProvider;
+
     public WorkflowReusableHandler(ZapierTriggerInfo zapierTrigger,
         IEventLogService? eventLogService,
         HttpClient client,
         IHttpContextAccessor httpContextAccessor,
-        IInfoProvider<ContentLanguageInfo> contentLanguageProvider)
-        : base(zapierTrigger, eventLogService, client, httpContextAccessor) =>
+        IInfoProvider<ContentLanguageInfo> contentLanguageProvider,
+        IInfoProvider<ContentItemInfo> contentInfoProvider,
+        IAdminLinkService adminLinkService)
+        : base(zapierTrigger, eventLogService, client, httpContextAccessor, adminLinkService)
+    {
         this.contentLanguageProvider = contentLanguageProvider;
+        this.contentInfoProvider = contentInfoProvider;
+    }
 
 
     public override bool RegistrationProcessor(bool register = true)
@@ -52,12 +62,15 @@ internal class WorkflowReusableHandler : ZapierWorkflowHandler
 
         var data = e.GetZapierWorkflowPostObject();
 
+        var contentItemInfo = contentInfoProvider.Get(e.ID);
         var info = contentLanguageProvider.Get(e.ContentLanguageID);
 
-        var websiteUri = GetHostDomain();
-        var adminUrl = new Uri(websiteUri, $"/admin/content-hub/{info.ContentLanguageName}/list/{e.ID}");
+        var pageParams = AdminUrlHelper.GetReusableParams(e.ID, contentItemInfo.ContentItemContentFolderID,
+            info.ContentLanguageName);
 
-        data.TryAdd("AdminLink", adminUrl);
+        string adminLink = AdminLinkService.GenerateAdminLink<ContentItemEdit>(pageParams, GetHostDomain());
+
+        data.TryAdd("AdminLink", adminLink);
 
 
         if (ZapierTrigger != null)

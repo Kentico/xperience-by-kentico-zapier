@@ -30,7 +30,7 @@ public static class ZapierServiceCollectionExtensions
         services.AddSingleton<IZapierTriggerService, ZapierTriggerService>();
         services.AddSingleton<IZapierTokenManager, ZapierTokenManager>();
         services.AddSingleton<IZapierTriggerHandlerFactory, ZapierTriggerHandlerFactory>();
-
+        services.AddSingleton<IAdminLinkService, AdminLinkService>();
         services.AddSingleton<IWorkflowScopeService, WorkflowScopeService>();
 
         services.AddAuthentication()

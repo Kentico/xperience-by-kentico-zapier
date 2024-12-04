@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kentico.Xperience.Zapier.Resources; 
+namespace Kentico.Xperience.Zapier.Resources;
 using System;
 
 
@@ -22,94 +22,114 @@ using System;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
 [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
 [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-internal class Localization {
-    
+internal class Localization
+{
+
     private static global::System.Resources.ResourceManager resourceMan;
-    
+
     private static global::System.Globalization.CultureInfo resourceCulture;
-    
+
     [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-    internal Localization() {
+    internal Localization()
+    {
     }
-    
+
     /// <summary>
     ///   Returns the cached ResourceManager instance used by this class.
     /// </summary>
     [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-    internal static global::System.Resources.ResourceManager ResourceManager {
-        get {
-            if (object.ReferenceEquals(resourceMan, null)) {
+    internal static global::System.Resources.ResourceManager ResourceManager
+    {
+        get
+        {
+            if (object.ReferenceEquals(resourceMan, null))
+            {
                 global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kentico.Xperience.Zapier.Resources.Localization", typeof(Localization).Assembly);
                 resourceMan = temp;
             }
             return resourceMan;
         }
     }
-    
+
     /// <summary>
     ///   Overrides the current thread's CurrentUICulture property for all
     ///   resource lookups using this strongly typed resource class.
     /// </summary>
     [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-    internal static global::System.Globalization.CultureInfo Culture {
-        get {
+    internal static global::System.Globalization.CultureInfo Culture
+    {
+        get
+        {
             return resourceCulture;
         }
-        set {
+        set
+        {
             resourceCulture = value;
         }
     }
-    
+
     /// <summary>
-    ///   Looks up a localized string similar to Generate button will create a new API Key.If API Key already exists, this will override the existing one. Generating new key, can broke other connected zapier webhooks. Keep that in mind!.
+    ///   Looks up a localized string similar to Generate button will create a new API Key. If API Key already exists, this will override the existing one. Generating new key, can broke other connected zapier webhooks. Keep that in mind!.
     /// </summary>
-    internal static string apikey_callout {
-        get {
+    internal static string apikey_callout
+    {
+        get
+        {
             return ResourceManager.GetString("apikey.callout", resourceCulture);
         }
     }
-    
+
     /// <summary>
     ///   Looks up a localized string similar to Save your API Key (It will not be visible again): {0}.
     /// </summary>
-    internal static string apikey_savemessage {
-        get {
+    internal static string apikey_savemessage
+    {
+        get
+        {
             return ResourceManager.GetString("apikey.savemessage", resourceCulture);
         }
     }
-    
+
     /// <summary>
     ///   Looks up a localized string similar to You are Authenticated.
     /// </summary>
-    internal static string auth_successtext {
-        get {
+    internal static string auth_successtext
+    {
+        get
+        {
             return ResourceManager.GetString("auth.successtext", resourceCulture);
         }
     }
-    
+
     /// <summary>
     ///   Looks up a localized string similar to Save your API key now.
     /// </summary>
-    internal static string zapier_apikey_generate {
-        get {
+    internal static string zapier_apikey_generate
+    {
+        get
+        {
             return ResourceManager.GetString("zapier.apikey.generate", resourceCulture);
         }
     }
-    
+
     /// <summary>
     ///   Looks up a localized string similar to Copy the generated API key to a secure location before continuing. The key is not stored and you will &lt;b&gt;not be able to see it again&lt;/b&gt;..
     /// </summary>
-    internal static string zapier_apikey_generate_callout {
-        get {
+    internal static string zapier_apikey_generate_callout
+    {
+        get
+        {
             return ResourceManager.GetString("zapier.apikey.generate.callout", resourceCulture);
         }
     }
-    
+
     /// <summary>
     ///   Looks up a localized string similar to Continue.
     /// </summary>
-    internal static string zapier_apikey_generate_continue {
-        get {
+    internal static string zapier_apikey_generate_continue
+    {
+        get
+        {
             return ResourceManager.GetString("zapier.apikey.generate.continue", resourceCulture);
         }
     }
