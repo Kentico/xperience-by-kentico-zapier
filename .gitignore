@@ -142,3 +142,7 @@ segments_2i
 **/App_Data/Zapier/*
 /examples/DancingGoat/appsettings.Development.json
 /examples/DancingGoat/Properties/PublishProfiles/IISProfile.pubxml.user
+
+# Publishing profiles
+*.pubxml
+*.pubxml.user
