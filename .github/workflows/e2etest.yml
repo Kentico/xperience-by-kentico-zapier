@@ -3,6 +3,8 @@ name: "E2E: Build and Test"
 on:
   schedule:
     - cron: '0 10 * * 5'  # Runs every Friday at 10:00 UTC
+  push:
+    branches: [feat/automatic_E2E_testing]
 
 jobs:
   build_and_test:
