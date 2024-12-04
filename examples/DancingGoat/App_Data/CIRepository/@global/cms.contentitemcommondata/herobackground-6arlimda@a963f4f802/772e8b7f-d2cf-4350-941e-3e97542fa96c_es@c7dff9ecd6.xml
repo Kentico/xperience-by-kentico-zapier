@@ -10,8 +10,10 @@
     <GUID>fc939370-8f94-4fc9-8cc4-bfdef6ab748c</GUID>
     <ObjectType>cms.contentlanguage</ObjectType>
   </ContentItemCommonDataContentLanguageID>
+  <ContentItemCommonDataFirstPublishedWhen>2024-09-23 10:23:42Z</ContentItemCommonDataFirstPublishedWhen>
   <ContentItemCommonDataGUID>772e8b7f-d2cf-4350-941e-3e97542fa96c</ContentItemCommonDataGUID>
   <ContentItemCommonDataIsLatest>True</ContentItemCommonDataIsLatest>
+  <ContentItemCommonDataLastPublishedWhen>2024-09-23 10:23:42Z</ContentItemCommonDataLastPublishedWhen>
   <ContentItemCommonDataVersionStatus>2</ContentItemCommonDataVersionStatus>
   <ContentItemReferences>
     <cms.contentitemreference>

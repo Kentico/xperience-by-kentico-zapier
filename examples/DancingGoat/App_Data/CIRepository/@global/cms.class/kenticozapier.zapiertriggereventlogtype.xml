@@ -3,17 +3,17 @@
   <ClassDisplayName>Zapier trigger event log severity</ClassDisplayName>
   <ClassFormDefinition>
     <form>
-      <field column="ZapierTriggerEventLogTypeID" columntype="integer" enabled="true" guid="bf6c0a96-b7c2-47a2-a267-0192e2f7c105" isPK="true" />
-      <field column="ZapierTriggerEventLogTypeZapierTriggerID" columntype="integer" enabled="true" guid="80876587-5580-47c2-93f6-4d76ff2dcc0c" />
-      <field column="ZapierTriggerEventLogTypeType" columntype="text" enabled="true" guid="5fcd6754-0dee-4259-a618-edf89b25746b" />
+      <field column="ZapierTriggerEventLogTypeID" columntype="integer" enabled="true" guid="92287f9e-b4fa-43ff-88ca-e3322ced637c" isPK="true" />
+      <field column="ZapierTriggerEventLogTypeZapierTriggerID" columntype="integer" enabled="true" guid="7df2957c-3307-4744-a8be-fed8c24c36cd" />
+      <field column="ZapierTriggerEventLogTypeType" columntype="text" enabled="true" guid="d09371b7-aac7-486e-a7d7-c6bcd2dd160d" />
     </form>
   </ClassFormDefinition>
-  <ClassGUID>dfaaf2e3-2c4a-4b17-937a-1bc5fe640885</ClassGUID>
+  <ClassGUID>dc5dec22-16d4-4a35-bef5-c0a086752a5d</ClassGUID>
   <ClassHasUnmanagedDbSchema>False</ClassHasUnmanagedDbSchema>
   <ClassName>KenticoZapier.ZapierTriggerEventLogType</ClassName>
   <ClassResourceID>
     <CodeName>CMS.Integration.Zapier</CodeName>
-    <GUID>a8b5f76d-8def-451f-88ae-35814618ba34</GUID>
+    <GUID>ed8884b4-0dc7-46ff-afc6-73bb7db14d7c</GUID>
     <ObjectType>cms.resource</ObjectType>
   </ClassResourceID>
   <ClassTableName>KenticoZapier_ZapierTriggerEventLogType</ClassTableName>

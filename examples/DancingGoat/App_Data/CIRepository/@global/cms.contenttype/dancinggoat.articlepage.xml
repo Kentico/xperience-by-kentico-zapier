@@ -65,17 +65,18 @@
           <controlname>Kentico.Administration.RichTextEditor</controlname>
         </settings>
       </field>
-      <field allowempty="true" column="ArticleRelatedArticles" columnprecision="0" columntype="webpages" enabled="true" guid="81b67ad9-9b71-4558-9914-ac14cd9001fb" visible="true">
+      <field allowempty="true" column="ArticleRelatedPages" columnprecision="0" columntype="contentitemreference" enabled="true" guid="49eea67f-5a3a-4a0a-a4a4-42cf4e2117c0" visible="true">
         <properties>
           <explanationtextashtml>False</explanationtextashtml>
-          <fieldcaption>Related articles</fieldcaption>
+          <fieldcaption>Related Pages</fieldcaption>
           <fielddescriptionashtml>False</fielddescriptionashtml>
         </properties>
         <settings>
-          <controlname>Kentico.Administration.WebPageSelector</controlname>
-          <MaximumPages>4</MaximumPages>
-          <Sortable>True</Sortable>
-          <TreePath>/Articles</TreePath>
+          <AllowedContentItemTypeIdentifiers>
+            <![CDATA[["9b5e6c86-ebd1-4471-8f5d-dca72e39b12b","b6830451-87c5-432c-afd3-013d9362abe4"]]]>
+          </AllowedContentItemTypeIdentifiers>
+          <controlname>Kentico.Administration.ContentItemSelector</controlname>
+          <SelectionType>contentTypes</SelectionType>
         </settings>
       </field>
       <schema guid="7c7b596d-5b91-40a5-8ded-f2e4757d8e66" name="7c7b596d-5b91-40a5-8ded-f2e4757d8e66">
@@ -87,6 +88,7 @@
   <ClassHasUnmanagedDbSchema>False</ClassHasUnmanagedDbSchema>
   <ClassIconClass>xp-rectangle-paragraph</ClassIconClass>
   <ClassName>DancingGoat.ArticlePage</ClassName>
+  <ClassShortName>DancingGoatArticlePage</ClassShortName>
   <ClassTableName>DancingGoat_ArticlePage</ClassTableName>
   <ClassType>Content</ClassType>
   <ClassWebPageHasUrl>True</ClassWebPageHasUrl>

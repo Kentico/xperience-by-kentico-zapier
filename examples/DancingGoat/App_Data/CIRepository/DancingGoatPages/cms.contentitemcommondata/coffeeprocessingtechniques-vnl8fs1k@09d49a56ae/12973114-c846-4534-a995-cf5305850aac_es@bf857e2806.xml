@@ -12,7 +12,7 @@
   </ContentItemCommonDataContentLanguageID>
   <ContentItemCommonDataGUID>12973114-c846-4534-a995-cf5305850aac</ContentItemCommonDataGUID>
   <ContentItemCommonDataIsLatest>True</ContentItemCommonDataIsLatest>
-  <ContentItemCommonDataLastPublishedWhen>2024-03-07 15:03:20Z</ContentItemCommonDataLastPublishedWhen>
+  <ContentItemCommonDataLastPublishedWhen>2024-11-04 08:33:26Z</ContentItemCommonDataLastPublishedWhen>
   <ContentItemCommonDataPageTemplateConfiguration>
     <![CDATA[{"identifier":"DancingGoat.Article","properties":null,"fieldIdentifiers":null}]]>
   </ContentItemCommonDataPageTemplateConfiguration>
@@ -29,6 +29,45 @@
       <ContentItemReferenceTargetItemID>
         <CodeName>Articles_Article-5_2x.jpg-ui1p5uwa</CodeName>
         <GUID>e07114f8-dd0b-47ed-9cee-1d5c1404835a</GUID>
+        <ObjectType>cms.contentitem</ObjectType>
+      </ContentItemReferenceTargetItemID>
+    </cms.contentitemreference>
+    <cms.contentitemreference>
+      <ContentItemReferenceGroupGUID>49eea67f-5a3a-4a0a-a4a4-42cf4e2117c0</ContentItemReferenceGroupGUID>
+      <ContentItemReferenceGUID>718e1c00-730d-4bfa-82f6-33a9ef6aac19</ContentItemReferenceGUID>
+      <ContentItemReferenceSourceCommonDataID>
+        <GUID>12973114-c846-4534-a995-cf5305850aac</GUID>
+        <ObjectType>cms.contentitemcommondata</ObjectType>
+      </ContentItemReferenceSourceCommonDataID>
+      <ContentItemReferenceTargetItemID>
+        <CodeName>OnRoasts-nlx96ge6</CodeName>
+        <GUID>d5d28908-d403-4f6d-ab5a-d7758b43dbf2</GUID>
+        <ObjectType>cms.contentitem</ObjectType>
+      </ContentItemReferenceTargetItemID>
+    </cms.contentitemreference>
+    <cms.contentitemreference>
+      <ContentItemReferenceGroupGUID>49eea67f-5a3a-4a0a-a4a4-42cf4e2117c0</ContentItemReferenceGroupGUID>
+      <ContentItemReferenceGUID>d4e92763-4b7f-470d-8b80-e92c90affaa3</ContentItemReferenceGUID>
+      <ContentItemReferenceSourceCommonDataID>
+        <GUID>12973114-c846-4534-a995-cf5305850aac</GUID>
+        <ObjectType>cms.contentitemcommondata</ObjectType>
+      </ContentItemReferenceSourceCommonDataID>
+      <ContentItemReferenceTargetItemID>
+        <CodeName>WhichBrewingFitsYou-a6ildi6t</CodeName>
+        <GUID>b69db6f4-355b-4e5a-917b-541fba602213</GUID>
+        <ObjectType>cms.contentitem</ObjectType>
+      </ContentItemReferenceTargetItemID>
+    </cms.contentitemreference>
+    <cms.contentitemreference>
+      <ContentItemReferenceGroupGUID>49eea67f-5a3a-4a0a-a4a4-42cf4e2117c0</ContentItemReferenceGroupGUID>
+      <ContentItemReferenceGUID>3636487a-eac2-4de6-bf30-6502b38bf336</ContentItemReferenceGUID>
+      <ContentItemReferenceSourceCommonDataID>
+        <GUID>12973114-c846-4534-a995-cf5305850aac</GUID>
+        <ObjectType>cms.contentitemcommondata</ObjectType>
+      </ContentItemReferenceSourceCommonDataID>
+      <ContentItemReferenceTargetItemID>
+        <CodeName>ElSalvadorFincaSanJose-ttfjisz3</CodeName>
+        <GUID>283f6888-603d-4e21-aeee-86da21efc6d4</GUID>
         <ObjectType>cms.contentitem</ObjectType>
       </ContentItemReferenceTargetItemID>
     </cms.contentitemreference>

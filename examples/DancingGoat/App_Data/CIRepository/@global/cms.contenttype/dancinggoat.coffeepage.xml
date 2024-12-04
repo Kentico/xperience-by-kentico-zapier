@@ -26,6 +26,7 @@
   <ClassHasUnmanagedDbSchema>False</ClassHasUnmanagedDbSchema>
   <ClassIconClass>xp-cup</ClassIconClass>
   <ClassName>DancingGoat.CoffeePage</ClassName>
+  <ClassShortName>DancingGoatCoffeePage</ClassShortName>
   <ClassTableName>DancingGoat_CoffeePage</ClassTableName>
   <ClassType>Content</ClassType>
   <ClassWebPageHasUrl>True</ClassWebPageHasUrl>

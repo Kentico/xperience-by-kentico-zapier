@@ -11,6 +11,9 @@
   <CafePhoto>
     <![CDATA[[{"Identifier":"224f43c1-e456-4dfe-af12-ad151c19d0d6"}]]]>
   </CafePhoto>
+  <CafePromotion>
+    <![CDATA[[{"Identifier":"5e0196c5-d7c2-4e66-80d5-a134ee708c58"},{"Identifier":"9966ec69-20f5-40f3-9833-9122ea53e416"}]]]>
+  </CafePromotion>
   <CafeStreet>27 Bowdoin St</CafeStreet>
   <CafeZipCode>02114</CafeZipCode>
   <ContentItemDataCommonDataID>

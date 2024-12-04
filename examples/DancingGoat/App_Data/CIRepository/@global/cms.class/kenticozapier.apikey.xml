@@ -3,9 +3,9 @@
   <ClassDisplayName>Api Key info</ClassDisplayName>
   <ClassFormDefinition>
     <form>
-      <field column="ApiKeyID" columntype="integer" enabled="true" guid="ee4f8dfe-786a-4771-af64-323d288c48e7" isPK="true" />
-      <field allowempty="true" column="ApiKeyToken" columntype="text" enabled="true" guid="8e85f34b-fa17-4546-925c-562f23562578" />
-      <field allowempty="true" column="ApiKeyRawToken" columnsize="100" columntype="text" dummy="altform" enabled="true" guid="96ab4e62-87f6-4a9d-aeb1-269dd3afe9dc" visible="true">
+      <field column="ApiKeyID" columntype="integer" enabled="true" guid="6b6c8eb2-a7c6-4d5b-8de2-7890f3a65529" isPK="true" />
+      <field allowempty="true" column="ApiKeyToken" columntype="text" enabled="true" guid="34a308de-20b5-486f-ad9a-745c7ab04956" />
+      <field allowempty="true" column="ApiKeyRawToken" columnsize="100" columntype="text" dummy="altform" enabled="true" guid="69ba1133-a0b8-4656-92fa-2666bec78930" visible="true">
         <properties>
           <fieldcaption>API key</fieldcaption>
         </properties>
@@ -13,16 +13,16 @@
           <controlname>Kentico.Administration.TextWithLabel</controlname>
         </settings>
       </field>
-      <field allowempty="true" column="ApiKeyCreated" columntype="datetime" enabled="true" guid="416a35a2-fd4d-4028-a58e-aee84d5138a5" />
-      <field allowempty="true" column="ApiKeyCreatedBy" columntype="integer" enabled="true" guid="641d8e15-dd7f-4035-a158-1f442a630519" />
+      <field allowempty="true" column="ApiKeyCreated" columntype="datetime" enabled="true" guid="b4dfd175-aa7d-4bd4-9517-a13700e2b95e" />
+      <field allowempty="true" column="ApiKeyCreatedBy" columntype="integer" enabled="true" guid="cd7d85b0-07c5-4c00-9942-ed37fd391ab8" />
     </form>
   </ClassFormDefinition>
-  <ClassGUID>21d83099-c0b1-489f-b67f-6a4f4c0358c3</ClassGUID>
+  <ClassGUID>b894a59e-206c-4b27-8593-3fda07050fdd</ClassGUID>
   <ClassHasUnmanagedDbSchema>False</ClassHasUnmanagedDbSchema>
   <ClassName>KenticoZapier.ApiKey</ClassName>
   <ClassResourceID>
     <CodeName>CMS.Integration.Zapier</CodeName>
-    <GUID>a8b5f76d-8def-451f-88ae-35814618ba34</GUID>
+    <GUID>ed8884b4-0dc7-46ff-afc6-73bb7db14d7c</GUID>
     <ObjectType>cms.resource</ObjectType>
   </ClassResourceID>
   <ClassTableName>KenticoZapier_ApiKey</ClassTableName>

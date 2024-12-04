@@ -16,6 +16,7 @@
   <ClassHasUnmanagedDbSchema>False</ClassHasUnmanagedDbSchema>
   <ClassIconClass>xp-id-cards</ClassIconClass>
   <ClassName>DancingGoat.ContactsPage</ClassName>
+  <ClassShortName>DancingGoatContactsPage</ClassShortName>
   <ClassTableName>DancingGoat_ContactsPage</ClassTableName>
   <ClassType>Content</ClassType>
   <ClassWebPageHasUrl>True</ClassWebPageHasUrl>

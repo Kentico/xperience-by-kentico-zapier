@@ -12,7 +12,7 @@
       <field column="MemberPassword" guid="61911700-cd6c-4d73-943a-985a57342b4f" enabled="" order="2" />
       <field column="MemberIsExternal" guid="5cf88feb-d217-4a33-8039-63b46bf2c672" enabled="" order="3" />
       <field column="MemberSecurityStamp" guid="d127bfec-d965-4888-8836-0b22ef2e1010" enabled="" order="4" />
-      <field column="MemberName" enabled="true" guid="f8b13f5b-c254-4f3a-8b8c-df10f5619300" visible="true" order="5">
+      <field column="MemberName" enabled="true" guid="f8b13f5b-c254-4f3a-8b8c-df10f5619300" visible="true">
         <settings>
           <controlname>Kentico.Administration.TextInput</controlname>
         </settings>

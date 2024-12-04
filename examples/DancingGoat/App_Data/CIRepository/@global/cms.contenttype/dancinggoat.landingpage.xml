@@ -16,6 +16,7 @@
   <ClassHasUnmanagedDbSchema>False</ClassHasUnmanagedDbSchema>
   <ClassIconClass>xp-accordion</ClassIconClass>
   <ClassName>DancingGoat.LandingPage</ClassName>
+  <ClassShortName>DancingGoatLandingPage</ClassShortName>
   <ClassTableName>DancingGoat_LandingPage</ClassTableName>
   <ClassType>Content</ClassType>
   <ClassWebPageHasUrl>True</ClassWebPageHasUrl>

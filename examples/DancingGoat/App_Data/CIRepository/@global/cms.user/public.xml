@@ -4,11 +4,12 @@
   <FirstName />
   <LastName />
   <UserAdministrationAccess>False</UserAdministrationAccess>
+  <UserAuthenticatorSharedKeyResetRequested>False</UserAuthenticatorSharedKeyResetRequested>
   <UserEnabled>True</UserEnabled>
   <UserGUID>3758b9b5-045c-4b7d-b020-80f9b068d990</UserGUID>
   <UserIsExternal>False</UserIsExternal>
   <UserIsPendingRegistration>False</UserIsPendingRegistration>
   <UserName>public</UserName>
   <UserPassword />
-  <UserSecurityStamp>c6775a53-ecad-4548-8f2d-57b58ecc6efb</UserSecurityStamp>
+  <UserSecurityStamp>84a6f097-3063-4b1a-9ff6-e9083cf68715</UserSecurityStamp>
 </cms.user>

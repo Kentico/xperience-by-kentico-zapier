@@ -26,6 +26,7 @@
   <ClassHasUnmanagedDbSchema>False</ClassHasUnmanagedDbSchema>
   <ClassIconClass>xp-rotate-double-right</ClassIconClass>
   <ClassName>DancingGoat.GrinderPage</ClassName>
+  <ClassShortName>DancingGoatGrinderPage</ClassShortName>
   <ClassTableName>DancingGoat_GrinderPage</ClassTableName>
   <ClassType>Content</ClassType>
   <ClassWebPageHasUrl>True</ClassWebPageHasUrl>

@@ -38,6 +38,7 @@
   <ClassHasUnmanagedDbSchema>False</ClassHasUnmanagedDbSchema>
   <ClassIconClass>xp-arrow-right-top-square</ClassIconClass>
   <ClassName>DancingGoat.NavigationItem</ClassName>
+  <ClassShortName>DancingGoatNavigationItem</ClassShortName>
   <ClassTableName>DancingGoat_NavigationItem</ClassTableName>
   <ClassType>Content</ClassType>
   <ClassWebPageHasUrl>False</ClassWebPageHasUrl>

@@ -17,6 +17,8 @@
           <fielddescriptionashtml>False</fielddescriptionashtml>
         </properties>
       </field>
+      <field column="EventType" guid="9faaf8cf-4252-49bf-bda1-9e196842868f" />
+      <field column="EventTime" guid="3e07f490-7533-444d-8f56-f524582462dc" />
       <field column="Source" columnprecision="0" enabled="true" guid="2e2efa2a-56af-4977-b7c3-ad308f96aa41" visible="true">
         <settings>
           <controlname>Kentico.Administration.TextWithLabel</controlname>

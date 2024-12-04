@@ -115,6 +115,19 @@
           <controlname>Kentico.Administration.ContentItemSelector</controlname>
         </settings>
       </field>
+      <field allowempty="true" column="CafePromotion" columnprecision="0" columntype="taxonomy" enabled="true" guid="fab42a26-dde5-4c5b-8b7d-2c3fb440a83a" visible="true">
+        <properties>
+          <explanationtextashtml>False</explanationtextashtml>
+          <fieldcaption>Cafe promotion</fieldcaption>
+          <fielddescriptionashtml>False</fielddescriptionashtml>
+        </properties>
+        <settings>
+          <controlname>Kentico.Administration.TagSelector</controlname>
+          <TaxonomyGroup>
+            <![CDATA[["0eb82e7d-4af6-496a-bfc2-c0b3419956b7"]]]>
+          </TaxonomyGroup>
+        </settings>
+      </field>
     </form>
   </ClassFormDefinition>
   <ClassGUID>2f06d20b-3357-48e6-b0f8-2ca7ef737237</ClassGUID>

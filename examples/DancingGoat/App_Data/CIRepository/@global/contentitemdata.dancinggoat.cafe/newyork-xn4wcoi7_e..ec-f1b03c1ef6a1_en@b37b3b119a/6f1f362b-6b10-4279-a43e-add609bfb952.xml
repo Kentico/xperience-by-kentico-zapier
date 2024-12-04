@@ -8,6 +8,9 @@
   <CafePhoto>
     <![CDATA[[{"Identifier":"4360aa53-d040-4b15-8b89-adea96d79aad"}]]]>
   </CafePhoto>
+  <CafePromotion>
+    <![CDATA[[{"Identifier":"9966ec69-20f5-40f3-9833-9122ea53e416"},{"Identifier":"5e0196c5-d7c2-4e66-80d5-a134ee708c58"},{"Identifier":"31fb0b68-a2a1-4196-bdd8-d4ae441996e8"}]]]>
+  </CafePromotion>
   <CafeStreet>328 W 29th St</CafeStreet>
   <CafeZipCode>10001</CafeZipCode>
   <ContentItemDataCommonDataID>

@@ -59,6 +59,7 @@
   <ClassHasUnmanagedDbSchema>False</ClassHasUnmanagedDbSchema>
   <ClassIconClass>xp-check</ClassIconClass>
   <ClassName>DancingGoat.ConfirmationPage</ClassName>
+  <ClassShortName>DancingGoatConfirmationPage</ClassShortName>
   <ClassTableName>DancingGoat_ConfirmationPage</ClassTableName>
   <ClassType>Content</ClassType>
   <ClassWebPageHasUrl>True</ClassWebPageHasUrl>

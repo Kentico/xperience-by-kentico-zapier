@@ -4,14 +4,15 @@
   <FirstName>Global</FirstName>
   <LastName>Administrator</LastName>
   <UserAdministrationAccess>True</UserAdministrationAccess>
+  <UserAuthenticatorSharedKeyResetRequested>False</UserAuthenticatorSharedKeyResetRequested>
   <UserEnabled>True</UserEnabled>
   <UserGUID>6415b8ce-8072-4bcd-8e48-9d7178b826b7</UserGUID>
   <UserIsExternal>False</UserIsExternal>
   <UserIsPendingRegistration>False</UserIsPendingRegistration>
   <UserName>administrator</UserName>
   <UserPassword>
-    <![CDATA[AQAAAAIAAYagAAAAEN1UGLD7y8ZZNzFt7hvK3UvT/V//izT86UIaRE0bkyYk+sqnhHE/OFW8HNqgBgTE5Q==]]>
+    <![CDATA[AQAAAAIAAYagAAAAEP7QY8wWwlBR4JuttAx2lscLWKFWXxiCPKKZamPVz52ouP0nnThoiKiF+PF4ukd16A==]]>
   </UserPassword>
-  <UserPasswordLastChanged>2024-10-21 14:44:35Z</UserPasswordLastChanged>
-  <UserSecurityStamp>8623d520-46e7-4f83-8b21-502b92507aed</UserSecurityStamp>
+  <UserPasswordLastChanged>2024-11-28 08:16:20Z</UserPasswordLastChanged>
+  <UserSecurityStamp>04628980-ddff-4a20-a45f-12d088ee039d</UserSecurityStamp>
 </cms.user>

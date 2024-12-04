@@ -12,7 +12,7 @@
   </ContentItemCommonDataContentLanguageID>
   <ContentItemCommonDataGUID>0c56d772-eda5-43fe-baeb-a1268c15b7fd</ContentItemCommonDataGUID>
   <ContentItemCommonDataIsLatest>True</ContentItemCommonDataIsLatest>
-  <ContentItemCommonDataLastPublishedWhen>2024-03-07 12:31:28Z</ContentItemCommonDataLastPublishedWhen>
+  <ContentItemCommonDataLastPublishedWhen>2024-10-30 14:57:11Z</ContentItemCommonDataLastPublishedWhen>
   <ContentItemCommonDataPageTemplateConfiguration>
     <![CDATA[{"identifier":"DancingGoat.Article","properties":null,"fieldIdentifiers":null}]]>
   </ContentItemCommonDataPageTemplateConfiguration>
@@ -33,6 +33,45 @@
       <ContentItemReferenceTargetItemID>
         <CodeName>Articles_Article-4_2x.jpg-pi7pf0nq</CodeName>
         <GUID>abc5b875-2f70-4aac-80a8-f8033867b0c5</GUID>
+        <ObjectType>cms.contentitem</ObjectType>
+      </ContentItemReferenceTargetItemID>
+    </cms.contentitemreference>
+    <cms.contentitemreference>
+      <ContentItemReferenceGroupGUID>49eea67f-5a3a-4a0a-a4a4-42cf4e2117c0</ContentItemReferenceGroupGUID>
+      <ContentItemReferenceGUID>ab23d545-5f34-45e5-b9f0-fe3fc1e24bc9</ContentItemReferenceGUID>
+      <ContentItemReferenceSourceCommonDataID>
+        <GUID>0c56d772-eda5-43fe-baeb-a1268c15b7fd</GUID>
+        <ObjectType>cms.contentitemcommondata</ObjectType>
+      </ContentItemReferenceSourceCommonDataID>
+      <ContentItemReferenceTargetItemID>
+        <CodeName>CoffeeProcessingTechniques-vnl8fs1k</CodeName>
+        <GUID>69a5c969-8e18-4b57-a9cd-7ce089d0d059</GUID>
+        <ObjectType>cms.contentitem</ObjectType>
+      </ContentItemReferenceTargetItemID>
+    </cms.contentitemreference>
+    <cms.contentitemreference>
+      <ContentItemReferenceGroupGUID>49eea67f-5a3a-4a0a-a4a4-42cf4e2117c0</ContentItemReferenceGroupGUID>
+      <ContentItemReferenceGUID>3d84d8ab-d7d3-43f9-9403-128c76423bfd</ContentItemReferenceGUID>
+      <ContentItemReferenceSourceCommonDataID>
+        <GUID>0c56d772-eda5-43fe-baeb-a1268c15b7fd</GUID>
+        <ObjectType>cms.contentitemcommondata</ObjectType>
+      </ContentItemReferenceSourceCommonDataID>
+      <ContentItemReferenceTargetItemID>
+        <CodeName>OriginsOfArabicaBourbon-epwvew12</CodeName>
+        <GUID>8b874690-2b06-4bf5-b363-8138de08fdfb</GUID>
+        <ObjectType>cms.contentitem</ObjectType>
+      </ContentItemReferenceTargetItemID>
+    </cms.contentitemreference>
+    <cms.contentitemreference>
+      <ContentItemReferenceGroupGUID>49eea67f-5a3a-4a0a-a4a4-42cf4e2117c0</ContentItemReferenceGroupGUID>
+      <ContentItemReferenceGUID>cee12d27-dbd5-4bcd-81e5-71910af7c787</ContentItemReferenceGUID>
+      <ContentItemReferenceSourceCommonDataID>
+        <GUID>0c56d772-eda5-43fe-baeb-a1268c15b7fd</GUID>
+        <ObjectType>cms.contentitemcommondata</ObjectType>
+      </ContentItemReferenceSourceCommonDataID>
+      <ContentItemReferenceTargetItemID>
+        <CodeName>ColombiaCarlosImbachi-jqs5axd7</CodeName>
+        <GUID>6902adcc-4278-4315-adae-c377044b8135</GUID>
         <ObjectType>cms.contentitem</ObjectType>
       </ContentItemReferenceTargetItemID>
     </cms.contentitemreference>

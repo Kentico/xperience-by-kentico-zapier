@@ -11,7 +11,7 @@
     </Parent>
   </Parent>
   <Bindings>
-    <Binding id="ma.automationstep_SendAutoresponderEmail_ma.automationprocess_SendAutoresponderEmail.DancingGoatSubscription">
+    <Binding id="ma.automationstep_SendAutoresponderEmail_ma.automationprocess_SendAutoresponderEmail.DancingGoatSubscription-ma.automationstep_SendAutoresponderEmail_ma.automationprocess_SendAutoresponderEmail.DancingGoatSubscription">
       <TransitionEndStepID>
         <CodeName>SendAutoresponderEmail</CodeName>
         <GUID>cdb3c2da-60cd-4395-9559-ac27b025de80</GUID>
