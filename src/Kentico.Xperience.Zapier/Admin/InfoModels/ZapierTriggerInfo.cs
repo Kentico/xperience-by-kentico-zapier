@@ -111,18 +111,6 @@ public partial class ZapierTriggerInfo : AbstractInfo<ZapierTriggerInfo, IInfoPr
     /// </summary>
     protected override void SetObject() => Provider.Set(this);
 
-
-    /// <summary>
-    /// Constructor for de-serialization.
-    /// </summary>
-    /// <param name="info">Serialization info.</param>
-    /// <param name="context">Streaming context.</param>
-    protected ZapierTriggerInfo(SerializationInfo info, StreamingContext context)
-        : base(info, context)
-    {
-    }
-
-
     /// <summary>
     /// Creates an empty instance of the <see cref="ZapierTriggerInfo"/> class.
     /// </summary>
