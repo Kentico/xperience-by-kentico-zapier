@@ -16,4 +16,9 @@
   <ContentItemName>
     <![CDATA[Events_Nathan-dumlao-6VhPY27jdps-unsplash_50.jpg-0xla25qz]]>
   </ContentItemName>
+  <ContentItemWorkspaceID>
+    <CodeName>KenticoDefault</CodeName>
+    <GUID>43f674d6-540d-4f91-8c19-608b5bddb2f2</GUID>
+    <ObjectType>cms.workspace</ObjectType>
+  </ContentItemWorkspaceID>
 </cms.contentitem>

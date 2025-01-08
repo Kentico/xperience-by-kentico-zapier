@@ -49,7 +49,20 @@
           <fielddescriptionashtml>False</fielddescriptionashtml>
         </properties>
       </field>
-      <field column="ContentLanguageIsDefault" enabled="true" guid="bd3fbada-af24-4e47-8807-2e82692cd710" visible="true" order="4">
+      <field column="ContentLanguageFlagIconName" enabled="true" guid="9d23c0ff-b206-4782-8dfc-f62cd267c3b0" visible="true" order="4">
+        <settings>
+          <controlname>Kentico.Administration.IconSelector</controlname>
+        </settings>
+        <properties>
+          <explanationtextashtml>False</explanationtextashtml>
+          <fieldcaption>{$base.contentlanguages.language.languageflag$}</fieldcaption>
+          <fielddescription>
+            <![CDATA[{$base.contentlanguages.language.languageflag.tooltip$}]]>
+          </fielddescription>
+          <fielddescriptionashtml>False</fielddescriptionashtml>
+        </properties>
+      </field>
+      <field column="ContentLanguageIsDefault" enabled="true" guid="bd3fbada-af24-4e47-8807-2e82692cd710" visible="true" order="5">
         <settings>
           <controlname>Kentico.Administration.Checkbox</controlname>
         </settings>
@@ -64,7 +77,7 @@
           <fielddescriptionashtml>False</fielddescriptionashtml>
         </properties>
       </field>
-      <category name="Fallback" order="5">
+      <category name="Fallback" order="6">
         <properties>
           <caption>
             <![CDATA[{$base.contentlanguages.language.fallback.category$}]]>
@@ -72,7 +85,7 @@
           <visible>true</visible>
         </properties>
       </category>
-      <field column="ContentLanguageFallbackContentLanguageID" enabled="true" guid="1f074d33-6319-41bf-8d1a-8c6299520e6d" visible="true" refobjtype="" reftype="" order="6">
+      <field column="ContentLanguageFallbackContentLanguageID" enabled="true" guid="1f074d33-6319-41bf-8d1a-8c6299520e6d" visible="true" refobjtype="" reftype="" order="7">
         <settings>
           <controlname>Kentico.Administration.SingleObjectIdSelector</controlname>
           <ObjectType>cms.contentlanguage</ObjectType>
@@ -82,10 +95,13 @@
           <fieldcaption>
             <![CDATA[{$base.contentlanguages.language.fallbacklanguage$}]]>
           </fieldcaption>
+          <fielddescription>
+            <![CDATA[{$base.contentlanguages.language.fallbacklanguage.tooltip$}]]>
+          </fielddescription>
           <fielddescriptionashtml>False</fielddescriptionashtml>
         </properties>
       </field>
-      <field column="ContentLanguageGUID" guid="a2fee50a-81d8-400b-86d5-6d5337892e82" enabled="" order="7" />
+      <field column="ContentLanguageGUID" guid="a2fee50a-81d8-400b-86d5-6d5337892e82" enabled="" order="8" />
     </form>
   </FormDefinition>
   <FormDisplayName>Create content language</FormDisplayName>

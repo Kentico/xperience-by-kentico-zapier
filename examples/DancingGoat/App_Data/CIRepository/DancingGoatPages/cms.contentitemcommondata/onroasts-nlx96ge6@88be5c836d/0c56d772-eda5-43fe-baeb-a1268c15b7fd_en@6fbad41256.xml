@@ -13,10 +13,10 @@
   <ContentItemCommonDataGUID>0c56d772-eda5-43fe-baeb-a1268c15b7fd</ContentItemCommonDataGUID>
   <ContentItemCommonDataIsLatest>True</ContentItemCommonDataIsLatest>
   <ContentItemCommonDataLastPublishedWhen>2024-10-30 14:57:11Z</ContentItemCommonDataLastPublishedWhen>
-  <ContentItemCommonDataPageTemplateConfiguration>
-    <![CDATA[{"identifier":"DancingGoat.Article","properties":null,"fieldIdentifiers":null}]]>
-  </ContentItemCommonDataPageTemplateConfiguration>
   <ContentItemCommonDataVersionStatus>2</ContentItemCommonDataVersionStatus>
+  <ContentItemCommonDataVisualBuilderTemplateConfiguration>
+    <![CDATA[{"identifier":"DancingGoat.Article","properties":null,"fieldIdentifiers":null}]]>
+  </ContentItemCommonDataVisualBuilderTemplateConfiguration>
   <SEOFieldsAllowSearchIndexing>True</SEOFieldsAllowSearchIndexing>
   <SEOFieldsDescription>
     <![CDATA[Roasting coffee beans can take from 6 to 13 minutes. Different roasting times produce varying caffeine concentrations and flavors.]]>

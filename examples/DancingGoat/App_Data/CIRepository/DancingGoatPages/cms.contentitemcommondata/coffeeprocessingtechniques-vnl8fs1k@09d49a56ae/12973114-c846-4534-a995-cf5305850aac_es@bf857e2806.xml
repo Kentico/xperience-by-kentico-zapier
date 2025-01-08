@@ -13,10 +13,10 @@
   <ContentItemCommonDataGUID>12973114-c846-4534-a995-cf5305850aac</ContentItemCommonDataGUID>
   <ContentItemCommonDataIsLatest>True</ContentItemCommonDataIsLatest>
   <ContentItemCommonDataLastPublishedWhen>2024-11-04 08:33:26Z</ContentItemCommonDataLastPublishedWhen>
-  <ContentItemCommonDataPageTemplateConfiguration>
-    <![CDATA[{"identifier":"DancingGoat.Article","properties":null,"fieldIdentifiers":null}]]>
-  </ContentItemCommonDataPageTemplateConfiguration>
   <ContentItemCommonDataVersionStatus>2</ContentItemCommonDataVersionStatus>
+  <ContentItemCommonDataVisualBuilderTemplateConfiguration>
+    <![CDATA[{"identifier":"DancingGoat.Article","properties":null,"fieldIdentifiers":null}]]>
+  </ContentItemCommonDataVisualBuilderTemplateConfiguration>
   <SEOFieldsAllowSearchIndexing>True</SEOFieldsAllowSearchIndexing>
   <ContentItemReferences>
     <cms.contentitemreference>

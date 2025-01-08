@@ -13,10 +13,10 @@
   <ContentItemCommonDataGUID>1d1fe600-a580-4a45-bd7d-8c43c647adf3</ContentItemCommonDataGUID>
   <ContentItemCommonDataIsLatest>True</ContentItemCommonDataIsLatest>
   <ContentItemCommonDataLastPublishedWhen>2024-11-04 08:32:37Z</ContentItemCommonDataLastPublishedWhen>
-  <ContentItemCommonDataPageTemplateConfiguration>
-    <![CDATA[{"identifier":"DancingGoat.Article","properties":null,"fieldIdentifiers":null}]]>
-  </ContentItemCommonDataPageTemplateConfiguration>
   <ContentItemCommonDataVersionStatus>2</ContentItemCommonDataVersionStatus>
+  <ContentItemCommonDataVisualBuilderTemplateConfiguration>
+    <![CDATA[{"identifier":"DancingGoat.Article","properties":null,"fieldIdentifiers":null}]]>
+  </ContentItemCommonDataVisualBuilderTemplateConfiguration>
   <SEOFieldsAllowSearchIndexing>True</SEOFieldsAllowSearchIndexing>
   <SEOFieldsDescription>
     <![CDATA[Learn about coffee plant processing techniques. Farmers use different methods in different parts of the world depending on weather conditions.]]>

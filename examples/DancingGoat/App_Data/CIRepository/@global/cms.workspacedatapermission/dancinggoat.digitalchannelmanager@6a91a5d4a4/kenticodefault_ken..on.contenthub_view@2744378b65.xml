@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cms.workspacedatapermission>
+  <WorkspaceDataPermissionApplicationName>Kentico.Xperience.Application.ContentHub</WorkspaceDataPermissionApplicationName>
+  <WorkspaceDataPermissionGUID>9776f758-9c7e-40d3-8c1a-3873a2177eff</WorkspaceDataPermissionGUID>
+  <WorkspaceDataPermissionPermissionName>View</WorkspaceDataPermissionPermissionName>
+  <WorkspaceDataPermissionRoleID>
+    <CodeName>DancingGoat.DigitalChannelManager</CodeName>
+    <GUID>80f9aa61-d17c-45f0-9b9a-9ff3c301438c</GUID>
+    <ObjectType>cms.role</ObjectType>
+  </WorkspaceDataPermissionRoleID>
+  <WorkspaceDataPermissionWorkspaceID>
+    <CodeName>KenticoDefault</CodeName>
+    <GUID>43f674d6-540d-4f91-8c19-608b5bddb2f2</GUID>
+    <ObjectType>cms.workspace</ObjectType>
+  </WorkspaceDataPermissionWorkspaceID>
+</cms.workspacedatapermission>

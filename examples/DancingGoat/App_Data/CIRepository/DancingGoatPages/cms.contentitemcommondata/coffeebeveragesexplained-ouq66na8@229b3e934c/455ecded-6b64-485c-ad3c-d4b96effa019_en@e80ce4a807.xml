@@ -13,10 +13,10 @@
   <ContentItemCommonDataGUID>455ecded-6b64-485c-ad3c-d4b96effa019</ContentItemCommonDataGUID>
   <ContentItemCommonDataIsLatest>True</ContentItemCommonDataIsLatest>
   <ContentItemCommonDataLastPublishedWhen>2024-03-07 12:31:11Z</ContentItemCommonDataLastPublishedWhen>
-  <ContentItemCommonDataPageTemplateConfiguration>
-    <![CDATA[{"identifier":"DancingGoat.Article","properties":null,"fieldIdentifiers":null}]]>
-  </ContentItemCommonDataPageTemplateConfiguration>
   <ContentItemCommonDataVersionStatus>2</ContentItemCommonDataVersionStatus>
+  <ContentItemCommonDataVisualBuilderTemplateConfiguration>
+    <![CDATA[{"identifier":"DancingGoat.Article","properties":null,"fieldIdentifiers":null}]]>
+  </ContentItemCommonDataVisualBuilderTemplateConfiguration>
   <SEOFieldsAllowSearchIndexing>True</SEOFieldsAllowSearchIndexing>
   <SEOFieldsDescription>
     <![CDATA[Espresso and filtered coffee. Two categories of coffee that differ in preparation. Learn about individual types of coffee that belong to these categories.]]>

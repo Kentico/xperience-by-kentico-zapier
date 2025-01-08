@@ -8,4 +8,9 @@
   <SmartFolderGUID>1aff3459-c137-48e4-8456-f5c941a3e904</SmartFolderGUID>
   <SmartFolderIsContentDeliveryEnabled>True</SmartFolderIsContentDeliveryEnabled>
   <SmartFolderName>dancinggoat.promotedcafes</SmartFolderName>
+  <SmartFolderWorkspaceID>
+    <CodeName>KenticoDefault</CodeName>
+    <GUID>43f674d6-540d-4f91-8c19-608b5bddb2f2</GUID>
+    <ObjectType>cms.workspace</ObjectType>
+  </SmartFolderWorkspaceID>
 </cms.smartfolder>
