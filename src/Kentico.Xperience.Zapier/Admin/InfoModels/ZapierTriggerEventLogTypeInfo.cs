@@ -1,5 +1,4 @@
 using System.Data;
-using System.Runtime.Serialization;
 
 using CMS;
 using CMS.DataEngine;
@@ -79,18 +78,6 @@ public partial class ZapierTriggerEventLogTypeInfo : AbstractInfo<ZapierTriggerE
     /// Updates the object using appropriate provider.
     /// </summary>
     protected override void SetObject() => Provider.Set(this);
-
-
-    /// <summary>
-    /// Constructor for de-serialization.
-    /// </summary>
-    /// <param name="info">Serialization info.</param>
-    /// <param name="context">Streaming context.</param>
-    protected ZapierTriggerEventLogTypeInfo(SerializationInfo info, StreamingContext context)
-        : base(info, context)
-    {
-    }
-
 
     /// <summary>
     /// Creates an empty instance of the <see cref="ZapierTriggerEventLogTypeInfo"/> class.

@@ -1,5 +1,4 @@
 using System.Data;
-using System.Runtime.Serialization;
 
 using CMS;
 using CMS.DataEngine;
@@ -85,17 +84,6 @@ public partial class ApiKeyInfo : AbstractInfo<ApiKeyInfo, IInfoProvider<ApiKeyI
     /// Updates the object using appropriate provider.
     /// </summary>
     protected override void SetObject() => Provider.Set(this);
-
-
-    /// <summary>
-    /// Constructor for de-serialization.
-    /// </summary>
-    /// <param name="info">Serialization info.</param>
-    /// <param name="context">Streaming context.</param>
-    protected ApiKeyInfo(SerializationInfo info, StreamingContext context)
-        : base(info, context)
-    {
-    }
 
 
     /// <summary>

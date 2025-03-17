@@ -1,0 +1,209 @@
+name: "E2E: Build and Test"
+
+on:
+  schedule:
+    - cron: '0 10 * * 5'  # Runs every Friday at 10:00 UTC
+  workflow_dispatch:
+
+jobs:
+  build_and_test:
+    name: Test E2E
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: pwsh
+
+    env:
+      ASPNETCORE_ENVIRONMENT: CI
+      DATABASE_BACKUP_FILENAME: ""
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+      DOTNET_NOLOGO: 1
+      PROJECT_NAME: DancingGoat
+      ASPNETCORE_URLS: https://localhost:14070
+      STATUS_CHECK_URL: https://localhost:14070/status
+      DATABASE_USER: "sa"
+      DATABASE_PASSWORD: "Pass@12345"
+      DATABASE_NAME: "XByK_DancingGoat_Zapier"
+      XPERIENCE_BY_KENTICO_LICENSE: ${{ secrets.XPERIENCE_BY_KENTICO_LICENSE }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install NPM
+        run: |
+          cd tests/Playwright
+          npm ci
+          npx playwright install --with-deps
+          cd ../..
+
+      - name: Get Database Backup Name
+        run: |
+          $latestBackup = Get-Content -Path "./database/backups.txt" -TotalCount 1
+          "DATABASE_BACKUP_FILENAME=$latestBackup" >> $env:GITHUB_ENV
+
+      - name: Extract Database Backup
+        run: |
+          Expand-Archive `
+            -Path "./database/${{ env.DATABASE_BACKUP_FILENAME }}.zip" `
+            -DestinationPath "./database"
+
+      - name: Install a SQL Server suite of tools (SQLEngine, SQLPackage)
+        uses: potatoqualitee/mssqlsuite@605af2310e2e22978ebf2c74d5995ba102094b8a # set as a commit hash for security - v1.8
+        with:
+          install: sqlpackage, sqlengine, sqlclient
+          sa-password: ${{ env.DATABASE_PASSWORD }}
+          version: 2022
+
+      - name: Restore Database .bak
+        run: |
+          docker exec sql mkdir /var/opt/mssql/backup
+          docker cp "./database/${{ env.DATABASE_BACKUP_FILENAME }}" sql:/var/opt/mssql/backup
+          sqlcmd `
+            -S localhost `
+            -d master `
+            -U ${{ env.DATABASE_USER }} `
+            -P ${{ env.DATABASE_PASSWORD }} `
+            -C `
+            -Q "RESTORE DATABASE [XByK_DancingGoat_Zapier] FROM DISK='/var/opt/mssql/backup/${{ env.DATABASE_BACKUP_FILENAME }}' WITH MOVE 'XByK_DancingGoat_Zapier' TO '/var/opt/mssql/data/XByK_DancingGoat_Zapier.mdf', MOVE 'XByK_DancingGoat_Zapier_log' TO '/var/opt/mssql/data/XByK_DancingGoat_Zapier_log.ldf'"      
+      
+      - name: Imports license key to DB
+        run: |
+          sqlcmd `
+            -S localhost `
+            -d ${{ env.DATABASE_NAME }} `
+            -U ${{ env.DATABASE_USER }} `
+            -P ${{ env.DATABASE_PASSWORD }} `
+            -C `
+            -Q "UPDATE CMS_SettingsKey SET KeyValue='${{ env.XPERIENCE_BY_KENTICO_LICENSE }}' WHERE KeyName='CMSLicenseKey'"
+      
+      - name: Seed DB with data for testing purposes
+        run: |
+          cd scripts
+          ./Seed-Database.ps1
+          cd ..      
+
+      - name: Reset DB consistency for last applied hotfix
+        run: |
+          dotnet build `
+            --configuration Release
+          cd scripts
+          ./Reset-DatabaseConsistency.ps1
+          cd ..
+      
+      - name: Build Solution for last hotfix
+        run: |
+          dotnet build `
+            --configuration Release `
+            -p:XbyKVersion=*
+          cd scripts
+          ./Reset-DatabaseConsistency.ps1 -ExcludeCIRestore
+          cd ..
+
+      - name: Publish Application
+        run: |
+          dotnet publish `
+            ./examples/${{ env.PROJECT_NAME }} `
+            -c Release `
+            -o ./publish `
+            --no-build `
+            --no-restore
+
+      - name: Test Solution
+        run: |
+          dotnet test `
+            --configuration Release `
+            --no-build `
+            --no-restore
+
+      - name: Run Application and E2E Tests
+        run: |
+          # Run the ASP.NET Core app as a background job
+          cd ./publish
+          Start-Job -ScriptBlock { 
+            dotnet --version
+            dotnet ./${{ env.PROJECT_NAME }}.dll 
+          } -Name ${{ env.PROJECT_NAME }}
+          Receive-Job -Name ${{ env.PROJECT_NAME }}
+          cd ../
+          # The ASP.NET Core app can take a few seconds to start, so we delay running tests
+          #   until it is ready, and fail if we go over a maximum wait time
+          $limit = 10
+          $attempts = 0
+          $success = $false
+          while ($attempts -lt $limit -and -not $success) {
+              Start-Sleep -Seconds 1
+              try {
+                  $response = Invoke-WebRequest -Uri ${{ env.STATUS_CHECK_URL }} -Method Get -SkipCertificateCheck
+                  if ($response.StatusCode -eq 200) {
+                      Write-Output "Application is ready."
+                      $success = $true
+                  }
+              }
+              catch {
+                  Write-Output "Attempt $attempts - Application not ready yet."
+              }
+              $attempts++
+          }
+          if (-not $success) {
+              Write-Output "Application did not respond in time."
+              Receive-Job -Name ${{ env.PROJECT_NAME }}
+              Stop-Job -Name ${{ env.PROJECT_NAME }}
+              Remove-Job -Name ${{ env.PROJECT_NAME }}
+              exit 1
+          }
+          # Run the E2E tests
+          cd tests/Playwright
+          npx playwright test
+          cd ../..
+  
+
+          # Stop the background ASP.NET Core application
+          Receive-Job -Name ${{ env.PROJECT_NAME }}
+          Stop-Job -Name ${{ env.PROJECT_NAME }}
+          Remove-Job -Name ${{ env.PROJECT_NAME }}
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: ./tests/Playwright/playwright-report/
+          retention-days: 30  
+      
+      # Create an issue if this job fails
+      - name: "Create GitHub Issue on Failure"
+        if: ${{ failure() && github.event_name != 'workflow_dispatch' }} # Runs only on failure and not manual trigger
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const date = new Date();
+            const issueTitle = `🚨 ${date.toLocaleDateString('en-GB')} E2E Test Failed: Weekly Cron Job`;
+            const issueBody = `### Workflow Failure Alert
+            - **Repository**: ${{ github.repository }}
+            - **Workflow**: [Test E2E](https://github.com/Kentico/xperience-by-kentico-zapier/actions/runs/${{ github.run_id }})
+            - **Timestamp**: ${date.toISOString()}
+
+            Please check the logs and resolve the issue.`;
+
+            try {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issueTitle,
+                body: issueBody,
+                labels: ["workflow-failure"]
+              });
+            } catch (error) {
+              console.error("Error creating issue:", error);
+            }

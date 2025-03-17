@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentitemdata.dancinggoat.coffeepage>
+  <ContentItemDataCommonDataID>
+    <GUID>87cc818c-94e4-47dc-8527-371354f1b7d7</GUID>
+    <ObjectType>cms.contentitemcommondata</ObjectType>
+    <Parent>
+      <CodeName>BrazilNaturalBarraGrande-ae338tmx</CodeName>
+      <GUID>4107d2e1-79e9-4875-90f9-408a54c3bd2c</GUID>
+      <ObjectType>cms.contentitem</ObjectType>
+    </Parent>
+  </ContentItemDataCommonDataID>
+  <ContentItemDataGUID>6853c528-72dc-4f17-835f-e7dcb358843e</ContentItemDataGUID>
+  <RelatedItem>
+    <![CDATA[[{"Identifier":"edb18903-129a-4c33-9ca1-506cfdf4496e"}]]]>
+  </RelatedItem>
+</contentitemdata.dancinggoat.coffeepage>

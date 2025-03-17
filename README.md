@@ -16,13 +16,16 @@ Zapier integration enables seamless connectivity between a wide range of web app
 
 ## Library Version Matrix
 
-This version supports content workflows added in version 28.3.0. Please ensure that your versions are up to date.
-
 | Xperience Version | Library Version |
 | ----------------- | --------------- |
-| >= 29.0.*         | 1.0.0           |
+| >= 30.0.\*        | >= 2.3.0        |
+| >= 29.7.\*        | >= 2.2.0        |
+| >= 29.5.\*        | >= 2.1.0        |
+| >= 29.3.\*        | >= 2.0.0        |
+| >= 29.0.\*        | 1.0.0           |
 
 ## Zapier cli application
+
 The Zapier cli app version 1.0.1 will initially be beta flagged, but this is the full version. The beta flag is just a zapier flag for new app integrations. This Flag will disappear after 90 days.
 
 ### Dependencies
@@ -88,7 +91,7 @@ dotnet add package Kentico.Xperience.Zapier
    - In the third step you need to set configuration for your trigger
    - Test your trigger
 6. Now you can create your own workflow eg. connect with Gmail, Microsoft Teams, ...
-   - You can find more information on https://zapier.com/workflows
+   - You can find more information on <https://zapier.com/workflows>
 7. Publication of your Zap will create an object in your Xperience by Kentico application.
    - You can find the list of created triggers at Zapier application at page _List of Zapier triggers_
 

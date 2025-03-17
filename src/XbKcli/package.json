@@ -1,7 +1,7 @@
 {
   "name": "xperience-by-kentico-zapier-cli",
-  "version": "1.0.1",
-  "description": "update platform core",
+  "version": "1.0.2",
+  "description": "update new data type in xbk",
   "main": "index.js",
   "scripts": {
     "test": "jest --testTimeout 10000"

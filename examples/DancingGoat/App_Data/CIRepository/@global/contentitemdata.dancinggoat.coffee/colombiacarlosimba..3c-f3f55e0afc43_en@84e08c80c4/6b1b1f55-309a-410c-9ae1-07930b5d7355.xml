@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentitemdata.dancinggoat.coffee>
+  <CoffeeProcessing>
+    <![CDATA[[{"Identifier":"a4361d0e-c08e-4738-8dbe-cd009818f8d6"},{"Identifier":"b5a37b3e-e22c-4a59-84ff-cc8af05edcff"}]]]>
+  </CoffeeProcessing>
+  <CoffeeTastes>
+    <![CDATA[[{"Identifier":"af7934d5-aba8-45ef-ba7b-10f83956ca26"}]]]>
+  </CoffeeTastes>
+  <ContentItemDataCommonDataID>
+    <GUID>b6642ea7-7595-44c9-873c-f3f55e0afc43</GUID>
+    <ObjectType>cms.contentitemcommondata</ObjectType>
+    <Parent>
+      <CodeName>ColombiaCarlosImbachi-t5ps0qy3</CodeName>
+      <GUID>d81c0256-89eb-4e1f-88d2-34d8beefe8f6</GUID>
+      <ObjectType>cms.contentitem</ObjectType>
+    </Parent>
+  </ContentItemDataCommonDataID>
+  <ContentItemDataGUID>6b1b1f55-309a-410c-9ae1-07930b5d7355</ContentItemDataGUID>
+</contentitemdata.dancinggoat.coffee>

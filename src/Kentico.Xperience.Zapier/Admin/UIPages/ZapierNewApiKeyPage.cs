@@ -20,7 +20,7 @@ namespace Kentico.Xperience.Zapier.Admin.UIPages;
 internal class ZapierNewApiKeyPage : InfoEditPage<ApiKeyInfo>
 {
     private readonly IInfoProvider<ApiKeyInfo> apiKeyInfoProvider;
-    private readonly IPageUrlGenerator pageUrlGenerator;
+    private readonly IPageLinkGenerator pageLinkGenerator;
     private readonly IZapierTokenManager tokenManager;
 
 
@@ -34,11 +34,11 @@ internal class ZapierNewApiKeyPage : InfoEditPage<ApiKeyInfo>
     protected override bool RefetchAll => true;
 
 
-    public ZapierNewApiKeyPage(IFormComponentMapper formComponentMapper, IFormDataBinder formDataBinder, IInfoProvider<ApiKeyInfo> apiKeyInfoProvider, IPageUrlGenerator pageUrlGenerator, IZapierTokenManager tokenManager)
+    public ZapierNewApiKeyPage(IFormComponentMapper formComponentMapper, IFormDataBinder formDataBinder, IInfoProvider<ApiKeyInfo> apiKeyInfoProvider, IPageLinkGenerator pageLinkGenerator, IZapierTokenManager tokenManager)
     : base(formComponentMapper, formDataBinder)
     {
         this.apiKeyInfoProvider = apiKeyInfoProvider;
-        this.pageUrlGenerator = pageUrlGenerator;
+        this.pageLinkGenerator = pageLinkGenerator;
         this.tokenManager = tokenManager;
     }
 
@@ -67,7 +67,7 @@ internal class ZapierNewApiKeyPage : InfoEditPage<ApiKeyInfo>
 
     protected override async Task<ICommandResponse> SubmitInternal(FormSubmissionCommandArguments args, ICollection<IFormItem> items, IFormFieldValueProvider formFieldValueProvider)
     {
-        string navigationUrl = pageUrlGenerator.GenerateUrl<ZapierApiKeyListingPage>();
+        string navigationUrl = pageLinkGenerator.GetPath<ZapierApiKeyListingPage>();
         return await Task.FromResult(NavigateTo(navigationUrl, RefetchAll));
     }
 

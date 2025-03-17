@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentitemdata.dancinggoat.image>
+  <ContentItemDataCommonDataID>
+    <GUID>68cce280-f4af-4065-a119-d3d149eb7ffd</GUID>
+    <ObjectType>cms.contentitemcommondata</ObjectType>
+    <Parent>
+      <CodeName>MacapM4D-d8wt8jia</CodeName>
+      <GUID>60771371-3371-42cd-a101-8ffb6d90f318</GUID>
+      <ObjectType>cms.contentitem</ObjectType>
+    </Parent>
+  </ContentItemDataCommonDataID>
+  <ContentItemDataGUID>80266e8f-10ca-4d9b-be9f-c6ca8a4e8808</ContentItemDataGUID>
+  <ImageFile>
+    <![CDATA[{"Identifier":"a0fee33a-d7bc-4f4e-ad0b-5154e0c131b3","Name":"macap-m4d.jpg","Extension":".jpg","Size":23639,"LastModified":"2023-11-07T10:00:29.4404128Z"}]]>
+  </ImageFile>
+</contentitemdata.dancinggoat.image>
