@@ -8,7 +8,7 @@
       <field column="ContentItemDataCommonDataID" columntype="integer" enabled="true" guid="0673c391-464a-4c31-b09c-9816e84fe922" refobjtype="cms.contentitemcommondata" reftype="Required" system="true" />
       <field column="ContentItemDataGUID" columntype="guid" enabled="true" guid="8a3f2e69-3868-4ff2-a56c-d6d47ad3af08" isunique="true" system="true" />
       <field allowempty="true" column="EmailSenderID" columntype="integer" enabled="true" guid="ffe99721-cb17-44ee-bfdc-9685153ce949" refobjtype="emaillibrary.emailchannelsender" reftype="NotRequired" system="true" />
-      <field column="EmailTemplateID" columntype="integer" enabled="true" guid="58e58438-8a58-4e56-af3a-fc3f5e428abd" refobjtype="emaillibrary.emailtemplate" reftype="Required" system="true" />
+      <field allowempty="true" column="EmailTemplateID" columntype="integer" enabled="true" guid="58e58438-8a58-4e56-af3a-fc3f5e428abd" refobjtype="emaillibrary.emailtemplate" reftype="NotRequired" system="true" />
       <field allowempty="true" column="EmailPlainText" columntype="longtext" enabled="true" guid="64cfeed4-662e-47b4-9136-f487d455b0c9" system="true" />
       <field allowempty="true" column="EmailSubject" columnprecision="0" columnsize="450" columntype="text" enabled="true" guid="6c9647ce-f9a3-438d-91a9-c65a5b1f2773" visible="true">
         <properties>
