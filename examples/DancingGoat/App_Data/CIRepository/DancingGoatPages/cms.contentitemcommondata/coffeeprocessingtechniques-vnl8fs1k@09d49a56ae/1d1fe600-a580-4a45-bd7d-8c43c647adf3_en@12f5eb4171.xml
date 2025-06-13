@@ -38,6 +38,19 @@
     </cms.contentitemreference>
     <cms.contentitemreference>
       <ContentItemReferenceGroupGUID>49eea67f-5a3a-4a0a-a4a4-42cf4e2117c0</ContentItemReferenceGroupGUID>
+      <ContentItemReferenceGUID>d8a00514-44d3-4a3e-87ff-1f9f34943e2c</ContentItemReferenceGUID>
+      <ContentItemReferenceSourceCommonDataID>
+        <GUID>1d1fe600-a580-4a45-bd7d-8c43c647adf3</GUID>
+        <ObjectType>cms.contentitemcommondata</ObjectType>
+      </ContentItemReferenceSourceCommonDataID>
+      <ContentItemReferenceTargetItemID>
+        <CodeName>ElSalvadorFincaSanJose-ttfjisz3</CodeName>
+        <GUID>283f6888-603d-4e21-aeee-86da21efc6d4</GUID>
+        <ObjectType>cms.contentitem</ObjectType>
+      </ContentItemReferenceTargetItemID>
+    </cms.contentitemreference>
+    <cms.contentitemreference>
+      <ContentItemReferenceGroupGUID>49eea67f-5a3a-4a0a-a4a4-42cf4e2117c0</ContentItemReferenceGroupGUID>
       <ContentItemReferenceGUID>403e8fb3-595b-419e-b838-7b9139b27c2e</ContentItemReferenceGUID>
       <ContentItemReferenceSourceCommonDataID>
         <GUID>1d1fe600-a580-4a45-bd7d-8c43c647adf3</GUID>
@@ -59,19 +72,6 @@
       <ContentItemReferenceTargetItemID>
         <CodeName>WhichBrewingFitsYou-a6ildi6t</CodeName>
         <GUID>b69db6f4-355b-4e5a-917b-541fba602213</GUID>
-        <ObjectType>cms.contentitem</ObjectType>
-      </ContentItemReferenceTargetItemID>
-    </cms.contentitemreference>
-    <cms.contentitemreference>
-      <ContentItemReferenceGroupGUID>49eea67f-5a3a-4a0a-a4a4-42cf4e2117c0</ContentItemReferenceGroupGUID>
-      <ContentItemReferenceGUID>d8a00514-44d3-4a3e-87ff-1f9f34943e2c</ContentItemReferenceGUID>
-      <ContentItemReferenceSourceCommonDataID>
-        <GUID>1d1fe600-a580-4a45-bd7d-8c43c647adf3</GUID>
-        <ObjectType>cms.contentitemcommondata</ObjectType>
-      </ContentItemReferenceSourceCommonDataID>
-      <ContentItemReferenceTargetItemID>
-        <CodeName>ElSalvadorFincaSanJose-ttfjisz3</CodeName>
-        <GUID>283f6888-603d-4e21-aeee-86da21efc6d4</GUID>
         <ObjectType>cms.contentitem</ObjectType>
       </ContentItemReferenceTargetItemID>
     </cms.contentitemreference>

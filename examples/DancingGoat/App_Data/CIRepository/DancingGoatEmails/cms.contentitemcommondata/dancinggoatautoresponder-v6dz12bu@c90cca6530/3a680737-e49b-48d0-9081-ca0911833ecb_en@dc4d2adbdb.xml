@@ -16,6 +16,19 @@
   <ContentItemReferences>
     <cms.contentitemreference>
       <ContentItemReferenceGroupGUID>82b7639d-e97f-4020-8926-55577729926a</ContentItemReferenceGroupGUID>
+      <ContentItemReferenceGUID>b7d1fb3b-9f6b-4635-99fc-8fe074039316</ContentItemReferenceGUID>
+      <ContentItemReferenceSourceCommonDataID>
+        <GUID>3a680737-e49b-48d0-9081-ca0911833ecb</GUID>
+        <ObjectType>cms.contentitemcommondata</ObjectType>
+      </ContentItemReferenceSourceCommonDataID>
+      <ContentItemReferenceTargetItemID>
+        <CodeName>Twitter-i4s1h9pp</CodeName>
+        <GUID>015129c5-8972-47b8-963c-e3d52ef69e7e</GUID>
+        <ObjectType>cms.contentitem</ObjectType>
+      </ContentItemReferenceTargetItemID>
+    </cms.contentitemreference>
+    <cms.contentitemreference>
+      <ContentItemReferenceGroupGUID>82b7639d-e97f-4020-8926-55577729926a</ContentItemReferenceGroupGUID>
       <ContentItemReferenceGUID>93194c58-e8c9-4331-9914-b00803c5b431</ContentItemReferenceGUID>
       <ContentItemReferenceSourceCommonDataID>
         <GUID>3a680737-e49b-48d0-9081-ca0911833ecb</GUID>
@@ -37,19 +50,6 @@
       <ContentItemReferenceTargetItemID>
         <CodeName>Logos_Logo-dancing-goat.png-1gxova27</CodeName>
         <GUID>96aaf7e4-b57b-4fb4-ae2c-25e8191e7079</GUID>
-        <ObjectType>cms.contentitem</ObjectType>
-      </ContentItemReferenceTargetItemID>
-    </cms.contentitemreference>
-    <cms.contentitemreference>
-      <ContentItemReferenceGroupGUID>82b7639d-e97f-4020-8926-55577729926a</ContentItemReferenceGroupGUID>
-      <ContentItemReferenceGUID>b7d1fb3b-9f6b-4635-99fc-8fe074039316</ContentItemReferenceGUID>
-      <ContentItemReferenceSourceCommonDataID>
-        <GUID>3a680737-e49b-48d0-9081-ca0911833ecb</GUID>
-        <ObjectType>cms.contentitemcommondata</ObjectType>
-      </ContentItemReferenceSourceCommonDataID>
-      <ContentItemReferenceTargetItemID>
-        <CodeName>Twitter-i4s1h9pp</CodeName>
-        <GUID>015129c5-8972-47b8-963c-e3d52ef69e7e</GUID>
         <ObjectType>cms.contentitem</ObjectType>
       </ContentItemReferenceTargetItemID>
     </cms.contentitemreference>

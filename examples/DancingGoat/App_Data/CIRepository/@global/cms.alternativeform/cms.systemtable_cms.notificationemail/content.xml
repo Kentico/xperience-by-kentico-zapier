@@ -36,6 +36,7 @@
           <fielddescriptionashtml>False</fielddescriptionashtml>
         </properties>
       </field>
+      <field column="NotificationEmailEventType" guid="cb7b2454-a82f-4fbf-a136-35b60f7083e1" enabled="" />
     </form>
   </FormDefinition>
   <FormDisplayName>Content</FormDisplayName>

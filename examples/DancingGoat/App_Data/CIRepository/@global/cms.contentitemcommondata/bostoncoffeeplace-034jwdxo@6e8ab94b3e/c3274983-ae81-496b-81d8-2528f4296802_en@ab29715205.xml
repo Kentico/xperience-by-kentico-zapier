@@ -18,14 +18,14 @@
   <ContentItemReferences>
     <cms.contentitemreference>
       <ContentItemReferenceGroupGUID>323d44df-162d-4dfa-8dd1-76ed849375ef</ContentItemReferenceGroupGUID>
-      <ContentItemReferenceGUID>c9603dce-56ac-4171-8277-a762484825e6</ContentItemReferenceGUID>
+      <ContentItemReferenceGUID>ca92e4ad-66db-49e5-a77d-05289fed9c4a</ContentItemReferenceGUID>
       <ContentItemReferenceSourceCommonDataID>
         <GUID>c3274983-ae81-496b-81d8-2528f4296802</GUID>
         <ObjectType>cms.contentitemcommondata</ObjectType>
       </ContentItemReferenceSourceCommonDataID>
       <ContentItemReferenceTargetItemID>
-        <CodeName>BoliviaFincaIllimani-c77ome92</CodeName>
-        <GUID>60d815a6-674e-468d-8155-d2b3be75a321</GUID>
+        <CodeName>ElSalvadorFincaSanJose-nr6bglxm</CodeName>
+        <GUID>818df78b-353d-4863-8e9d-287040051249</GUID>
         <ObjectType>cms.contentitem</ObjectType>
       </ContentItemReferenceTargetItemID>
     </cms.contentitemreference>
@@ -43,15 +43,15 @@
       </ContentItemReferenceTargetItemID>
     </cms.contentitemreference>
     <cms.contentitemreference>
-      <ContentItemReferenceGroupGUID>1e4c0c62-4056-4acd-ac2e-d96ba01adff7</ContentItemReferenceGroupGUID>
-      <ContentItemReferenceGUID>32ca3b28-9965-450c-be4d-46107956cfdc</ContentItemReferenceGUID>
+      <ContentItemReferenceGroupGUID>323d44df-162d-4dfa-8dd1-76ed849375ef</ContentItemReferenceGroupGUID>
+      <ContentItemReferenceGUID>c9603dce-56ac-4171-8277-a762484825e6</ContentItemReferenceGUID>
       <ContentItemReferenceSourceCommonDataID>
         <GUID>c3274983-ae81-496b-81d8-2528f4296802</GUID>
         <ObjectType>cms.contentitemcommondata</ObjectType>
       </ContentItemReferenceSourceCommonDataID>
       <ContentItemReferenceTargetItemID>
-        <CodeName>Cafes_Boston_2x.png-ook06kfb</CodeName>
-        <GUID>224f43c1-e456-4dfe-af12-ad151c19d0d6</GUID>
+        <CodeName>BoliviaFincaIllimani-c77ome92</CodeName>
+        <GUID>60d815a6-674e-468d-8155-d2b3be75a321</GUID>
         <ObjectType>cms.contentitem</ObjectType>
       </ContentItemReferenceTargetItemID>
     </cms.contentitemreference>
@@ -69,15 +69,15 @@
       </ContentItemReferenceTargetItemID>
     </cms.contentitemreference>
     <cms.contentitemreference>
-      <ContentItemReferenceGroupGUID>323d44df-162d-4dfa-8dd1-76ed849375ef</ContentItemReferenceGroupGUID>
-      <ContentItemReferenceGUID>ca92e4ad-66db-49e5-a77d-05289fed9c4a</ContentItemReferenceGUID>
+      <ContentItemReferenceGroupGUID>1e4c0c62-4056-4acd-ac2e-d96ba01adff7</ContentItemReferenceGroupGUID>
+      <ContentItemReferenceGUID>32ca3b28-9965-450c-be4d-46107956cfdc</ContentItemReferenceGUID>
       <ContentItemReferenceSourceCommonDataID>
         <GUID>c3274983-ae81-496b-81d8-2528f4296802</GUID>
         <ObjectType>cms.contentitemcommondata</ObjectType>
       </ContentItemReferenceSourceCommonDataID>
       <ContentItemReferenceTargetItemID>
-        <CodeName>ElSalvadorFincaSanJose-nr6bglxm</CodeName>
-        <GUID>818df78b-353d-4863-8e9d-287040051249</GUID>
+        <CodeName>Cafes_Boston_2x.png-ook06kfb</CodeName>
+        <GUID>224f43c1-e456-4dfe-af12-ad151c19d0d6</GUID>
         <ObjectType>cms.contentitem</ObjectType>
       </ContentItemReferenceTargetItemID>
     </cms.contentitemreference>

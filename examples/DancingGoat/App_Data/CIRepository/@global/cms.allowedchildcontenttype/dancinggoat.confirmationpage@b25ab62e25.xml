@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cms.allowedchildcontenttype>
+  <Parent>
+    <CodeName>DancingGoat.ConfirmationPage</CodeName>
+    <GUID>99f9eb0a-8475-49cd-bbe6-cb485f802cce</GUID>
+    <ObjectType>cms.contenttype</ObjectType>
+  </Parent>
+  <Bindings>
+    <Binding id="cms.contenttype_DancingGoat.ArticlePage">
+      <AllowedChildContentTypeChildID>
+        <CodeName>DancingGoat.ArticlePage</CodeName>
+        <GUID>9b5e6c86-ebd1-4471-8f5d-dca72e39b12b</GUID>
+        <ObjectType>cms.contenttype</ObjectType>
+      </AllowedChildContentTypeChildID>
+    </Binding>
+    <Binding id="cms.contenttype_DancingGoat.ArticlesSection">
+      <AllowedChildContentTypeChildID>
+        <CodeName>DancingGoat.ArticlesSection</CodeName>
+        <GUID>d4f5b41b-4c36-4bc1-9e3f-6ae34235f559</GUID>
+        <ObjectType>cms.contenttype</ObjectType>
+      </AllowedChildContentTypeChildID>
+    </Binding>
+    <Binding id="cms.contenttype_DancingGoat.CoffeePage">
+      <AllowedChildContentTypeChildID>
+        <CodeName>DancingGoat.CoffeePage</CodeName>
+        <GUID>b6830451-87c5-432c-afd3-013d9362abe4</GUID>
+        <ObjectType>cms.contenttype</ObjectType>
+      </AllowedChildContentTypeChildID>
+    </Binding>
+    <Binding id="cms.contenttype_DancingGoat.ConfirmationPage">
+      <AllowedChildContentTypeChildID>
+        <CodeName>DancingGoat.ConfirmationPage</CodeName>
+        <GUID>99f9eb0a-8475-49cd-bbe6-cb485f802cce</GUID>
+        <ObjectType>cms.contenttype</ObjectType>
+      </AllowedChildContentTypeChildID>
+    </Binding>
+    <Binding id="cms.contenttype_DancingGoat.ContactsPage">
+      <AllowedChildContentTypeChildID>
+        <CodeName>DancingGoat.ContactsPage</CodeName>
+        <GUID>60f497db-5c3a-4cad-8bcd-ecc7c545be28</GUID>
+        <ObjectType>cms.contenttype</ObjectType>
+      </AllowedChildContentTypeChildID>
+    </Binding>
+    <Binding id="cms.contenttype_DancingGoat.GrinderPage">
+      <AllowedChildContentTypeChildID>
+        <CodeName>DancingGoat.GrinderPage</CodeName>
+        <GUID>f073253e-564e-40a2-82b7-f487e26181ef</GUID>
+        <ObjectType>cms.contenttype</ObjectType>
+      </AllowedChildContentTypeChildID>
+    </Binding>
+    <Binding id="cms.contenttype_DancingGoat.HomePage">
+      <AllowedChildContentTypeChildID>
+        <CodeName>DancingGoat.HomePage</CodeName>
+        <GUID>92908e16-49f3-4576-b9c8-024461af012c</GUID>
+        <ObjectType>cms.contenttype</ObjectType>
+      </AllowedChildContentTypeChildID>
+    </Binding>
+    <Binding id="cms.contenttype_DancingGoat.LandingPage">
+      <AllowedChildContentTypeChildID>
+        <CodeName>DancingGoat.LandingPage</CodeName>
+        <GUID>ea41caaf-281d-4b7c-ae35-88313d57e339</GUID>
+        <ObjectType>cms.contenttype</ObjectType>
+      </AllowedChildContentTypeChildID>
+    </Binding>
+    <Binding id="cms.contenttype_DancingGoat.NavigationItem">
+      <AllowedChildContentTypeChildID>
+        <CodeName>DancingGoat.NavigationItem</CodeName>
+        <GUID>dada684e-94fc-4ead-80fd-bb72dd0e54bf</GUID>
+        <ObjectType>cms.contenttype</ObjectType>
+      </AllowedChildContentTypeChildID>
+    </Binding>
+    <Binding id="cms.contenttype_DancingGoat.PrivacyPage">
+      <AllowedChildContentTypeChildID>
+        <CodeName>DancingGoat.PrivacyPage</CodeName>
+        <GUID>b2091eb3-2f55-49a2-8241-049e01d25cb7</GUID>
+        <ObjectType>cms.contenttype</ObjectType>
+      </AllowedChildContentTypeChildID>
+    </Binding>
+    <Binding id="cms.contenttype_DancingGoat.ProductsSection">
+      <AllowedChildContentTypeChildID>
+        <CodeName>DancingGoat.ProductsSection</CodeName>
+        <GUID>c2d4f4f3-dbd7-481a-b5f6-df465a2a8b45</GUID>
+        <ObjectType>cms.contenttype</ObjectType>
+      </AllowedChildContentTypeChildID>
+    </Binding>
+  </Bindings>
+</cms.allowedchildcontenttype>

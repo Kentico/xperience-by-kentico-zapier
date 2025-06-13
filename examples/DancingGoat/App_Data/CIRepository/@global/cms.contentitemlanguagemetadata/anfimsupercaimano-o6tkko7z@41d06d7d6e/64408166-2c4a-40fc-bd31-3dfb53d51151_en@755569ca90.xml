@@ -32,6 +32,7 @@
         <ObjectType>cms.contentitemlanguagemetadata</ObjectType>
       </ContentItemTagContentItemLanguageMetadataID>
       <ContentItemTagFieldGUID>e7e6e1c3-5380-4e5b-a3c0-424178693aee</ContentItemTagFieldGUID>
+      <ContentItemTagGUID>fb61a82f-cd55-47d1-9e15-94ab4b913f0a</ContentItemTagGUID>
       <ContentItemTagTagGUID>9901b825-8e29-4d17-8cb1-47dc65679fd6</ContentItemTagTagGUID>
     </cms.contentitemtag>
     <cms.contentitemtag>
@@ -40,6 +41,7 @@
         <ObjectType>cms.contentitemlanguagemetadata</ObjectType>
       </ContentItemTagContentItemLanguageMetadataID>
       <ContentItemTagFieldGUID>9c9aa0b2-02f5-4ece-89d7-cb860116b433</ContentItemTagFieldGUID>
+      <ContentItemTagGUID>d703996e-259f-4997-84b2-c8d585d979d3</ContentItemTagGUID>
       <ContentItemTagTagGUID>bb2f322a-e09b-40e9-a54d-4a00a11fbd21</ContentItemTagTagGUID>
     </cms.contentitemtag>
   </ContentItemTags>

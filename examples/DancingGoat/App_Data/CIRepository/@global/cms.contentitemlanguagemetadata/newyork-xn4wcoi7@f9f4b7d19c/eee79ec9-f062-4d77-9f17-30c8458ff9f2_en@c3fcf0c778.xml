@@ -32,14 +32,7 @@
         <ObjectType>cms.contentitemlanguagemetadata</ObjectType>
       </ContentItemTagContentItemLanguageMetadataID>
       <ContentItemTagFieldGUID>fab42a26-dde5-4c5b-8b7d-2c3fb440a83a</ContentItemTagFieldGUID>
-      <ContentItemTagTagGUID>9966ec69-20f5-40f3-9833-9122ea53e416</ContentItemTagTagGUID>
-    </cms.contentitemtag>
-    <cms.contentitemtag>
-      <ContentItemTagContentItemLanguageMetadataID>
-        <GUID>eee79ec9-f062-4d77-9f17-30c8458ff9f2</GUID>
-        <ObjectType>cms.contentitemlanguagemetadata</ObjectType>
-      </ContentItemTagContentItemLanguageMetadataID>
-      <ContentItemTagFieldGUID>fab42a26-dde5-4c5b-8b7d-2c3fb440a83a</ContentItemTagFieldGUID>
+      <ContentItemTagGUID>da9523b4-5d44-4af9-ba3c-20d0f9a60fea</ContentItemTagGUID>
       <ContentItemTagTagGUID>5e0196c5-d7c2-4e66-80d5-a134ee708c58</ContentItemTagTagGUID>
     </cms.contentitemtag>
     <cms.contentitemtag>
@@ -48,7 +41,17 @@
         <ObjectType>cms.contentitemlanguagemetadata</ObjectType>
       </ContentItemTagContentItemLanguageMetadataID>
       <ContentItemTagFieldGUID>fab42a26-dde5-4c5b-8b7d-2c3fb440a83a</ContentItemTagFieldGUID>
+      <ContentItemTagGUID>fcd4f4e4-0dc2-4b4b-8a71-e7efcfe13dcd</ContentItemTagGUID>
       <ContentItemTagTagGUID>31fb0b68-a2a1-4196-bdd8-d4ae441996e8</ContentItemTagTagGUID>
+    </cms.contentitemtag>
+    <cms.contentitemtag>
+      <ContentItemTagContentItemLanguageMetadataID>
+        <GUID>eee79ec9-f062-4d77-9f17-30c8458ff9f2</GUID>
+        <ObjectType>cms.contentitemlanguagemetadata</ObjectType>
+      </ContentItemTagContentItemLanguageMetadataID>
+      <ContentItemTagFieldGUID>fab42a26-dde5-4c5b-8b7d-2c3fb440a83a</ContentItemTagFieldGUID>
+      <ContentItemTagGUID>07b87b65-8977-409f-b8da-f885e30e0188</ContentItemTagGUID>
+      <ContentItemTagTagGUID>9966ec69-20f5-40f3-9833-9122ea53e416</ContentItemTagTagGUID>
     </cms.contentitemtag>
   </ContentItemTags>
 </cms.contentitemlanguagemetadata>
