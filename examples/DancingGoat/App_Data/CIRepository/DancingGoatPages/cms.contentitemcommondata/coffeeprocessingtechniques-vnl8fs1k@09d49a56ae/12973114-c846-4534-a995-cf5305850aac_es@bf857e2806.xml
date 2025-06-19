@@ -47,19 +47,6 @@
     </cms.contentitemreference>
     <cms.contentitemreference>
       <ContentItemReferenceGroupGUID>49eea67f-5a3a-4a0a-a4a4-42cf4e2117c0</ContentItemReferenceGroupGUID>
-      <ContentItemReferenceGUID>d4e92763-4b7f-470d-8b80-e92c90affaa3</ContentItemReferenceGUID>
-      <ContentItemReferenceSourceCommonDataID>
-        <GUID>12973114-c846-4534-a995-cf5305850aac</GUID>
-        <ObjectType>cms.contentitemcommondata</ObjectType>
-      </ContentItemReferenceSourceCommonDataID>
-      <ContentItemReferenceTargetItemID>
-        <CodeName>WhichBrewingFitsYou-a6ildi6t</CodeName>
-        <GUID>b69db6f4-355b-4e5a-917b-541fba602213</GUID>
-        <ObjectType>cms.contentitem</ObjectType>
-      </ContentItemReferenceTargetItemID>
-    </cms.contentitemreference>
-    <cms.contentitemreference>
-      <ContentItemReferenceGroupGUID>49eea67f-5a3a-4a0a-a4a4-42cf4e2117c0</ContentItemReferenceGroupGUID>
       <ContentItemReferenceGUID>3636487a-eac2-4de6-bf30-6502b38bf336</ContentItemReferenceGUID>
       <ContentItemReferenceSourceCommonDataID>
         <GUID>12973114-c846-4534-a995-cf5305850aac</GUID>
@@ -68,6 +55,19 @@
       <ContentItemReferenceTargetItemID>
         <CodeName>ElSalvadorFincaSanJose-ttfjisz3</CodeName>
         <GUID>283f6888-603d-4e21-aeee-86da21efc6d4</GUID>
+        <ObjectType>cms.contentitem</ObjectType>
+      </ContentItemReferenceTargetItemID>
+    </cms.contentitemreference>
+    <cms.contentitemreference>
+      <ContentItemReferenceGroupGUID>49eea67f-5a3a-4a0a-a4a4-42cf4e2117c0</ContentItemReferenceGroupGUID>
+      <ContentItemReferenceGUID>d4e92763-4b7f-470d-8b80-e92c90affaa3</ContentItemReferenceGUID>
+      <ContentItemReferenceSourceCommonDataID>
+        <GUID>12973114-c846-4534-a995-cf5305850aac</GUID>
+        <ObjectType>cms.contentitemcommondata</ObjectType>
+      </ContentItemReferenceSourceCommonDataID>
+      <ContentItemReferenceTargetItemID>
+        <CodeName>WhichBrewingFitsYou-a6ildi6t</CodeName>
+        <GUID>b69db6f4-355b-4e5a-917b-541fba602213</GUID>
         <ObjectType>cms.contentitem</ObjectType>
       </ContentItemReferenceTargetItemID>
     </cms.contentitemreference>

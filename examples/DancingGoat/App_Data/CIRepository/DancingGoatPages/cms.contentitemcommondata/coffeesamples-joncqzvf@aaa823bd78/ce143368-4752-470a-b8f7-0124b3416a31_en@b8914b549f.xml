@@ -40,15 +40,15 @@
       </ContentItemReferenceTargetItemID>
     </cms.contentitemreference>
     <cms.contentitemreference>
-      <ContentItemReferenceGroupGUID>b27ccf6b-cd44-45cb-b087-5021dca20a55</ContentItemReferenceGroupGUID>
-      <ContentItemReferenceGUID>b1ba35c2-c663-4a18-b6f2-310d4bba7c09</ContentItemReferenceGUID>
+      <ContentItemReferenceGroupGUID>2fe94e9c-68b0-4202-b18f-49dc7c4d6810</ContentItemReferenceGroupGUID>
+      <ContentItemReferenceGUID>d00b4ee1-ff2c-4359-a9c7-91644cb6e2ae</ContentItemReferenceGUID>
       <ContentItemReferenceSourceCommonDataID>
         <GUID>ce143368-4752-470a-b8f7-0124b3416a31</GUID>
         <ObjectType>cms.contentitemcommondata</ObjectType>
       </ContentItemReferenceSourceCommonDataID>
       <ContentItemReferenceTargetItemID>
-        <CodeName>Graphics_Hero-bg3.jpg-4dz6obv8</CodeName>
-        <GUID>8a528627-fc98-46a4-9b2f-c56b270e86c5</GUID>
+        <CodeName>BoliviaFincaIllimani-c77ome92</CodeName>
+        <GUID>60d815a6-674e-468d-8155-d2b3be75a321</GUID>
         <ObjectType>cms.contentitem</ObjectType>
       </ContentItemReferenceTargetItemID>
     </cms.contentitemreference>
@@ -66,15 +66,15 @@
       </ContentItemReferenceTargetItemID>
     </cms.contentitemreference>
     <cms.contentitemreference>
-      <ContentItemReferenceGroupGUID>2fe94e9c-68b0-4202-b18f-49dc7c4d6810</ContentItemReferenceGroupGUID>
-      <ContentItemReferenceGUID>d00b4ee1-ff2c-4359-a9c7-91644cb6e2ae</ContentItemReferenceGUID>
+      <ContentItemReferenceGroupGUID>b27ccf6b-cd44-45cb-b087-5021dca20a55</ContentItemReferenceGroupGUID>
+      <ContentItemReferenceGUID>b1ba35c2-c663-4a18-b6f2-310d4bba7c09</ContentItemReferenceGUID>
       <ContentItemReferenceSourceCommonDataID>
         <GUID>ce143368-4752-470a-b8f7-0124b3416a31</GUID>
         <ObjectType>cms.contentitemcommondata</ObjectType>
       </ContentItemReferenceSourceCommonDataID>
       <ContentItemReferenceTargetItemID>
-        <CodeName>BoliviaFincaIllimani-c77ome92</CodeName>
-        <GUID>60d815a6-674e-468d-8155-d2b3be75a321</GUID>
+        <CodeName>Graphics_Hero-bg3.jpg-4dz6obv8</CodeName>
+        <GUID>8a528627-fc98-46a4-9b2f-c56b270e86c5</GUID>
         <ObjectType>cms.contentitem</ObjectType>
       </ContentItemReferenceTargetItemID>
     </cms.contentitemreference>
