@@ -143,6 +143,8 @@ segments_2i
 /examples/DancingGoat/appsettings.Development.json
 /examples/DancingGoat/Properties/PublishProfiles/IISProfile.pubxml.user
 
+/examples/DancingGoat/assets/ContentItems
+
 # Publishing profiles
 *.pubxml
 *.pubxml.user
