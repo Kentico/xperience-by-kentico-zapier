@@ -18,6 +18,7 @@ Zapier integration enables seamless connectivity between a wide range of web app
 
 | Xperience Version | Library Version |
 | ----------------- | --------------- |
+| >= 31.0.\*        | >= 2.4.0        |
 | >= 30.6.\*        | >= 2.4.0        |
 | >= 30.0.\*        | >= 2.3.0        |
 | >= 29.7.\*        | >= 2.2.0        |
