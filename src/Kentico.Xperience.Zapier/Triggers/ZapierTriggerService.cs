@@ -74,17 +74,17 @@ internal class ZapierTriggerService : IZapierTriggerService
     private readonly IWorkflowScopeService workflowScopeService;
     private readonly IContentQueryExecutor contentQueryExecutor;
     private readonly IContentQueryResultMapper contentQueryResultMapper;
-    private readonly IWebPageQueryResultMapper webPageQueryResultMapper;
+    private readonly IContentQueryModelTypeMapper contentQueryModelTypeMapper;
 
 
-    public ZapierTriggerService(IWebsiteChannelContext websiteChannelContext, IWorkflowScopeService workflowScopeService, IContentQueryExecutor contentQueryExecutor, IContentQueryResultMapper contentQueryResultMapper, IWebPageQueryResultMapper webPageQueryResultMapper, IInfoProvider<ZapierTriggerEventLogTypeInfo> zapierTriggerEventLogTypeInfoProvider, IInfoProvider<ZapierTriggerInfo> zapierTriggerInfoProvider)
+    public ZapierTriggerService(IWebsiteChannelContext websiteChannelContext, IWorkflowScopeService workflowScopeService, IContentQueryExecutor contentQueryExecutor, IContentQueryResultMapper contentQueryResultMapper, IContentQueryModelTypeMapper contentQueryModelTypeMapper, IInfoProvider<ZapierTriggerEventLogTypeInfo> zapierTriggerEventLogTypeInfoProvider, IInfoProvider<ZapierTriggerInfo> zapierTriggerInfoProvider)
     {
         this.zapierTriggerInfoProvider = zapierTriggerInfoProvider;
         this.websiteChannelContext = websiteChannelContext;
         this.workflowScopeService = workflowScopeService;
         this.contentQueryExecutor = contentQueryExecutor;
         this.contentQueryResultMapper = contentQueryResultMapper;
-        this.webPageQueryResultMapper = webPageQueryResultMapper;
+        this.contentQueryModelTypeMapper = contentQueryModelTypeMapper;
         this.zapierTriggerEventLogTypeInfoProvider = zapierTriggerEventLogTypeInfoProvider;
         this.zapierTriggerInfoProvider = zapierTriggerInfoProvider;
     }
@@ -145,7 +145,7 @@ internal class ZapierTriggerService : IZapierTriggerService
                         .WithLinkedItems(1)
                         .ForWebsite(websiteChannelContext.WebsiteChannelName ?? string.Empty)
                     .TopN(1));
-                var pages = await contentQueryExecutor.GetWebPageResult(builder, webPageQueryResultMapper.MapPages);
+                var pages = await contentQueryExecutor.GetWebPageResult(builder, contentQueryModelTypeMapper.MapPages);
                 result = pages.FirstOrDefault();
             }
 
