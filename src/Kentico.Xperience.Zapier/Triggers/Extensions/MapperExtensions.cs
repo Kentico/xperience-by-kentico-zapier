@@ -10,7 +10,7 @@ internal static class MapperExtensions
     public static Dictionary<string, object> MapReusable(this IContentQueryResultMapper _, IContentQueryDataContainer container) => GetProperties(container);
 
 
-    public static Dictionary<string, object> MapPages(this IWebPageQueryResultMapper _, IWebPageContentQueryDataContainer container) => GetProperties(container);
+    public static Dictionary<string, object> MapPages(this IContentQueryModelTypeMapper _, IContentQueryDataContainer container) => GetProperties(container);
 
 
     private static Dictionary<string, object> GetProperties(IContentQueryDataContainer container)
