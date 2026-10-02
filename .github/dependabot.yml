@@ -1,6 +1,6 @@
 # Dependabot alerts and security updates are enabled for every repository by the organization's
-# security configuration. This file adds weekly version updates and splits both kinds of pull requests
-# into major and minor or patch groups.
+# security configuration. This file adds weekly version updates. Per ecosystem, security updates and
+# version updates each come as one pull request for major updates and one for minor and patch updates.
 # Options: https://docs.github.com/code-security/reference/supply-chain-security/dependabot-options-reference
 version: 2
 
@@ -23,6 +23,8 @@ updates:
       nuget-security-minor-patch:
         applies-to: security-updates
         update-types: [minor, patch]
+      nuget-major:
+        update-types: [major]
       nuget-minor-patch:
         update-types: [minor, patch]
 
@@ -42,6 +44,8 @@ updates:
       npm-security-minor-patch:
         applies-to: security-updates
         update-types: [minor, patch]
+      npm-major:
+        update-types: [major]
       npm-minor-patch:
         update-types: [minor, patch]
 
