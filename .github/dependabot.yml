@@ -13,9 +13,8 @@ updates:
     cooldown:
       default-days: 7
     ignore:
-      # The integration targets the oldest supported Xperience by Kentico version on purpose. Raising it
-      # forces customers to upgrade, so it is a release decision. Ignore rules apply to security updates too.
       - dependency-name: "Kentico.Xperience.*"
+        update-types: ["version-update:semver-minor", "version-update:semver-patch"]
     groups:
       nuget-security-major:
         applies-to: security-updates
