@@ -59,7 +59,7 @@ jobs:
             -DestinationPath "./database"
 
       - name: Install a SQL Server suite of tools (SQLEngine, SQLPackage)
-        uses: potatoqualitee/mssqlsuite@605af2310e2e22978ebf2c74d5995ba102094b8a # set as a commit hash for security - v1.8
+        uses: potatoqualitee/mssqlsuite@2291d923e83859edd871679c05b379037376761f # set as a commit hash for security - v1.12
         with:
           install: sqlpackage, sqlengine, sqlclient
           sa-password: ${{ env.DATABASE_PASSWORD }}
