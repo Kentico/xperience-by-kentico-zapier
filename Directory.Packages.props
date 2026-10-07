@@ -13,6 +13,7 @@
 		<PackageVersion Include="Kentico.Xperience.WebApp" Version="$(LastAppliedHotfix)" />
 		<PackageVersion Include="kentico.xperience.azurestorage" Version="$(LastAppliedHotfix)" />
 		<PackageVersion Include="kentico.xperience.imageprocessing" Version="$(LastAppliedHotfix)" />
+		<PackageVersion Include="Magick.NET-Q8-AnyCPU" Version="14.15.0" />
 		<PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
 		<PackageVersion Include="SonarAnalyzer.CSharp" Version="9.6.0.74858" />
 		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
