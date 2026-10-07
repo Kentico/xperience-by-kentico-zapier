@@ -57,6 +57,32 @@ To run the Sample app Admin customization in development mode, add the following
 }
 ```
 
+## Tests
+
+| Layer | Command | Needs |
+| --- | --- | --- |
+| Zapier CLI unit tests (jest + nock, offline) | `cd src/XbKcli && npm test` | Node |
+| .NET unit tests (NUnit, Kentico fakes, no database) | `dotnet test` | .NET SDK |
+| E2E: Playwright admin tests + Zapier contract tests | `cd scripts && ./Invoke-E2E.ps1 -Target <current\|minimal\|latest>` | SQL Server (LocalDB is enough), Node, Playwright browsers (`npx playwright install` once) |
+
+`Invoke-E2E.ps1` is the single entry point used locally and by the `E2E: Build and Test` GitHub workflow:
+
+- `current` runs against the database of your configured connection string as it is. Fast; it creates a new Zapier API key there (refusing to replace an existing one unless you pass `-ReplaceApiKey`), and the contract tests leave form submissions marked `e2e-` and event log entries behind. Don't point it at a database with data you care about.
+- `minimal` restores `database/*.bak` into `<catalog>_E2E`, upgrades it to `LastAppliedHotfix` (`--kxp-update`, `--kxp-ci-restore`) and tests at that version.
+- `latest` does the same, then rebuilds with `-p:XbyKVersion=*` and upgrades again, so the newest Xperience release is tested. This is what CI runs weekly.
+
+The throwaway database and the started application are removed when the script ends (`-KeepDatabase` keeps the database for inspection).
+The Zapier contract tests alone, against any running instance, are `npm run test:e2e` with `XBYK_URL` and `ZAPIER_API_KEY` set; see `src/XbKcli/test/e2e/README.md`.
+
+### Upgrading Xperience by Kentico
+
+An upgrade is never only a package bump. After changing `LastAppliedHotfix` in `Directory.Packages.props`:
+
+1. Run `./Invoke-E2E.ps1 -Target minimal -KeepDatabase` to upgrade a copy of the sample database with `--kxp-update`. Expect the `--kxp-ci-restore` step to fail at this point: the committed repository still describes the previous schema. The database is kept because of `-KeepDatabase`.
+2. Point the sample project at that database, run `dotnet run --project examples/DancingGoat -- --kxp-ci-store` and commit the regenerated `App_Data/CIRepository`.
+3. Optionally back up that database over `database/*.bak.zip`. Only do this on a SQL Server no newer than the CI container (SQL Server 2022, see `e2etest.yml`); a backup taken on a newer engine such as LocalDB 2025 cannot be restored there. Keeping the old backup is fine: the pipeline upgrades it on every run.
+4. Run `./Invoke-E2E.ps1 -Target latest` before merging.
+
 ## Development Workflow
 
 1. Create a new branch with one of the following prefixes

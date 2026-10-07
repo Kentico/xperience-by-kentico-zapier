@@ -11,7 +11,9 @@ on:
       - "**.props"
       - "**.targets"
       - "**.sln"
-      - "**/Client/**/*.json"
+      - "**.json"
+      - "src/XbKcli/**"
+      - ".github/workflows/ci.yml"
   pull_request:
     branches: [main]
     paths:
@@ -24,6 +26,8 @@ on:
       - "**.props"
       - "**.targets"
       - "**.sln"
+      - "src/XbKcli/**"
+      - ".github/workflows/ci.yml"
 
 jobs:
   build_and_test:
@@ -56,7 +60,9 @@ jobs:
         run: |
           dotnet build `
             --configuration Release `
-            --no-restore
+            --no-restore `
+            -warnaserror `
+            -p:WarningsNotAsErrors=NU1900%3BNU1901%3BNU1902%3BNU1903%3BNU1904 # NuGet audit advisories stay warnings (Dependabot covers them); %3B = ; for MSBuild
 
       - name: Test Solution
         run: |
@@ -64,3 +70,26 @@ jobs:
             --configuration Release `
             --no-build `
             --no-restore
+
+  zapier_cli_tests:
+    name: Zapier CLI app - unit tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/XbKcli
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18 # Zapier runtime for zapier-platform-core < 18.0.0 (core 18 moved to Node 22)
+          cache: npm
+          cache-dependency-path: src/XbKcli/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests (offline, nock)
+        run: npm test

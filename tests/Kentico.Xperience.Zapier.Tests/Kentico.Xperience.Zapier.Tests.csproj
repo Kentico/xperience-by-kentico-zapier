@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <RootNamespace>Kentico.Xperience.Zapier.Tests</RootNamespace>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <!-- Float with XbyKVersion like the sample app, so the E2E "latest" run tests against the newest release.
+       Admin and WebApp are referenced directly because Kentico packages depend on each other's exact version. -->
+  <ItemGroup>
+    <PackageReference Include="Kentico.Xperience.Core.Tests" VersionOverride="$(XbyKVersion)" />
+    <PackageReference Include="Kentico.Xperience.Admin" VersionOverride="$(XbyKVersion)" />
+    <PackageReference Include="Kentico.Xperience.WebApp" VersionOverride="$(XbyKVersion)" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="NSubstitute" />
+    <PackageReference Include="NUnit" />
+    <PackageReference Include="NUnit3TestAdapter" />
+    <PackageReference Include="NUnit.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Kentico.Xperience.Zapier\Kentico.Xperience.Zapier.csproj" />
+  </ItemGroup>
+
+</Project>

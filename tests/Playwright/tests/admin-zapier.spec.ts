@@ -33,7 +33,8 @@ test.describe("[Zapier integration]", () => {
     });
     await test.step("Check API key table for an entry", async () => {
       await expect(adminPage.$generateApiKeyBtn).toBeVisible(); // page is loaded
-      await expect(page.getByTestId("table-cell-ApiKeyToken")).toBeVisible();
+      // The grid renders placeholder cells with the same test id while loading, so wait for the first real one.
+      await expect(page.getByTestId("table-cell-ApiKeyToken").first()).toBeVisible();
     });
     await test.step("Delete API key", async () => {
       await adminPage.$deleteApiKeyBtn.click();

@@ -4,7 +4,8 @@
 #>
 
 param (
-    [switch]$CIEnabled
+    [switch]$CIEnabled,
+    [string]$ConnectionString
 )
 
 Import-Module (Resolve-Path Settings) `
@@ -14,8 +15,7 @@ Import-Module (Resolve-Path Settings) `
 
 Import-Module (Resolve-Path Utilities) `
     -Function `
-    Invoke-ExpressionWithException, `
-    Invoke-SqlQuery, `
+    Invoke-SqlStatement, `
     Get-ConnectionString, `
     Write-Status `
     -Force
@@ -24,13 +24,10 @@ Import-Module (Resolve-Path Utilities) `
 $keyValue = if ($CIEnabled) { 'True' } else { 'False' }
 
 $appSettings = Get-AppSettings
-$connection = Get-ConnectionString $appSettings
+$connection = if ($ConnectionString) { $ConnectionString } else { Get-ConnectionString $appSettings }
 
-$command = "Invoke-SqlQuery " + `
-    "-connectionString ""$connection"" " + `
-    "-query ""UPDATE CMS_SettingsKey SET KeyValue='$keyValue' WHERE KeyName='CMSEnableCI'"" "
-
-Invoke-ExpressionWithException $command
+# Executed directly, not through Invoke-Expression, so the connection string is neither re-parsed nor echoed.
+Invoke-SqlStatement -connectionString $connection -query "UPDATE CMS_SettingsKey SET KeyValue='$keyValue' WHERE KeyName='CMSEnableCI'" | Out-Null
 
 Write-Host "`n"
 Write-Status "CI restore for Enabled=$keyValue"

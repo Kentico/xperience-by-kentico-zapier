@@ -16,10 +16,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Routing;
 
-using Samples.DancingGoat;
-
 
 var builder = WebApplication.CreateBuilder(args);
+
+// The E2E pipeline (scripts/Invoke-E2E.ps1) runs the build output in the CI environment; static web assets of
+// referenced packages (_content/...) are only wired up automatically in Development.
+if (builder.Environment.IsEnvironment("CI"))
+{
+    builder.WebHost.UseStaticWebAssets();
+}
 
 
 builder.Services.AddKentico(features =>
@@ -52,8 +57,6 @@ builder.Services.AddLocalization()
 builder.Services.AddDancingGoatServices();
 
 builder.Services.AddKenticoZapier();
-
-builder.Services.AddSingleton<IEmailActivityTrackingEvaluator, EmailActivityTrackingEvaluator>();
 
 builder.Services.AddHealthChecks();
 

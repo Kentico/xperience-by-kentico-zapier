@@ -153,3 +153,6 @@ segments_2i
 mcp.json
 claude_desktop_config.json
 mcp_config.json
+
+# Extracted database backups (the .zip is committed)
+database/*.bak

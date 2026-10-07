@@ -21,5 +21,20 @@ internal abstract class ZapierObjectHandler : ZapierTriggerHandler
     }
 
 
-    private async Task SendPostToWebhook(string url, BaseInfo data) => await DoPost(url, data.TozapierDictionary());
+    private async Task SendPostToWebhook(string url, BaseInfo data)
+    {
+        Dictionary<string, object>? content;
+        try
+        {
+            content = data.TozapierDictionary();
+        }
+        catch (Exception ex)
+        {
+            // Runs inside the fire-and-forget task started by Handler, so an unlogged exception here would be lost.
+            LogDeliveryFailure(url, ex);
+            return;
+        }
+
+        await DoPost(url, content);
+    }
 }

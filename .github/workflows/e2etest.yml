@@ -1,9 +1,17 @@
 name: "E2E: Build and Test"
 
 on:
+  # Not run on pull requests: it needs the license secret, which Dependabot and fork pull requests cannot read.
+  # Weekly: newest Xperience release (XbyKVersion=*), drift detection; opens an issue on failure.
   schedule:
     - cron: '0 10 * * 5'  # Runs every Friday at 10:00 UTC
   workflow_dispatch:
+    inputs:
+      target:
+        description: "Xperience version to test against"
+        type: choice
+        default: latest
+        options: [minimal, latest]
 
 jobs:
   build_and_test:
@@ -14,21 +22,27 @@ jobs:
         shell: pwsh
 
     env:
+      # schedule -> latest, workflow_dispatch -> chosen input
+      E2E_TARGET: ${{ inputs.target || 'latest' }}
       ASPNETCORE_ENVIRONMENT: CI
       DATABASE_BACKUP_FILENAME: ""
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
       DOTNET_NOLOGO: 1
-      PROJECT_NAME: DancingGoat
       ASPNETCORE_URLS: https://localhost:14070
-      STATUS_CHECK_URL: https://localhost:14070/status
-      DATABASE_USER: "sa"
       DATABASE_PASSWORD: "Pass@12345"
-      DATABASE_NAME: "XByK_DancingGoat_Zapier"
       XPERIENCE_BY_KENTICO_LICENSE: ${{ secrets.XPERIENCE_BY_KENTICO_LICENSE }}
 
     steps:
       - uses: actions/checkout@v4
+
+      # Fail early with a clear message instead of a 180 s startup timeout later.
+      - name: Check license secret
+        run: |
+          if ([string]::IsNullOrEmpty($env:XPERIENCE_BY_KENTICO_LICENSE)) {
+            Write-Host "::error::The XPERIENCE_BY_KENTICO_LICENSE repository secret is not set."
+            exit 1
+          }
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -38,13 +52,18 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          # Playwright 1.63 needs Node >= 20. The Zapier app itself runs on the Zapier runtime of its
+          # zapier-platform-core major (Node 18 below core 18.0.0); ci.yml unit-tests it on that version.
+          node-version: 22
 
       - name: Install NPM
         run: |
           cd tests/Playwright
           npm ci
           npx playwright install --with-deps
+          cd ../..
+          cd src/XbKcli
+          npm ci
           cd ../..
 
       - name: Get Database Backup Name
@@ -65,113 +84,21 @@ jobs:
           sa-password: ${{ env.DATABASE_PASSWORD }}
           version: 2022
 
-      - name: Restore Database .bak
+      - name: Copy database backup into the SQL Server container
         run: |
-          docker exec sql mkdir /var/opt/mssql/backup
+          docker exec sql mkdir -p /var/opt/mssql/backup
           docker cp "./database/${{ env.DATABASE_BACKUP_FILENAME }}" sql:/var/opt/mssql/backup
-          sqlcmd `
-            -S localhost `
-            -d master `
-            -U ${{ env.DATABASE_USER }} `
-            -P ${{ env.DATABASE_PASSWORD }} `
-            -C `
-            -Q "RESTORE DATABASE [XByK_DancingGoat_Zapier] FROM DISK='/var/opt/mssql/backup/${{ env.DATABASE_BACKUP_FILENAME }}' WITH MOVE 'XByK_DancingGoat_Zapier' TO '/var/opt/mssql/data/XByK_DancingGoat_Zapier.mdf', MOVE 'XByK_DancingGoat_Zapier_log' TO '/var/opt/mssql/data/XByK_DancingGoat_Zapier_log.ldf'"      
-      
-      - name: Imports license key to DB
-        run: |
-          sqlcmd `
-            -S localhost `
-            -d ${{ env.DATABASE_NAME }} `
-            -U ${{ env.DATABASE_USER }} `
-            -P ${{ env.DATABASE_PASSWORD }} `
-            -C `
-            -Q "UPDATE CMS_SettingsKey SET KeyValue='${{ env.XPERIENCE_BY_KENTICO_LICENSE }}' WHERE KeyName='CMSLicenseKey'"
-      
-      - name: Seed DB with data for testing purposes
+
+      # Same script developers run locally (see docs/Contributing-Setup.md):
+      # restore -> license -> seed -> upgrade to LastAppliedHotfix + CI restore -> rebuild with XbyKVersion=*
+      # -> upgrade again -> API key -> start app -> Playwright -> Zapier contract tests -> stop app -> drop database
+      - name: Run E2E (${{ env.E2E_TARGET }})
         run: |
           cd scripts
-          ./Seed-Database.ps1
-          cd ..      
-
-      - name: Reset DB consistency for last applied hotfix
-        run: |
-          dotnet build `
-            --configuration Release
-          cd scripts
-          ./Reset-DatabaseConsistency.ps1
-          cd ..
-      
-      - name: Build Solution for last hotfix
-        run: |
-          dotnet build `
-            --configuration Release `
-            -p:XbyKVersion=*
-          cd scripts
-          ./Reset-DatabaseConsistency.ps1 -ExcludeCIRestore
-          cd ..
-
-      - name: Publish Application
-        run: |
-          dotnet publish `
-            ./examples/${{ env.PROJECT_NAME }} `
-            -c Release `
-            -o ./publish `
-            --no-build `
-            --no-restore
-
-      - name: Test Solution
-        run: |
-          dotnet test `
-            --configuration Release `
-            --no-build `
-            --no-restore
-
-      - name: Run Application and E2E Tests
-        run: |
-          # Run the ASP.NET Core app as a background job
-          cd ./publish
-          Start-Job -ScriptBlock { 
-            dotnet --version
-            dotnet ./${{ env.PROJECT_NAME }}.dll 
-          } -Name ${{ env.PROJECT_NAME }}
-          Receive-Job -Name ${{ env.PROJECT_NAME }}
-          cd ../
-          # The ASP.NET Core app can take a few seconds to start, so we delay running tests
-          #   until it is ready, and fail if we go over a maximum wait time
-          $limit = 10
-          $attempts = 0
-          $success = $false
-          while ($attempts -lt $limit -and -not $success) {
-              Start-Sleep -Seconds 1
-              try {
-                  $response = Invoke-WebRequest -Uri ${{ env.STATUS_CHECK_URL }} -Method Get -SkipCertificateCheck
-                  if ($response.StatusCode -eq 200) {
-                      Write-Output "Application is ready."
-                      $success = $true
-                  }
-              }
-              catch {
-                  Write-Output "Attempt $attempts - Application not ready yet."
-              }
-              $attempts++
-          }
-          if (-not $success) {
-              Write-Output "Application did not respond in time."
-              Receive-Job -Name ${{ env.PROJECT_NAME }}
-              Stop-Job -Name ${{ env.PROJECT_NAME }}
-              Remove-Job -Name ${{ env.PROJECT_NAME }}
-              exit 1
-          }
-          # Run the E2E tests
-          cd tests/Playwright
-          npx playwright test
-          cd ../..
-  
-
-          # Stop the background ASP.NET Core application
-          Receive-Job -Name ${{ env.PROJECT_NAME }}
-          Stop-Job -Name ${{ env.PROJECT_NAME }}
-          Remove-Job -Name ${{ env.PROJECT_NAME }}
+          ./Invoke-E2E.ps1 `
+            -Target $env:E2E_TARGET `
+            -BackupPath "/var/opt/mssql/backup/$($env:DATABASE_BACKUP_FILENAME)" `
+            -Url $env:ASPNETCORE_URLS
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
@@ -182,7 +109,7 @@ jobs:
       
       # Create an issue if this job fails
       - name: "Create GitHub Issue on Failure"
-        if: ${{ failure() && github.event_name != 'workflow_dispatch' }} # Runs only on failure and not manual trigger
+        if: ${{ failure() && github.event_name == 'schedule' }} # Only the weekly drift run opens issues; manual runs report in the run itself
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
