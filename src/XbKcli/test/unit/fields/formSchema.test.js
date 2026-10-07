@@ -39,7 +39,8 @@ describe("utils.getFormSchema", () => {
     });
     expect(schema[0].system).toBeFalsy();
     expect(schema[0].isPK).toBe(false);
-    expect(schema[2]).toMatchObject({ allowempty: "true", explanationtext: "Optional" });
+    expect(schema[0].allowempty).toBe(false);
+    expect(schema[2]).toMatchObject({ allowempty: true, explanationtext: "Optional" });
     expect(schema[3]).toMatchObject({ defaultvalue: "false" });
     expect(scope.isDone()).toBe(true);
   });
@@ -63,18 +64,36 @@ describe("fields.getFormInputsField", () => {
     expect(fields.find((f) => f.key === "Subscribe")).toMatchObject({ type: "boolean", default: "false" });
   });
 
-  it("fails with a clear error when a required field has a column type Zapier cannot map", async () => {
+  it.each([
+    ["omitted", 'column="Attachment" columntype="binary"'],
+    ["explicitly false", 'column="Attachment" columntype="binary" allowempty="false"'],
+  ])("fails with a clear error when a required field has a column type Zapier cannot map (allowempty %s)", async (_, attachment) => {
     nock(WEBSITE)
       .get(`/zapier/actions/biz-form/${CLASSNAME}`)
       .matchHeader("authorization", AUTH_HEADER)
       .reply(
         200,
-        JSON.stringify(FORM_DEFINITION_XML.replace('column="Attachment" columntype="binary" allowempty="true"', 'column="Attachment" columntype="binary"')),
+        JSON.stringify(FORM_DEFINITION_XML.replace('column="Attachment" columntype="binary" allowempty="true"', attachment)),
         { "Content-Type": "application/json" }
       );
 
     await expect(appTester((z, bundle) => getFormInputsField(z, bundle, CLASSNAME), { authData: authData() })).rejects.toThrow(
       /required fields that Zapier cannot fill: Attachment \(binary\)/
     );
+  });
+
+  it("marks a field with explicit allowempty=\"false\" as required", async () => {
+    nock(WEBSITE)
+      .get(`/zapier/actions/biz-form/${CLASSNAME}`)
+      .matchHeader("authorization", AUTH_HEADER)
+      .reply(
+        200,
+        JSON.stringify(FORM_DEFINITION_XML.replace('column="UserMessage" columntype="longtext" allowempty="true"', 'column="UserMessage" columntype="longtext" allowempty="false"')),
+        { "Content-Type": "application/json" }
+      );
+
+    const fields = await appTester((z, bundle) => getFormInputsField(z, bundle, CLASSNAME), { authData: authData() });
+
+    expect(fields.find((f) => f.key === "UserMessage")).toMatchObject({ required: true });
   });
 });

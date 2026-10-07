@@ -11,7 +11,7 @@ async function getFormSchema(z, bundle, classname) {
       columntype: fieldAttrs.columntype,
       columnsize: fieldAttrs.columnsize,
       isPK: fieldAttrs.isPK || false,
-      allowempty: fieldAttrs.allowempty || false,
+      allowempty: fieldAttrs.allowempty === "true",
       visible: fieldAttrs.visible && fieldAttrs.visible === "true",
       system: fieldAttrs.system && fieldAttrs.system === "true",
     };
