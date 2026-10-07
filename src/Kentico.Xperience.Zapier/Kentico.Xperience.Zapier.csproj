@@ -12,6 +12,7 @@
     <PackageReference Include="Kentico.Xperience.Admin" />
     <PackageReference Include="Kentico.Xperience.WebApp" />
     <PackageReference Include="AspNetCore.Authentication.ApiKey" />
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" />
   </ItemGroup>
 
   <ItemGroup>
