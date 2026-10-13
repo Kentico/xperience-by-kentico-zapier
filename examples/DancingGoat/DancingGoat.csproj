@@ -23,8 +23,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="kentico.xperience.admin" Condition="'$(SeparatedAdmin)' == 'false'" VersionOverride="$(XbyKVersion)" />
-    <PackageReference Include="kentico.xperience.azurestorage" VersionOverride="$(XbyKVersion)" />
-    <PackageReference Include="kentico.xperience.imageprocessing" VersionOverride="$(XbyKVersion)" />
     <PackageReference Include="kentico.xperience.webapp" VersionOverride="$(XbyKVersion)" />
   </ItemGroup>
   <ItemGroup>

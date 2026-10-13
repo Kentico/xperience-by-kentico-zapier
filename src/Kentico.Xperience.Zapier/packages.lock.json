@@ -23,22 +23,6 @@
           "Microsoft.SemanticKernel.Connectors.AzureOpenAI": "1.67.1"
         }
       },
-      "Kentico.Xperience.WebApp": {
-        "type": "Direct",
-        "requested": "[31.0.0, )",
-        "resolved": "31.0.0",
-        "contentHash": "2BEEcrQRc37BFBstUngGbUYtnb3PD2m/Go1zwYH2/YTve0tY85EnAsoLT2NFuoFzivhMp17zmtIZFDr1yaeybA==",
-        "dependencies": {
-          "CommandLineParser": "2.9.1",
-          "HotChocolate.AspNetCore": "15.0.3",
-          "HotChocolate.Data": "15.0.3",
-          "HtmlSanitizer": "9.0.889",
-          "Kentico.Xperience.Core": "[31.0.0]",
-          "Microsoft.AspNetCore.Components": "8.0.22",
-          "Microsoft.Extensions.Caching.Memory": "8.0.1",
-          "Microsoft.Extensions.FileProviders.Embedded": "8.0.22"
-        }
-      },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
         "requested": "[9.6.0.74858, )",
@@ -1126,6 +1110,22 @@
         "contentHash": "t16Z+OplJEElJy1Q6t12EwMGF2BeLw8IKjD1ema7ewbCRaMqeVIRPZo3MlxidnRFRK+tV6II8tKYX+7N5ZS98A==",
         "dependencies": {
           "System.IO.Hashing": "8.0.0"
+        }
+      },
+      "Kentico.Xperience.WebApp": {
+        "type": "CentralTransitive",
+        "requested": "[31.0.0, )",
+        "resolved": "31.0.0",
+        "contentHash": "2BEEcrQRc37BFBstUngGbUYtnb3PD2m/Go1zwYH2/YTve0tY85EnAsoLT2NFuoFzivhMp17zmtIZFDr1yaeybA==",
+        "dependencies": {
+          "CommandLineParser": "2.9.1",
+          "HotChocolate.AspNetCore": "15.0.3",
+          "HotChocolate.Data": "15.0.3",
+          "HtmlSanitizer": "9.0.889",
+          "Kentico.Xperience.Core": "[31.0.0]",
+          "Microsoft.AspNetCore.Components": "8.0.22",
+          "Microsoft.Extensions.Caching.Memory": "8.0.1",
+          "Microsoft.Extensions.FileProviders.Embedded": "8.0.22"
         }
       }
     }
