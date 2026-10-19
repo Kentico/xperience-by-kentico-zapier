@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <PackageReference Include="Kentico.Xperience.Admin" />
-    <PackageReference Include="Kentico.Xperience.WebApp" />
     <PackageReference Include="AspNetCore.Authentication.ApiKey" />
   </ItemGroup>
 
