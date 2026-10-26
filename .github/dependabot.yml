@@ -1,61 +1,30 @@
-# Dependabot alerts and security updates are enabled for every repository by the organization's
-# security configuration. This file adds weekly version updates. Per ecosystem, security updates and
-# version updates each come as one pull request for major updates and one for minor and patch updates.
+# Dependabot alerts and security updates are switched on in the repository settings.
+# Version updates are off (open-pull-requests-limit: 0), so Dependabot opens pull requests only for
+# security updates. The NuGet entry exists to apply the ignore rules below to them. A security update
+# runs in the directory of the vulnerable project and only uses an entry whose directories match it.
 # Options: https://docs.github.com/code-security/reference/supply-chain-security/dependabot-options-reference
 version: 2
 
 updates:
   - package-ecosystem: nuget
-    directory: /
-    schedule:
-      interval: weekly
-      day: monday
-    cooldown:
-      default-days: 7
-    ignore:
-      # The integration targets the oldest supported Xperience by Kentico version on purpose. Raising it
-      # forces customers to upgrade, so it is a release decision. Ignore rules apply to security updates too.
-      - dependency-name: "Kentico.Xperience.*"
-    groups:
-      nuget-security-major:
-        applies-to: security-updates
-        update-types: [major]
-      nuget-security-minor-patch:
-        applies-to: security-updates
-        update-types: [minor, patch]
-      nuget-major:
-        update-types: [major]
-      nuget-minor-patch:
-        update-types: [minor, patch]
-
-  - package-ecosystem: npm
     directories:
-      - /src/XbKcli
-      - /tests/Playwright
+      - "/"
+      - "/src/*"
+      - "/examples/*"
     schedule:
-      interval: weekly
-      day: monday
-    cooldown:
-      default-days: 7
-    groups:
-      npm-security-major:
-        applies-to: security-updates
-        update-types: [major]
-      npm-security-minor-patch:
-        applies-to: security-updates
-        update-types: [minor, patch]
-      npm-major:
-        update-types: [major]
-      npm-minor-patch:
-        update-types: [minor, patch]
-
-  - package-ecosystem: github-actions
-    directory: /
-    schedule:
-      interval: weekly
-      day: monday
-    cooldown:
-      default-days: 7
-    groups:
-      github-actions:
-        patterns: ["*"]
+      interval: monthly
+    open-pull-requests-limit: 0
+    ignore:
+      # The integration targets the oldest supported Xperience by Kentico version on purpose.
+      - dependency-name: "Kentico.Xperience.*"
+      # Transitive dependencies of the Kentico.Xperience.* packages. The consuming application supplies the
+      # Xperience by Kentico version as a peer dependency, so these are fixed by upgrading Xperience by
+      # Kentico, not by pinning them here.
+      - dependency-name: "AngleSharp"
+      - dependency-name: "HotChocolate.Language"
+      - dependency-name: "HtmlSanitizer"
+      - dependency-name: "Magick.NET-Q8-AnyCPU"
+      - dependency-name: "MailKit"
+      - dependency-name: "MimeKit"
+      - dependency-name: "Microsoft.SemanticKernel.Core"
+      - dependency-name: "System.Security.Cryptography.Pkcs"
